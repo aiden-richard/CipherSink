@@ -10,8 +10,9 @@ CipherSink is a strategic two-player naval combat game inspired by Battleship, b
  - If a ship is hit on each of its cells, it is considered sinked
  - The first player to sink all of their opponent's ships wins
 
-# How to start the game up. (with screenshots or viedo)
+# Examples:
+### How to start the game up. (with screenshots or viedo)
 
-# Screenshot of main page - (insert photo)
+### Screenshot of main page - (insert photo)
 
-# Screenshots or Video showing a game being played - (insert multiple photos/video)
+### Screenshots or Video showing a game being played - (insert multiple photos/video)
