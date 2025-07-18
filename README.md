@@ -1,5 +1,5 @@
 # CipherSink
-CipherSink is a strategic two-player naval combat game inspired by Battleship, built using zero trust principals. The game is played on a peer to peer connection, needing no central server to operate. Game state is tracked using hashes and salts, ensuring every move can be verified without revealing where your ships are.
+CipherSink is a strategic two-player naval combat game inspired by [Battleship](https://en.wikipedia.org/wiki/Battleship_(game)), built using zero trust principals. The game is played on a peer to peer connection, needing no central server to operate. Game state is tracked using hashes and salts, ensuring every move can be verified without revealing where your ships are.
 
 ### Game Rules:
  - Game is played on a 10x10 grid
