@@ -18,7 +18,7 @@ internal class Cell
     /// Occupation type of the cell.
     /// Stored as an instance of the OccupationType enum.
     /// </summary>
-    public OccupationType occupationType { get; set; }
+    public OccupationType OccupationType { get; set; }
 
     /// <summary>
     /// Constructor to initialize the cell with given coordinates.
@@ -29,7 +29,7 @@ internal class Cell
     public Cell(int x, int y)
     {
         Coordinates = new Coordinates(x, y);
-        occupationType = OccupationType.Empty;
+        OccupationType = OccupationType.Empty;
     }
 
     /// <summary>
@@ -39,8 +39,8 @@ internal class Cell
     public bool IsOccupied
     {
         get {
-            return occupationType != OccupationType.Empty
-                && occupationType != OccupationType.Miss;
+            return OccupationType != OccupationType.Empty
+                && OccupationType != OccupationType.Miss;
         }
     }
 }
