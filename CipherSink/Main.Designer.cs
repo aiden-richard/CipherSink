@@ -28,68 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            listBox1 = new ListBox();
+            StartGameBtn = new Button();
+            PlayerAccountBtn = new Button();
+            OptionsBtn = new Button();
+            FriendsBtn = new Button();
+            ExitBtn = new Button();
             TitleLbl = new Label();
             QuoteLbl = new Label();
+            RecentGamesLV = new ListView();
+            label1 = new Label();
             SuspendLayout();
             // 
-            // button1
+            // StartGameBtn
             // 
-            button1.Location = new Point(169, 160);
-            button1.Name = "button1";
-            button1.Size = new Size(121, 49);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            StartGameBtn.Location = new Point(169, 160);
+            StartGameBtn.Name = "StartGameBtn";
+            StartGameBtn.Size = new Size(121, 49);
+            StartGameBtn.TabIndex = 0;
+            StartGameBtn.Text = "Start Game";
+            StartGameBtn.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // PlayerAccountBtn
             // 
-            button2.Location = new Point(27, 231);
-            button2.Name = "button2";
-            button2.Size = new Size(121, 49);
-            button2.TabIndex = 1;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            PlayerAccountBtn.Location = new Point(27, 231);
+            PlayerAccountBtn.Name = "PlayerAccountBtn";
+            PlayerAccountBtn.Size = new Size(121, 49);
+            PlayerAccountBtn.TabIndex = 1;
+            PlayerAccountBtn.Text = "Account";
+            PlayerAccountBtn.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // OptionsBtn
             // 
-            button3.Location = new Point(169, 231);
-            button3.Name = "button3";
-            button3.Size = new Size(121, 49);
-            button3.TabIndex = 2;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            OptionsBtn.Location = new Point(169, 231);
+            OptionsBtn.Name = "OptionsBtn";
+            OptionsBtn.Size = new Size(121, 49);
+            OptionsBtn.TabIndex = 2;
+            OptionsBtn.Text = "Options";
+            OptionsBtn.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // FriendsBtn
             // 
-            button4.Location = new Point(306, 231);
-            button4.Name = "button4";
-            button4.Size = new Size(121, 49);
-            button4.TabIndex = 3;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            FriendsBtn.Location = new Point(306, 231);
+            FriendsBtn.Name = "FriendsBtn";
+            FriendsBtn.Size = new Size(121, 49);
+            FriendsBtn.TabIndex = 3;
+            FriendsBtn.Text = "Friends";
+            FriendsBtn.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // ExitBtn
             // 
-            button5.Location = new Point(27, 389);
-            button5.Name = "button5";
-            button5.Size = new Size(121, 49);
-            button5.TabIndex = 4;
-            button5.Text = "button5";
-            button5.UseVisualStyleBackColor = true;
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(233, 344);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(230, 94);
-            listBox1.TabIndex = 5;
+            ExitBtn.Location = new Point(27, 389);
+            ExitBtn.Name = "ExitBtn";
+            ExitBtn.Size = new Size(121, 49);
+            ExitBtn.TabIndex = 4;
+            ExitBtn.Text = "Exit";
+            ExitBtn.UseVisualStyleBackColor = true;
             // 
             // TitleLbl
             // 
@@ -106,41 +99,62 @@
             // 
             QuoteLbl.AutoSize = true;
             QuoteLbl.BackColor = Color.Transparent;
-            QuoteLbl.Font = new Font("Impact", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            QuoteLbl.Font = new Font("Impact", 18F, FontStyle.Italic, GraphicsUnit.Point, 0);
             QuoteLbl.Location = new Point(118, 111);
             QuoteLbl.Name = "QuoteLbl";
             QuoteLbl.Size = new Size(224, 29);
             QuoteLbl.TabIndex = 7;
             QuoteLbl.Text = "You cracked my code!";
             // 
+            // RecentGamesLV
+            // 
+            RecentGamesLV.Location = new Point(235, 341);
+            RecentGamesLV.Name = "RecentGamesLV";
+            RecentGamesLV.Size = new Size(228, 97);
+            RecentGamesLV.TabIndex = 8;
+            RecentGamesLV.UseCompatibleStateImageBehavior = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Lora", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label1.Location = new Point(235, 313);
+            label1.Name = "label1";
+            label1.Size = new Size(160, 25);
+            label1.TabIndex = 9;
+            label1.Text = "Most Recent Games:";
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(475, 450);
+            Controls.Add(label1);
+            Controls.Add(RecentGamesLV);
             Controls.Add(QuoteLbl);
             Controls.Add(TitleLbl);
-            Controls.Add(listBox1);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(ExitBtn);
+            Controls.Add(FriendsBtn);
+            Controls.Add(OptionsBtn);
+            Controls.Add(PlayerAccountBtn);
+            Controls.Add(StartGameBtn);
             Name = "Main";
-            Text = "Form1";
+            Text = "CipherSunk";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private ListBox listBox1;
+        private Button StartGameBtn;
+        private Button PlayerAccountBtn;
+        private Button OptionsBtn;
+        private Button FriendsBtn;
+        private Button ExitBtn;
         private Label TitleLbl;
         private Label QuoteLbl;
+        private ListView RecentGamesLV;
+        private Label label1;
     }
 }
