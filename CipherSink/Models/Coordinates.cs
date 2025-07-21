@@ -8,15 +8,15 @@ internal class Coordinates
     /// <summary>
     /// The X coordinate.
     /// </summary>
-    public int X { get; set; }
+    public int X { get; init; }
 
     /// <summary>
     /// The Y coordinate.
     /// </summary>
-    public int Y { get; set; }
+    public int Y { get; init; }
 
     /// <summary>
-    /// Conststructor to initialize the coordinates with given values.
+    /// Constructor to initialize the coordinates with given values.
     /// </summary>
     /// <param name="x">The x value to be set</param>
     /// <param name="y">The y value to be set</param>
