@@ -21,7 +21,7 @@ internal abstract class Ship
     /// <summary>
     /// The name of the ship, stored as a string
     /// </summary>
-    public required string Name { get; init; }
+    public string Name { get; init; }
 
     /// <summary>
     /// The size of the ship, which is the number of cells it occupies on the game board.
