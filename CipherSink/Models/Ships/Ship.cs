@@ -26,7 +26,7 @@ internal abstract class Ship
     /// <summary>
     /// The size of the ship, which is the number of cells it occupies on the game board.
     /// </summary>
-    public required int Size { get; init; }
+    public int Size { get; init; }
 
     /// <summary>
     /// The occupation type of the ship, represented by the OccupationType enum.
