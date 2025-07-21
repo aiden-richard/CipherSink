@@ -12,7 +12,7 @@ internal class Cell
     /// Coordinates of the cell in the grid.
     /// Stored as an instance of the Coordinates class.
     /// </summary>
-    public Coordinates Coordinates { get; set; }
+    public Coordinates Coordinates { get; init; }
 
     /// <summary>
     /// Occupation type of the cell.
