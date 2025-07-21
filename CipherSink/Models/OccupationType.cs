@@ -11,6 +11,21 @@ namespace CipherSink.Models;
 /// </summary>
 public enum  OccupationType
 {
+    [Description("C")]
+    Carrier,
+
+    [Description("B")]
+    Battleship,
+
+    [Description("C")]
+    Cruiser,
+
+    [Description("S")]
+    Submarine,
+
+    [Description("D")]
+    Destroyer,
+
     [Description("o")]
     Empty,
 
