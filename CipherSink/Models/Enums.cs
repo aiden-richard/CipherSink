@@ -2,8 +2,11 @@
 
 namespace CipherSink.Models;
 
-internal enum CellCheckResult
+internal enum CheckCellResult
 {
+    Hit,
+    Miss,
+    OutOfBounds
 }
 
 /// <summary>

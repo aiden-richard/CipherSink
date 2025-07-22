@@ -142,20 +142,20 @@ internal class GameBoard
     /// </summary>
     /// <param name="x">The x coordinate to check</param>
     /// <param name="y">The y coordinate to check</param>
-    /// <returns>true if Cell is occupied; otherwise false</returns>
+    /// <returns>A CheckCellResult</returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public bool CheckCell(int x, int y)
+    public CheckCellResult CheckCell(int x, int y)
     {
         // Check if coordinates are within bounds
         if (x < 0 || x >= BoardSize || y < 0 || y >= BoardSize)
         {
-            throw new ArgumentOutOfRangeException("Coordinates are out of bounds.");
+            return CheckCellResult.OutOfBounds;
         }
 
         if (!Grid[x, y].IsOccupied)
         {
             Grid[x, y].OccupationType = OccupationType.Miss; // Mark as Miss
-            return false;
+            return CheckCellResult.Miss;
         }
 
         // Find the ship occupying this cell and register a hit
@@ -166,10 +166,10 @@ internal class GameBoard
             {
                 ship.RegisterHit(coord);
                 Grid[x, y].OccupationType = OccupationType.Hit;
-                return true; // Hit registered
+                return CheckCellResult.Hit; // Rereturn Hit
             }
         }
 
-        return false; // Should not reach here if IsOccupied is true, but fallback
+        return CheckCellResult.Miss; // Should not reach here, but just in case
     }
 }
