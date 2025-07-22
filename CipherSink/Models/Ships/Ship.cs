@@ -1,4 +1,6 @@
-﻿namespace CipherSink.Models.Ships;
+﻿using CipherSink.Models.GameBoard;
+
+namespace CipherSink.Models.Ships;
 
 /// <summary>
 /// This class represents a ship on the game board.
@@ -11,11 +13,11 @@ internal abstract class Ship
     /// <param name="name">The name of the ship. Cannot be null or empty.</param>
     /// <param name="size">The size of the ship as an int, representing the number of cells it occupies.</param>
     /// <param name="occupation">The occupation type of the ship</param>
-    protected Ship(string name, int size, OccupationType occupation)
+    protected Ship(string name, int size, OccupationType occupationType)
     {
         Name = name;
         Size = size;
-        Occupation = occupation;
+        OccupationType = occupationType;
     }
 
     /// <summary>
@@ -31,7 +33,7 @@ internal abstract class Ship
     /// <summary>
     /// The occupation type of the ship, represented by the OccupationType enum.
     /// </summary>
-    public OccupationType Occupation { get; init; }
+    public OccupationType OccupationType { get; init; }
 
     /// <summary>
     /// A list of coordinates representing the positions occupied by the ship on the game board.

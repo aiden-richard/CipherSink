@@ -1,4 +1,6 @@
-﻿namespace CipherSink.Models;
+﻿using CipherSink.Helpers;
+
+namespace CipherSink.Models.GameBoard;
 
 /// <summary>
 /// This class represents a cell in the grid.
@@ -42,5 +44,10 @@ internal class Cell
             return OccupationType != OccupationType.Empty
                 && OccupationType != OccupationType.Miss;
         }
+    }
+
+    public override string ToString()
+    {
+        return OccupationTypeExtension.GetDescription(OccupationType);
     }
 }
