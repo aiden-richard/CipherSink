@@ -17,4 +17,33 @@ public partial class Main : Form
             e.Graphics.FillRectangle(brush, this.ClientRectangle);
         }
     }
+
+    private void StartGameBtn_Click(object sender, EventArgs e)
+    {
+        var gameboardForm = new Gameboard();
+        gameboardForm.ShowDialog();
+    }
+
+    private void PlayerAccountBtn_Click(object sender, EventArgs e)
+    {
+        var accountForm = new AccountStats();
+        accountForm.ShowDialog();
+    }
+
+    private void OptionsBtn_Click(object sender, EventArgs e)
+    {
+        var optionsForm = new Options();
+        optionsForm.ShowDialog();
+    }
+
+    private void RecentPlayersBtn_Click(object sender, EventArgs e)
+    {
+        var friendsForm = new RecentPlayers();
+        friendsForm.ShowDialog();
+    }
+
+    private void ExitBtn_Click(object sender, EventArgs e)
+    {
+        Application.Exit();
+    }
 }

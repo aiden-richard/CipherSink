@@ -31,7 +31,7 @@
             StartGameBtn = new Button();
             PlayerAccountBtn = new Button();
             OptionsBtn = new Button();
-            FriendsBtn = new Button();
+            RecentPlayersBtn = new Button();
             ExitBtn = new Button();
             TitleLbl = new Label();
             QuoteLbl = new Label();
@@ -47,6 +47,7 @@
             StartGameBtn.TabIndex = 0;
             StartGameBtn.Text = "Start Game";
             StartGameBtn.UseVisualStyleBackColor = true;
+            StartGameBtn.Click += StartGameBtn_Click;
             // 
             // PlayerAccountBtn
             // 
@@ -54,8 +55,9 @@
             PlayerAccountBtn.Name = "PlayerAccountBtn";
             PlayerAccountBtn.Size = new Size(121, 49);
             PlayerAccountBtn.TabIndex = 1;
-            PlayerAccountBtn.Text = "Account";
+            PlayerAccountBtn.Text = "Account Stats";
             PlayerAccountBtn.UseVisualStyleBackColor = true;
+            PlayerAccountBtn.Click += PlayerAccountBtn_Click;
             // 
             // OptionsBtn
             // 
@@ -65,15 +67,17 @@
             OptionsBtn.TabIndex = 2;
             OptionsBtn.Text = "Options";
             OptionsBtn.UseVisualStyleBackColor = true;
+            OptionsBtn.Click += OptionsBtn_Click;
             // 
-            // FriendsBtn
+            // RecentPlayersBtn
             // 
-            FriendsBtn.Location = new Point(306, 231);
-            FriendsBtn.Name = "FriendsBtn";
-            FriendsBtn.Size = new Size(121, 49);
-            FriendsBtn.TabIndex = 3;
-            FriendsBtn.Text = "Friends";
-            FriendsBtn.UseVisualStyleBackColor = true;
+            RecentPlayersBtn.Location = new Point(306, 231);
+            RecentPlayersBtn.Name = "RecentPlayersBtn";
+            RecentPlayersBtn.Size = new Size(121, 49);
+            RecentPlayersBtn.TabIndex = 3;
+            RecentPlayersBtn.Text = "Recently Played Against";
+            RecentPlayersBtn.UseVisualStyleBackColor = true;
+            RecentPlayersBtn.Click += RecentPlayersBtn_Click;
             // 
             // ExitBtn
             // 
@@ -83,6 +87,7 @@
             ExitBtn.TabIndex = 4;
             ExitBtn.Text = "Exit";
             ExitBtn.UseVisualStyleBackColor = true;
+            ExitBtn.Click += ExitBtn_Click;
             // 
             // TitleLbl
             // 
@@ -118,10 +123,10 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Lora", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label1.Location = new Point(235, 313);
             label1.Name = "label1";
-            label1.Size = new Size(160, 25);
+            label1.Size = new Size(160, 20);
             label1.TabIndex = 9;
             label1.Text = "Most Recent Games:";
             // 
@@ -135,10 +140,12 @@
             Controls.Add(QuoteLbl);
             Controls.Add(TitleLbl);
             Controls.Add(ExitBtn);
-            Controls.Add(FriendsBtn);
+            Controls.Add(RecentPlayersBtn);
             Controls.Add(OptionsBtn);
             Controls.Add(PlayerAccountBtn);
             Controls.Add(StartGameBtn);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "Main";
             Text = "CipherSink";
             ResumeLayout(false);
@@ -150,7 +157,7 @@
         private Button StartGameBtn;
         private Button PlayerAccountBtn;
         private Button OptionsBtn;
-        private Button FriendsBtn;
+        private Button RecentPlayersBtn;
         private Button ExitBtn;
         private Label TitleLbl;
         private Label QuoteLbl;
