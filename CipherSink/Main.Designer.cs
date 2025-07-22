@@ -91,9 +91,9 @@
             TitleLbl.Font = new Font("Impact", 36F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             TitleLbl.Location = new Point(98, 42);
             TitleLbl.Name = "TitleLbl";
-            TitleLbl.Size = new Size(265, 60);
+            TitleLbl.Size = new Size(253, 60);
             TitleLbl.TabIndex = 6;
-            TitleLbl.Text = "CipherSunk";
+            TitleLbl.Text = "CipherSink";
             // 
             // QuoteLbl
             // 
@@ -140,7 +140,7 @@
             Controls.Add(PlayerAccountBtn);
             Controls.Add(StartGameBtn);
             Name = "Main";
-            Text = "CipherSunk";
+            Text = "CipherSink";
             ResumeLayout(false);
             PerformLayout();
         }
