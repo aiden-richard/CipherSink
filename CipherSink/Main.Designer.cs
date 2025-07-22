@@ -47,6 +47,7 @@
             StartGameBtn.TabIndex = 0;
             StartGameBtn.Text = "Start Game";
             StartGameBtn.UseVisualStyleBackColor = true;
+            StartGameBtn.Click += StartGameBtn_Click;
             // 
             // PlayerAccountBtn
             // 
@@ -56,6 +57,7 @@
             PlayerAccountBtn.TabIndex = 1;
             PlayerAccountBtn.Text = "Account";
             PlayerAccountBtn.UseVisualStyleBackColor = true;
+            PlayerAccountBtn.Click += PlayerAccountBtn_Click;
             // 
             // OptionsBtn
             // 
@@ -65,6 +67,7 @@
             OptionsBtn.TabIndex = 2;
             OptionsBtn.Text = "Options";
             OptionsBtn.UseVisualStyleBackColor = true;
+            OptionsBtn.Click += OptionsBtn_Click;
             // 
             // FriendsBtn
             // 
@@ -74,6 +77,7 @@
             FriendsBtn.TabIndex = 3;
             FriendsBtn.Text = "Friends";
             FriendsBtn.UseVisualStyleBackColor = true;
+            FriendsBtn.Click += FriendsBtn_Click;
             // 
             // ExitBtn
             // 
@@ -83,6 +87,7 @@
             ExitBtn.TabIndex = 4;
             ExitBtn.Text = "Exit";
             ExitBtn.UseVisualStyleBackColor = true;
+            ExitBtn.Click += ExitBtn_Click;
             // 
             // TitleLbl
             // 
