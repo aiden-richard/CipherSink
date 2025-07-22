@@ -166,7 +166,7 @@ internal class GameBoard
             {
                 ship.RegisterHit(coord);
                 Grid[x, y].OccupationType = OccupationType.Hit;
-                return CheckCellResult.Hit; // Rereturn Hit
+                return CheckCellResult.Hit; // Return Hit
             }
         }
 
