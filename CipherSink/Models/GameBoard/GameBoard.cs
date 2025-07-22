@@ -172,4 +172,20 @@ internal class GameBoard
 
         return CheckCellResult.Miss; // Should not reach here, but just in case
     }
+
+    public override string ToString()
+    {
+        string PrettyGrid = "";
+
+        for (int y = 0; y < BoardSize; y++)
+        {
+            for (int x = 0; x < BoardSize; x++)
+            {
+                PrettyGrid += Grid[x, y].ToString() + " ";
+            }
+            PrettyGrid += "\n";
+        }
+
+        return PrettyGrid;
+    }
 }
