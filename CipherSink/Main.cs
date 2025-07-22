@@ -21,25 +21,25 @@ public partial class Main : Form
     private void StartGameBtn_Click(object sender, EventArgs e)
     {
         var gameboardForm = new Gameboard();
-        gameboardForm.Show();
+        gameboardForm.ShowDialog();
     }
 
     private void PlayerAccountBtn_Click(object sender, EventArgs e)
     {
         var accountForm = new Account();
-        accountForm.Show();
+        accountForm.ShowDialog();
     }
 
     private void OptionsBtn_Click(object sender, EventArgs e)
     {
         var optionsForm = new Options();
-        optionsForm.Show();
+        optionsForm.ShowDialog();
     }
 
     private void FriendsBtn_Click(object sender, EventArgs e)
     {
         var friendsForm = new FriendsList();
-        friendsForm.Show();
+        friendsForm.ShowDialog();
     }
 
     private void ExitBtn_Click(object sender, EventArgs e)
