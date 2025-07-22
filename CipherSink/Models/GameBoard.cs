@@ -113,4 +113,33 @@ internal class GameBoard
     {
         throw new NotImplementedException("Random ship placement is not implemented yet.");
     }
+
+    public bool CheckCell(int x, int y)
+    {
+        // Check if coordinates are within bounds
+        if (x < 0 || x >= BoardSize || y < 0 || y >= BoardSize)
+        {
+            throw new ArgumentOutOfRangeException("Coordinates are out of bounds.");
+        }
+
+        if (!Grid[x, y].IsOccupied)
+        {
+            Grid[x, y].OccupationType = OccupationType.Miss; // Mark as Miss
+            return false;
+        }
+
+        // Find the ship occupying this cell and register a hit
+        Coordinates coord = new Coordinates(x, y);
+        foreach (var ship in Ships)
+        {
+            if (ship.Positions.Any(pos => pos.Equals(coord)))
+            {
+                ship.RegisterHit(coord);
+                Grid[x, y].OccupationType = OccupationType.Hit;
+                return true; // Hit registered
+            }
+        }
+
+        return false; // Should not reach here if IsOccupied is true, but fallback
+    }
 }
