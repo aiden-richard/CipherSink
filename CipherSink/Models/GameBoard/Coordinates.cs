@@ -1,4 +1,4 @@
-﻿namespace CipherSink.Models;
+﻿namespace CipherSink.Models.GameBoard;
 
 /// <summary>
 /// This class represents a pair of coordinates (X, Y).

@@ -1,4 +1,6 @@
-﻿namespace CipherSink.Models.Ships;
+﻿using CipherSink.Models.GameBoard;
+
+namespace CipherSink.Models.Ships;
 
 /// <summary>
 /// This class represents a ship on the game board.

@@ -1,6 +1,6 @@
 ﻿using CipherSink.Models.Ships;
 
-namespace CipherSink.Models;
+namespace CipherSink.Models.GameBoard;
 
 /// <summary>
 /// This class represents the game board for the Battleship game
@@ -96,7 +96,7 @@ internal class GameBoard
         }
 
         // Place the ship on the grid and return true
-        List<Coordinates> positions = new List<Coordinates>();
+        List<Coordinates> positions = new();
         for (int i = 0; i < ship.Size; i++)
         {
             int placeX = vertical ? x : x + i;
