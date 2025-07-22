@@ -113,12 +113,11 @@ internal class GameBoard
     /// This method places ships randomly on the game board.
     /// If a ship cannot be placed after 1000 attempts, it throws an exception.
     /// </summary>
-    /// <param name="ships">List of ships to be placed</param>
     /// <exception cref="InvalidOperationException"></exception>
-    public void PlaceShipsRandomly(IReadOnlyList<Ship> ships)
+    public void PlaceShipsRandomly()
     {
         var rand = new Random();
-        foreach (var ship in ships)
+        foreach (var ship in Ships)
         {
             bool placed = false;
             int attempts = 0;
