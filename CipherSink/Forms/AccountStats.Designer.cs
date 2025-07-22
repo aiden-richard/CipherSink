@@ -114,6 +114,7 @@
             TotalSunkTbx.ReadOnly = true;
             TotalSunkTbx.Size = new Size(100, 23);
             TotalSunkTbx.TabIndex = 4;
+            TotalSunkTbx.TabStop = false;
             // 
             // MissesTbx
             // 
@@ -122,6 +123,7 @@
             MissesTbx.ReadOnly = true;
             MissesTbx.Size = new Size(52, 23);
             MissesTbx.TabIndex = 3;
+            MissesTbx.TabStop = false;
             // 
             // HitsTbx
             // 
@@ -130,6 +132,7 @@
             HitsTbx.ReadOnly = true;
             HitsTbx.Size = new Size(52, 23);
             HitsTbx.TabIndex = 2;
+            HitsTbx.TabStop = false;
             // 
             // LossesTbx
             // 
@@ -138,6 +141,7 @@
             LossesTbx.ReadOnly = true;
             LossesTbx.Size = new Size(52, 23);
             LossesTbx.TabIndex = 1;
+            LossesTbx.TabStop = false;
             // 
             // WinsTbx
             // 
@@ -146,6 +150,7 @@
             WinsTbx.ReadOnly = true;
             WinsTbx.Size = new Size(52, 23);
             WinsTbx.TabIndex = 0;
+            WinsTbx.TabStop = false;
             // 
             // AccountStats
             // 
@@ -153,6 +158,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(227, 248);
             Controls.Add(UserStatsGbx);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "AccountStats";
             Text = "Account Stats";
             UserStatsGbx.ResumeLayout(false);
