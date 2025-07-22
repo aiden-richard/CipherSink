@@ -31,7 +31,7 @@ internal enum OccupationType
     [Description("D")]
     Destroyer,
 
-    [Description("o")]
+    [Description("O")]
     Empty,
 
     [Description("X")]
