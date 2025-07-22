@@ -1,6 +1,6 @@
 ﻿namespace CipherSink
 {
-    partial class Account
+    partial class AccountStats
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            ActiveUserTbx = new TextBox();
-            label2 = new Label();
-            LogOutUserBtn = new Button();
-            NewUserTbx = new TextBox();
-            label3 = new Label();
-            LogInUserBtn = new Button();
             UserStatsGbx = new GroupBox();
             label8 = new Label();
             label7 = new Label();
@@ -49,72 +42,6 @@
             UserStatsGbx.SuspendLayout();
             SuspendLayout();
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 171);
-            label1.Name = "label1";
-            label1.Size = new Size(82, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Current User:";
-            // 
-            // ActiveUserTbx
-            // 
-            ActiveUserTbx.Location = new Point(100, 168);
-            ActiveUserTbx.Name = "ActiveUserTbx";
-            ActiveUserTbx.ReadOnly = true;
-            ActiveUserTbx.Size = new Size(231, 23);
-            ActiveUserTbx.TabIndex = 1;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Impact", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(103, 19);
-            label2.Name = "label2";
-            label2.Size = new Size(131, 23);
-            label2.TabIndex = 2;
-            label2.Text = "Add a new user:";
-            // 
-            // LogOutUserBtn
-            // 
-            LogOutUserBtn.Location = new Point(237, 197);
-            LogOutUserBtn.Name = "LogOutUserBtn";
-            LogOutUserBtn.Size = new Size(94, 36);
-            LogOutUserBtn.TabIndex = 3;
-            LogOutUserBtn.Text = "Log out";
-            LogOutUserBtn.UseVisualStyleBackColor = true;
-            // 
-            // NewUserTbx
-            // 
-            NewUserTbx.Location = new Point(92, 60);
-            NewUserTbx.Name = "NewUserTbx";
-            NewUserTbx.Size = new Size(239, 23);
-            NewUserTbx.TabIndex = 4;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(19, 63);
-            label3.Name = "label3";
-            label3.Size = new Size(67, 15);
-            label3.TabIndex = 5;
-            label3.Text = "Username:";
-            // 
-            // LogInUserBtn
-            // 
-            LogInUserBtn.Location = new Point(237, 94);
-            LogInUserBtn.Name = "LogInUserBtn";
-            LogInUserBtn.Size = new Size(94, 33);
-            LogInUserBtn.TabIndex = 6;
-            LogInUserBtn.Text = "Sign in";
-            LogInUserBtn.UseVisualStyleBackColor = true;
-            // 
             // UserStatsGbx
             // 
             UserStatsGbx.BackColor = Color.Transparent;
@@ -128,9 +55,9 @@
             UserStatsGbx.Controls.Add(HitsTbx);
             UserStatsGbx.Controls.Add(LossesTbx);
             UserStatsGbx.Controls.Add(WinsTbx);
-            UserStatsGbx.Location = new Point(68, 253);
+            UserStatsGbx.Location = new Point(12, 12);
             UserStatsGbx.Name = "UserStatsGbx";
-            UserStatsGbx.Size = new Size(195, 185);
+            UserStatsGbx.Size = new Size(199, 217);
             UserStatsGbx.TabIndex = 7;
             UserStatsGbx.TabStop = false;
             UserStatsGbx.Text = "Current user's stats:";
@@ -220,36 +147,20 @@
             WinsTbx.Size = new Size(52, 23);
             WinsTbx.TabIndex = 0;
             // 
-            // Account
+            // AccountStats
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(343, 450);
+            ClientSize = new Size(227, 248);
             Controls.Add(UserStatsGbx);
-            Controls.Add(LogInUserBtn);
-            Controls.Add(label3);
-            Controls.Add(NewUserTbx);
-            Controls.Add(LogOutUserBtn);
-            Controls.Add(label2);
-            Controls.Add(ActiveUserTbx);
-            Controls.Add(label1);
-            Name = "Account";
-            Text = "Account";
+            Name = "AccountStats";
+            Text = "Account Stats";
             UserStatsGbx.ResumeLayout(false);
             UserStatsGbx.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
-        private TextBox ActiveUserTbx;
-        private Label label2;
-        private Button LogOutUserBtn;
-        private TextBox NewUserTbx;
-        private Label label3;
-        private Button LogInUserBtn;
         private GroupBox UserStatsGbx;
         private Label label8;
         private Label label7;

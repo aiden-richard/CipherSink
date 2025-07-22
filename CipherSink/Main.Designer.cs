@@ -31,7 +31,7 @@
             StartGameBtn = new Button();
             PlayerAccountBtn = new Button();
             OptionsBtn = new Button();
-            FriendsBtn = new Button();
+            RecentPlayersBtn = new Button();
             ExitBtn = new Button();
             TitleLbl = new Label();
             QuoteLbl = new Label();
@@ -55,7 +55,7 @@
             PlayerAccountBtn.Name = "PlayerAccountBtn";
             PlayerAccountBtn.Size = new Size(121, 49);
             PlayerAccountBtn.TabIndex = 1;
-            PlayerAccountBtn.Text = "Account";
+            PlayerAccountBtn.Text = "Account Stats";
             PlayerAccountBtn.UseVisualStyleBackColor = true;
             PlayerAccountBtn.Click += PlayerAccountBtn_Click;
             // 
@@ -69,15 +69,15 @@
             OptionsBtn.UseVisualStyleBackColor = true;
             OptionsBtn.Click += OptionsBtn_Click;
             // 
-            // FriendsBtn
+            // RecentPlayersBtn
             // 
-            FriendsBtn.Location = new Point(306, 231);
-            FriendsBtn.Name = "FriendsBtn";
-            FriendsBtn.Size = new Size(121, 49);
-            FriendsBtn.TabIndex = 3;
-            FriendsBtn.Text = "Friends";
-            FriendsBtn.UseVisualStyleBackColor = true;
-            FriendsBtn.Click += FriendsBtn_Click;
+            RecentPlayersBtn.Location = new Point(306, 231);
+            RecentPlayersBtn.Name = "RecentPlayersBtn";
+            RecentPlayersBtn.Size = new Size(121, 49);
+            RecentPlayersBtn.TabIndex = 3;
+            RecentPlayersBtn.Text = "Recently Played Against";
+            RecentPlayersBtn.UseVisualStyleBackColor = true;
+            RecentPlayersBtn.Click += RecentPlayersBtn_Click;
             // 
             // ExitBtn
             // 
@@ -140,7 +140,7 @@
             Controls.Add(QuoteLbl);
             Controls.Add(TitleLbl);
             Controls.Add(ExitBtn);
-            Controls.Add(FriendsBtn);
+            Controls.Add(RecentPlayersBtn);
             Controls.Add(OptionsBtn);
             Controls.Add(PlayerAccountBtn);
             Controls.Add(StartGameBtn);
@@ -155,7 +155,7 @@
         private Button StartGameBtn;
         private Button PlayerAccountBtn;
         private Button OptionsBtn;
-        private Button FriendsBtn;
+        private Button RecentPlayersBtn;
         private Button ExitBtn;
         private Label TitleLbl;
         private Label QuoteLbl;
