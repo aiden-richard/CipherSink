@@ -51,14 +51,16 @@
             label2.TabIndex = 3;
             label2.Text = "Recent Players:";
             // 
-            // FriendsList
+            // RecentPlayers
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(314, 450);
             Controls.Add(label2);
             Controls.Add(RecentPlayersLV);
-            Name = "FriendsList";
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            Name = "RecentPlayers";
             Text = "Recent Players";
             ResumeLayout(false);
             PerformLayout();

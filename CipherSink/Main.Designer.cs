@@ -123,10 +123,10 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Lora", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label1.Location = new Point(235, 313);
             label1.Name = "label1";
-            label1.Size = new Size(160, 25);
+            label1.Size = new Size(160, 20);
             label1.TabIndex = 9;
             label1.Text = "Most Recent Games:";
             // 
@@ -144,6 +144,8 @@
             Controls.Add(OptionsBtn);
             Controls.Add(PlayerAccountBtn);
             Controls.Add(StartGameBtn);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "Main";
             Text = "CipherSink";
             ResumeLayout(false);

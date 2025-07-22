@@ -100,10 +100,10 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = SystemColors.Info;
-            label4.Font = new Font("Montserrat", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             label4.Location = new Point(84, 331);
             label4.Name = "label4";
-            label4.Size = new Size(162, 22);
+            label4.Size = new Size(144, 20);
             label4.TabIndex = 6;
             label4.Text = "Work in progress";
             // 
@@ -115,6 +115,8 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(AudioGbx);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "Options";
             Text = "Options";
             ((System.ComponentModel.ISupportInitialize)MasterAudioTbr).EndInit();

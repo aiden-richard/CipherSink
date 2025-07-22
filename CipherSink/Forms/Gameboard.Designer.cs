@@ -55,6 +55,7 @@
             TurnTrackerTbx.ReadOnly = true;
             TurnTrackerTbx.Size = new Size(100, 23);
             TurnTrackerTbx.TabIndex = 2;
+            TurnTrackerTbx.TabStop = false;
             // 
             // label1
             // 
@@ -75,6 +76,8 @@
             Controls.Add(TurnTrackerTbx);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "Gameboard";
             Text = "Gameboard";
             ResumeLayout(false);
