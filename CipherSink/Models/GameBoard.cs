@@ -109,11 +109,41 @@ internal class GameBoard
         return true;
     }
 
+    /// <summary>
+    /// This method places ships randomly on the game board.
+    /// If a ship cannot be placed after 1000 attempts, it throws an exception.
+    /// </summary>
+    /// <param name="ships">List of ships to be placed</param>
+    /// <exception cref="InvalidOperationException"></exception>
     public void PlaceShipsRandomly(IReadOnlyList<Ship> ships)
     {
-        throw new NotImplementedException("Random ship placement is not implemented yet.");
+        var rand = new Random();
+        foreach (var ship in ships)
+        {
+            bool placed = false;
+            int attempts = 0;
+            while (!placed && attempts < 1000)
+            {
+                bool vertical = rand.Next(2) == 0;
+                int x = vertical ? rand.Next(BoardSize) : rand.Next(BoardSize - ship.Size + 1);
+                int y = vertical ? rand.Next(BoardSize - ship.Size + 1) : rand.Next(BoardSize);
+                placed = PlaceShip(ship, x, y, vertical);
+                attempts++;
+            }
+            if (!placed)
+            {
+                throw new InvalidOperationException($"Could not place ship: {ship.Name} after {attempts} attempts.");
+            }
+        }
     }
 
+    /// <summary>
+    /// This method checks a cell for ship at the given coordinates.
+    /// </summary>
+    /// <param name="x">The x coordinate to check</param>
+    /// <param name="y">The y coordinate to check</param>
+    /// <returns>true if Cell is occupied; otherwise false</returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public bool CheckCell(int x, int y)
     {
         // Check if coordinates are within bounds
