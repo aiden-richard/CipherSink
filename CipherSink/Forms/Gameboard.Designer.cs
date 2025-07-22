@@ -28,12 +28,64 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Gameboard";
+            panel1 = new Panel();
+            panel2 = new Panel();
+            TurnTrackerTbx = new TextBox();
+            label1 = new Label();
+            SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Location = new Point(81, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(302, 272);
+            panel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            panel2.Location = new Point(81, 404);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(302, 270);
+            panel2.TabIndex = 1;
+            // 
+            // TurnTrackerTbx
+            // 
+            TurnTrackerTbx.Location = new Point(447, 338);
+            TurnTrackerTbx.Name = "TurnTrackerTbx";
+            TurnTrackerTbx.ReadOnly = true;
+            TurnTrackerTbx.Size = new Size(100, 23);
+            TurnTrackerTbx.TabIndex = 2;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Location = new Point(482, 320);
+            label1.Name = "label1";
+            label1.Size = new Size(35, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Turn:";
+            // 
+            // Gameboard
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(599, 686);
+            Controls.Add(label1);
+            Controls.Add(TurnTrackerTbx);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Name = "Gameboard";
+            Text = "Gameboard";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Panel panel1;
+        private Panel panel2;
+        private TextBox TurnTrackerTbx;
+        private Label label1;
     }
 }
