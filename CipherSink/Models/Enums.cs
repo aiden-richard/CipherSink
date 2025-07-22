@@ -2,6 +2,9 @@
 
 namespace CipherSink.Models;
 
+/// <summary>
+/// CheckCellResult enumeration represents the result of checking a cell in the game board.
+/// </summary>
 internal enum CheckCellResult
 {
     Hit,
