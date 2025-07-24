@@ -1,6 +1,4 @@
-﻿using CipherSink.Models.Ships;
-
-namespace CipherSink.Models.GameBoard;
+﻿namespace CipherSink.Models.GameBoard;
 
 /// <summary>
 /// This class represents the game board for the Battleship game
