@@ -24,7 +24,7 @@ internal static class OccupationTypeExtension
 
         // Get the member information for the enum value
         // does this by finding the member that matches the enum value
-        // or in other words, GetMember("Carrier") will return the member info for the Carrier enum value
+        // For example, GetMember("Carrier") will return the member info for the Carrier enum value
         var memberInfo = type.GetMember(occupationType.ToString());
 
         // Check if the memberInfo array has any elements, it will be empty if the enum value is not found
