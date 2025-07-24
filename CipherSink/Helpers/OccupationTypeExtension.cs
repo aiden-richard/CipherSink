@@ -32,8 +32,7 @@ internal static class OccupationTypeExtension
         {
             // Get the DescriptionAttribute from the member's attributes
             // does this by looking for attributes of type DescriptionAttribute
-            // the false is to signal that we do not want to search the base class for attributes
-            // 'false' ensures we only retrieve DescriptionAttribute instances directly applied to this enum member (not inherited)
+            // the 'false' ensures we only retrieve DescriptionAttribute instances directly applied to this enum member (not inherited)
             var attributes = memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
 
             // If the attribute is found, return its description
