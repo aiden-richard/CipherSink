@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace CipherSink.Models;
+namespace CipherSink.Models.GameBoard;
 
 /// <summary>
 /// CheckCellResult enumeration represents the result of checking a cell in the game board.

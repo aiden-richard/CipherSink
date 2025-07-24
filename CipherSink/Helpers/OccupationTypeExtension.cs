@@ -1,4 +1,4 @@
-﻿using CipherSink.Models;
+﻿using CipherSink.Models.GameBoard;
 using System.ComponentModel;
 
 namespace CipherSink.Helpers;
