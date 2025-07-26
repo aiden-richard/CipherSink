@@ -61,7 +61,7 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "RecentPlayers";
-            Text = "Recent Players";
+            Text = "Recent Games";
             ResumeLayout(false);
             PerformLayout();
         }
