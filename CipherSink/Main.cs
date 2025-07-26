@@ -18,8 +18,9 @@ public partial class Main : Form
         }
     }
 
-    private void StartGameBtn_Click(object sender, EventArgs e)
+    private void CreateGameBtn_Click(object sender, EventArgs e)
     {
+        // For now will just open the gameboard form, later on should open a message box to create a game
         var gameboardForm = new Gameboard();
         gameboardForm.ShowDialog();
     }
@@ -36,7 +37,7 @@ public partial class Main : Form
         optionsForm.ShowDialog();
     }
 
-    private void RecentPlayersBtn_Click(object sender, EventArgs e)
+    private void RecentGamesBtn_Click(object sender, EventArgs e)
     {
         var friendsForm = new RecentPlayers();
         friendsForm.ShowDialog();
