@@ -79,6 +79,7 @@
             AudioGbx.Controls.Add(MusicAudioTbr);
             AudioGbx.Controls.Add(label2);
             AudioGbx.Controls.Add(MasterAudioTbr);
+            AudioGbx.ForeColor = Color.FromArgb(128, 255, 255);
             AudioGbx.Location = new Point(12, 12);
             AudioGbx.Name = "AudioGbx";
             AudioGbx.Size = new Size(309, 177);
@@ -90,6 +91,7 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
+            label3.ForeColor = Color.FromArgb(128, 255, 255);
             label3.Location = new Point(18, 251);
             label3.Name = "label3";
             label3.Size = new Size(77, 15);
@@ -100,10 +102,10 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = SystemColors.Info;
-            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label4.Location = new Point(84, 331);
+            label4.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            label4.Location = new Point(64, 329);
             label4.Name = "label4";
-            label4.Size = new Size(144, 20);
+            label4.Size = new Size(234, 31);
             label4.TabIndex = 6;
             label4.Text = "Work in progress";
             // 
@@ -111,6 +113,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkBlue;
             ClientSize = new Size(333, 450);
             Controls.Add(label4);
             Controls.Add(label3);
