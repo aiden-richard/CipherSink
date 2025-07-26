@@ -93,6 +93,7 @@
             TitleLbl.AutoSize = true;
             TitleLbl.BackColor = Color.Transparent;
             TitleLbl.Font = new Font("Impact", 36F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            TitleLbl.ForeColor = Color.FromArgb(128, 255, 255);
             TitleLbl.Location = new Point(112, 43);
             TitleLbl.Name = "TitleLbl";
             TitleLbl.Size = new Size(253, 60);
@@ -104,6 +105,7 @@
             QuoteLbl.AutoSize = true;
             QuoteLbl.BackColor = Color.Transparent;
             QuoteLbl.Font = new Font("Impact", 18F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            QuoteLbl.ForeColor = Color.FromArgb(128, 255, 255);
             QuoteLbl.Location = new Point(121, 112);
             QuoteLbl.Name = "QuoteLbl";
             QuoteLbl.Size = new Size(224, 29);
@@ -123,6 +125,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkBlue;
             ClientSize = new Size(475, 450);
             Controls.Add(JoinGameBtn);
             Controls.Add(QuoteLbl);

@@ -9,15 +9,6 @@ public partial class Main : Form
         InitializeComponent();
     }
 
-    protected override void OnPaintBackground(PaintEventArgs e)
-    {
-        // Draw a vertical gradient from yellow (top) to blue (bottom)
-        using (var brush = new LinearGradientBrush(this.ClientRectangle, Color.LightGoldenrodYellow, Color.RoyalBlue, LinearGradientMode.Vertical))
-        {
-            e.Graphics.FillRectangle(brush, this.ClientRectangle);
-        }
-    }
-
     private void CreateGameBtn_Click(object sender, EventArgs e)
     {
         // For now will just open the gameboard form, later on should open a message box to create a game
