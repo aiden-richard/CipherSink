@@ -54,6 +54,8 @@ internal abstract class Ship
     /// </summary>
     public bool IsSunk => Hits.Count == Size;
 
+    public bool IsLocked { get; protected set; } = false;
+
     /// <summary>
     /// Adds a coordinate to Hits if it is a valid position of the ship.
     /// </summary>
@@ -70,11 +72,11 @@ internal abstract class Ship
     /// Sets the positions of the ship on the game board.
     /// </summary>
     /// <param name="positions">The list of coordinates the ship is placed at</param>
-    public void SetPositions(List<Coordinates> positions)
+    public bool SetPositions(List<Coordinates> positions)
     {
-        if (Positions.Count > 0)
+        if (positions == null)
         {
-            throw new InvalidOperationException($"Positions have already been set for ship: {Name}");
+            throw new ArgumentNullException(nameof(positions), "Positions cannot be null.");
         }
 
         if (positions.Count != Size)
@@ -82,7 +84,34 @@ internal abstract class Ship
             throw new ArgumentException($"The number of positions must be equal to the size of the ship ({Size}).");
         }
 
-        Positions = positions;
+        if (IsLocked)
+        {
+            return false;
+        }
+
+        Positions = new List<Coordinates>(positions).AsReadOnly();
+        return true;
+    }
+
+    public bool LockPositions()
+    {
+        if (Positions.Count == 0)
+        {
+            return false;
+        }
+
+        IsLocked = true;
+        return true;
+    }
+
+    public bool LockPositions(List<Coordinates> positions)
+    {
+        if (SetPositions(positions))
+        {
+            return LockPositions();
+        }
+
+        return false;
     }
 }
 
