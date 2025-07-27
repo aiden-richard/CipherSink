@@ -93,6 +93,13 @@ internal abstract class Ship
         return true;
     }
 
+    /// <summary>
+    /// Locks the current positions by setting the IsLocked property to true.
+    /// The SetPositions method uses this property to determine if the ship's positions can be changed.
+    /// If there are no positions to lock, it returns false.
+    /// </summary>
+    /// <returns><see langword="true"/> if the positions were successfully locked; otherwise, <see langword="false"/> if there
+    /// are no positions to lock.</returns>
     public bool LockPositions()
     {
         if (Positions.Count == 0)
@@ -104,6 +111,11 @@ internal abstract class Ship
         return true;
     }
 
+    /// <summary>
+    /// Locks the ship's positions by first setting the positions using SetPositions.
+    /// </summary>
+    /// <param name="positions">The list of positions that the method tries to set and lock</param>
+    /// <returns></returns>
     public bool LockPositions(List<Coordinates> positions)
     {
         if (SetPositions(positions))
