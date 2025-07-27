@@ -137,7 +137,7 @@ internal class GameBoard
     /// If any ship fails to lock, it returns false.
     /// If a fail occurs, any ships that were successfully locked will remain locked.
     /// </summary>
-    /// <returns>true if all ships are locked; false otherwise</returns>
+    /// <returns><see langword="true"/> if all ships are locked; <see langword="false"/> otherwise</returns>
     public bool LockShips() 
     {
         // Lock all ships to prevent further placement
