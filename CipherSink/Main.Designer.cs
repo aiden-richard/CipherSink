@@ -120,6 +120,7 @@
             JoinGameBtn.TabIndex = 8;
             JoinGameBtn.Text = "Join Game";
             JoinGameBtn.UseVisualStyleBackColor = true;
+            JoinGameBtn.Click += JoinGameBtn_Click;
             // 
             // Main
             // 

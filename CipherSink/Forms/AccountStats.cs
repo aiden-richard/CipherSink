@@ -1,7 +1,4 @@
-﻿using System.Drawing.Drawing2D;
-
-
-namespace CipherSink;
+﻿namespace CipherSink;
 
 public partial class AccountStats : Form
 {
