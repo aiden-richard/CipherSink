@@ -131,7 +131,13 @@ internal class GameBoard
             }
         }
     }
-
+    /// <summary>
+    /// This method locks all ships on the game board.
+    /// It does this by calling the LockPositions method on each ship.
+    /// If any ship fails to lock, it returns false.
+    /// If a fail occurs, any ships that were successfully locked will remain locked.
+    /// </summary>
+    /// <returns><see langword="true"/> if all ships are locked; <see langword="false"/> otherwise</returns>
     public bool LockShips() 
     {
         // Lock all ships to prevent further placement
