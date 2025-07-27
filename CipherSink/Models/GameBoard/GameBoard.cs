@@ -76,10 +76,25 @@ internal class GameBoard
         int endX = vertical ? x : x + ship.Size - 1;
         int endY = vertical ? y + ship.Size - 1 : y;
 
-        // check start and end coordinates are within bounds
-        if (x < 0 || endX >= BoardSize || y < 0 || endY >= BoardSize)
+        // check start coordinates are within bounds of board
+        if (x < 0 || x >= BoardSize || y < 0 || y >= BoardSize)
         {
             throw new ArgumentOutOfRangeException("Coordinates are out of bounds.");
+        }
+
+        // check end coordinates are within not less than 0
+        // throw exception if they are because it should not be possible to place a ship in this direction
+        if (endX < 0 || endY < 0)
+        {
+            throw new ArgumentOutOfRangeException("Ship extends beyond the bounds of the board.");
+        }
+
+        // check if end coordinates are within the positive bounds of board
+        // return false rather than throw exception because it is possible to place a ship in this direction
+        // a user might try to click the bottom or right edge of the board and this should not throw an exception
+        if (endX >= BoardSize || endY >= BoardSize)
+        {
+            return false; // Ship extends beyond the bounds of the board
         }
 
         // Check if the cells are already occupied
@@ -102,6 +117,7 @@ internal class GameBoard
             Grid[placeX, placeY].OccupationType = ship.OccupationType;
             positions.Add(new Coordinates(placeX, placeY));
         }
+
         return ship.SetPositions(positions);
     }
 
