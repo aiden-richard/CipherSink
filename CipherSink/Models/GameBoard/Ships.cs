@@ -115,7 +115,7 @@ internal abstract class Ship
     /// Locks the ship's positions by first setting the positions using SetPositions.
     /// </summary>
     /// <param name="positions">The list of positions that the method tries to set and lock</param>
-    /// <returns></returns>
+    /// <returns><see langword="true"/> if the positions were successfully set and locked; otherwise, <see langword="false"/> if the positions could not be set or locked.</returns>
     public bool LockPositions(List<Coordinates> positions)
     {
         if (SetPositions(positions))
