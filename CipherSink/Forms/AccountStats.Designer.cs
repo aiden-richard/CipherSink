@@ -55,6 +55,7 @@
             UserStatsGbx.Controls.Add(HitsTbx);
             UserStatsGbx.Controls.Add(LossesTbx);
             UserStatsGbx.Controls.Add(WinsTbx);
+            UserStatsGbx.ForeColor = Color.FromArgb(128, 255, 255);
             UserStatsGbx.Location = new Point(12, 12);
             UserStatsGbx.Name = "UserStatsGbx";
             UserStatsGbx.Size = new Size(199, 217);
@@ -156,6 +157,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkBlue;
             ClientSize = new Size(227, 248);
             Controls.Add(UserStatsGbx);
             FormBorderStyle = FormBorderStyle.FixedDialog;

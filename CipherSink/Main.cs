@@ -1,5 +1,3 @@
-using System.Drawing.Drawing2D;
-
 namespace CipherSink;
 
 public partial class Main : Form
@@ -9,17 +7,16 @@ public partial class Main : Form
         InitializeComponent();
     }
 
-    protected override void OnPaintBackground(PaintEventArgs e)
+    private void CreateGameBtn_Click(object sender, EventArgs e)
     {
-        // Draw a vertical gradient from yellow (top) to blue (bottom)
-        using (var brush = new LinearGradientBrush(this.ClientRectangle, Color.LightGoldenrodYellow, Color.RoyalBlue, LinearGradientMode.Vertical))
-        {
-            e.Graphics.FillRectangle(brush, this.ClientRectangle);
-        }
+        // For now will just open the gameboard form, later on should open a message box to create a game
+        var gameboardForm = new Gameboard();
+        gameboardForm.ShowDialog();
     }
 
-    private void StartGameBtn_Click(object sender, EventArgs e)
+    private void JoinGameBtn_Click(object sender, EventArgs e)
     {
+        // Will do the same as above, but the message box will be for joining a game
         var gameboardForm = new Gameboard();
         gameboardForm.ShowDialog();
     }
@@ -36,7 +33,7 @@ public partial class Main : Form
         optionsForm.ShowDialog();
     }
 
-    private void RecentPlayersBtn_Click(object sender, EventArgs e)
+    private void RecentGamesBtn_Click(object sender, EventArgs e)
     {
         var friendsForm = new RecentPlayers();
         friendsForm.ShowDialog();
@@ -46,4 +43,5 @@ public partial class Main : Form
     {
         Application.Exit();
     }
+
 }

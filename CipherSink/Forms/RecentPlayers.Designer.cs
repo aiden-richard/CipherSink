@@ -45,6 +45,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(128, 255, 255);
             label2.Location = new Point(12, 9);
             label2.Name = "label2";
             label2.Size = new Size(145, 25);
@@ -55,13 +56,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkBlue;
             ClientSize = new Size(314, 450);
             Controls.Add(label2);
             Controls.Add(RecentPlayersLV);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "RecentPlayers";
-            Text = "Recent Players";
+            Text = "Recent Games";
             ResumeLayout(false);
             PerformLayout();
         }

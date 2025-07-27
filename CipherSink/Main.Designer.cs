@@ -28,32 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            StartGameBtn = new Button();
+            CreateGameBtn = new Button();
             PlayerAccountBtn = new Button();
             OptionsBtn = new Button();
-            RecentPlayersBtn = new Button();
+            RecentGamesBtn = new Button();
             ExitBtn = new Button();
             TitleLbl = new Label();
             QuoteLbl = new Label();
-            RecentGamesLV = new ListView();
-            label1 = new Label();
+            JoinGameBtn = new Button();
             SuspendLayout();
             // 
-            // StartGameBtn
+            // CreateGameBtn
             // 
-            StartGameBtn.Location = new Point(169, 160);
-            StartGameBtn.Name = "StartGameBtn";
-            StartGameBtn.Size = new Size(121, 49);
-            StartGameBtn.TabIndex = 0;
-            StartGameBtn.Text = "Start Game";
-            StartGameBtn.UseVisualStyleBackColor = true;
-            StartGameBtn.Click += StartGameBtn_Click;
+            CreateGameBtn.Location = new Point(138, 160);
+            CreateGameBtn.Name = "CreateGameBtn";
+            CreateGameBtn.Size = new Size(195, 33);
+            CreateGameBtn.TabIndex = 0;
+            CreateGameBtn.Text = "Create Game";
+            CreateGameBtn.UseVisualStyleBackColor = true;
+            CreateGameBtn.Click += CreateGameBtn_Click;
             // 
             // PlayerAccountBtn
             // 
-            PlayerAccountBtn.Location = new Point(27, 231);
+            PlayerAccountBtn.Location = new Point(138, 262);
             PlayerAccountBtn.Name = "PlayerAccountBtn";
-            PlayerAccountBtn.Size = new Size(121, 49);
+            PlayerAccountBtn.Size = new Size(195, 33);
             PlayerAccountBtn.TabIndex = 1;
             PlayerAccountBtn.Text = "Account Stats";
             PlayerAccountBtn.UseVisualStyleBackColor = true;
@@ -61,29 +60,29 @@
             // 
             // OptionsBtn
             // 
-            OptionsBtn.Location = new Point(169, 231);
+            OptionsBtn.Location = new Point(138, 340);
             OptionsBtn.Name = "OptionsBtn";
-            OptionsBtn.Size = new Size(121, 49);
+            OptionsBtn.Size = new Size(195, 33);
             OptionsBtn.TabIndex = 2;
             OptionsBtn.Text = "Options";
             OptionsBtn.UseVisualStyleBackColor = true;
             OptionsBtn.Click += OptionsBtn_Click;
             // 
-            // RecentPlayersBtn
+            // RecentGamesBtn
             // 
-            RecentPlayersBtn.Location = new Point(306, 231);
-            RecentPlayersBtn.Name = "RecentPlayersBtn";
-            RecentPlayersBtn.Size = new Size(121, 49);
-            RecentPlayersBtn.TabIndex = 3;
-            RecentPlayersBtn.Text = "Recently Played Against";
-            RecentPlayersBtn.UseVisualStyleBackColor = true;
-            RecentPlayersBtn.Click += RecentPlayersBtn_Click;
+            RecentGamesBtn.Location = new Point(138, 301);
+            RecentGamesBtn.Name = "RecentGamesBtn";
+            RecentGamesBtn.Size = new Size(195, 33);
+            RecentGamesBtn.TabIndex = 3;
+            RecentGamesBtn.Text = "Recent Games";
+            RecentGamesBtn.UseVisualStyleBackColor = true;
+            RecentGamesBtn.Click += RecentGamesBtn_Click;
             // 
             // ExitBtn
             // 
-            ExitBtn.Location = new Point(27, 389);
+            ExitBtn.Location = new Point(138, 405);
             ExitBtn.Name = "ExitBtn";
-            ExitBtn.Size = new Size(121, 49);
+            ExitBtn.Size = new Size(195, 33);
             ExitBtn.TabIndex = 4;
             ExitBtn.Text = "Exit";
             ExitBtn.UseVisualStyleBackColor = true;
@@ -94,7 +93,8 @@
             TitleLbl.AutoSize = true;
             TitleLbl.BackColor = Color.Transparent;
             TitleLbl.Font = new Font("Impact", 36F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            TitleLbl.Location = new Point(98, 42);
+            TitleLbl.ForeColor = Color.FromArgb(128, 255, 255);
+            TitleLbl.Location = new Point(112, 43);
             TitleLbl.Name = "TitleLbl";
             TitleLbl.Size = new Size(253, 60);
             TitleLbl.TabIndex = 6;
@@ -105,45 +105,37 @@
             QuoteLbl.AutoSize = true;
             QuoteLbl.BackColor = Color.Transparent;
             QuoteLbl.Font = new Font("Impact", 18F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            QuoteLbl.Location = new Point(118, 111);
+            QuoteLbl.ForeColor = Color.FromArgb(128, 255, 255);
+            QuoteLbl.Location = new Point(121, 112);
             QuoteLbl.Name = "QuoteLbl";
             QuoteLbl.Size = new Size(224, 29);
             QuoteLbl.TabIndex = 7;
             QuoteLbl.Text = "You cracked my code!";
             // 
-            // RecentGamesLV
+            // JoinGameBtn
             // 
-            RecentGamesLV.Location = new Point(235, 341);
-            RecentGamesLV.Name = "RecentGamesLV";
-            RecentGamesLV.Size = new Size(228, 97);
-            RecentGamesLV.TabIndex = 8;
-            RecentGamesLV.UseCompatibleStateImageBehavior = false;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
-            label1.Location = new Point(235, 313);
-            label1.Name = "label1";
-            label1.Size = new Size(160, 20);
-            label1.TabIndex = 9;
-            label1.Text = "Most Recent Games:";
+            JoinGameBtn.Location = new Point(138, 199);
+            JoinGameBtn.Name = "JoinGameBtn";
+            JoinGameBtn.Size = new Size(195, 33);
+            JoinGameBtn.TabIndex = 8;
+            JoinGameBtn.Text = "Join Game";
+            JoinGameBtn.UseVisualStyleBackColor = true;
+            JoinGameBtn.Click += JoinGameBtn_Click;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkBlue;
             ClientSize = new Size(475, 450);
-            Controls.Add(label1);
-            Controls.Add(RecentGamesLV);
+            Controls.Add(JoinGameBtn);
             Controls.Add(QuoteLbl);
             Controls.Add(TitleLbl);
             Controls.Add(ExitBtn);
-            Controls.Add(RecentPlayersBtn);
+            Controls.Add(RecentGamesBtn);
             Controls.Add(OptionsBtn);
             Controls.Add(PlayerAccountBtn);
-            Controls.Add(StartGameBtn);
+            Controls.Add(CreateGameBtn);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "Main";
@@ -154,14 +146,13 @@
 
         #endregion
 
-        private Button StartGameBtn;
+        private Button CreateGameBtn;
         private Button PlayerAccountBtn;
         private Button OptionsBtn;
-        private Button RecentPlayersBtn;
+        private Button RecentGamesBtn;
         private Button ExitBtn;
         private Label TitleLbl;
         private Label QuoteLbl;
-        private ListView RecentGamesLV;
-        private Label label1;
+        private Button JoinGameBtn;
     }
 }
