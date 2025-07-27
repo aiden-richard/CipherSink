@@ -77,7 +77,7 @@ internal class GameBoard
         int endY = vertical ? y + ship.Size - 1 : y;
 
         // check start coordinates are within bounds of board
-        if (x < 0 || x > BoardSize || y < 0 || y > BoardSize)
+        if (x < 0 || x >= BoardSize || y < 0 || y >= BoardSize)
         {
             throw new ArgumentOutOfRangeException("Coordinates are out of bounds.");
         }
