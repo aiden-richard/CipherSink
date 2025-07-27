@@ -102,9 +102,7 @@ internal class GameBoard
             Grid[placeX, placeY].OccupationType = ship.OccupationType;
             positions.Add(new Coordinates(placeX, placeY));
         }
-        ship.SetPositions(positions);
-
-        return true;
+        return ship.SetPositions(positions);
     }
 
     /// <summary>
@@ -132,6 +130,24 @@ internal class GameBoard
                 throw new InvalidOperationException($"Could not place ship: {ship.Name} after {attempts} attempts.");
             }
         }
+    }
+
+    public bool LockShips() 
+    {
+        // Lock all ships to prevent further placement
+        foreach (var ship in Ships)
+        {
+            if (!ship.IsLocked)
+            {
+                bool success = ship.LockPositions();
+                if (!success)
+                {
+                    return false; // If any ship fails to lock, return false
+                }
+            }
+        }
+
+        return true; // All ships successfully locked
     }
 
     /// <summary>
