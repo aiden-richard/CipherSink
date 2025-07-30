@@ -28,25 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
-            panel2 = new Panel();
             TurnTrackerTbx = new TextBox();
             label1 = new Label();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.Location = new Point(81, 12);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(302, 272);
-            panel1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            panel2.Location = new Point(81, 404);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(302, 270);
-            panel2.TabIndex = 1;
             // 
             // TurnTrackerTbx
             // 
@@ -77,8 +61,6 @@
             ClientSize = new Size(599, 686);
             Controls.Add(label1);
             Controls.Add(TurnTrackerTbx);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "Gameboard";
@@ -88,9 +70,6 @@
         }
 
         #endregion
-
-        private Panel panel1;
-        private Panel panel2;
         private TextBox TurnTrackerTbx;
         private Label label1;
     }
