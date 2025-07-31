@@ -36,7 +36,7 @@
             // 
             // TurnTrackerTbx
             // 
-            TurnTrackerTbx.Location = new Point(578, 501);
+            TurnTrackerTbx.Location = new Point(568, 548);
             TurnTrackerTbx.Name = "TurnTrackerTbx";
             TurnTrackerTbx.ReadOnly = true;
             TurnTrackerTbx.Size = new Size(100, 23);
@@ -49,7 +49,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(128, 255, 255);
-            label1.Location = new Point(609, 477);
+            label1.Location = new Point(595, 524);
             label1.Name = "label1";
             label1.Size = new Size(45, 21);
             label1.TabIndex = 3;
@@ -57,7 +57,8 @@
             // 
             // EnemyPlayerTlp
             // 
-            EnemyPlayerTlp.ColumnCount = 10;
+            EnemyPlayerTlp.ColumnCount = 11;
+            EnemyPlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             EnemyPlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             EnemyPlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             EnemyPlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
@@ -70,7 +71,7 @@
             EnemyPlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             EnemyPlayerTlp.Location = new Point(12, 12);
             EnemyPlayerTlp.Name = "EnemyPlayerTlp";
-            EnemyPlayerTlp.RowCount = 10;
+            EnemyPlayerTlp.RowCount = 11;
             EnemyPlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             EnemyPlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             EnemyPlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
@@ -81,12 +82,13 @@
             EnemyPlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             EnemyPlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             EnemyPlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            EnemyPlayerTlp.Size = new Size(450, 452);
+            EnemyPlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            EnemyPlayerTlp.Size = new Size(512, 512);
             EnemyPlayerTlp.TabIndex = 4;
             // 
             // ActivePlayerTlp
             // 
-            ActivePlayerTlp.ColumnCount = 10;
+            ActivePlayerTlp.ColumnCount = 11;
             ActivePlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             ActivePlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             ActivePlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
@@ -97,9 +99,10 @@
             ActivePlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             ActivePlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             ActivePlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
-            ActivePlayerTlp.Location = new Point(12, 535);
+            ActivePlayerTlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
+            ActivePlayerTlp.Location = new Point(12, 568);
             ActivePlayerTlp.Name = "ActivePlayerTlp";
-            ActivePlayerTlp.RowCount = 10;
+            ActivePlayerTlp.RowCount = 11;
             ActivePlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             ActivePlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             ActivePlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
@@ -110,7 +113,8 @@
             ActivePlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             ActivePlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             ActivePlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            ActivePlayerTlp.Size = new Size(450, 452);
+            ActivePlayerTlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            ActivePlayerTlp.Size = new Size(512, 512);
             ActivePlayerTlp.TabIndex = 5;
             // 
             // Gameboard
@@ -118,7 +122,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkBlue;
-            ClientSize = new Size(774, 1018);
+            ClientSize = new Size(707, 1092);
             Controls.Add(ActivePlayerTlp);
             Controls.Add(EnemyPlayerTlp);
             Controls.Add(label1);
