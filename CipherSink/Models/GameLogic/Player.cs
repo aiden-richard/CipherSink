@@ -17,13 +17,6 @@ internal class Player
     public int Id { get; set; }
 
     /// <summary>
-    /// Gets or sets the display name of the player.
-    /// </summary>
-    /// <value>The player's display name. This property is required and cannot be null.</value>
-    /// <exception cref="ArgumentNullException">Thrown when attempting to set a null value.</exception>
-    public required string Name { get; set; }
-
-    /// <summary>
     /// Gets or sets the cryptographic key pair associated with this player.
     /// </summary>
     /// <value>The player's cryptographic key pair. This property is required and cannot be null.</value>
@@ -37,9 +30,7 @@ internal class Player
     public required KeyPair KeyPair { get; set; }
 
     /// <summary>
-    /// Gets or sets the game board associated with this player.
-    /// The game board contains the player's ship placements, grid state, and tracks
-    /// hits and misses during gameplay.
+    /// Gets or sets the game board currently associated with this player.
     /// </summary>
     /// <value>The player's game board instance. Defaults to a new <see cref="Gameboard"/> instance.</value>
     /// <seealso cref="Gameboard"/>
@@ -47,8 +38,8 @@ internal class Player
 
     public Player(string name, KeyPair keyPair)
     {
-        Name = name ?? throw new ArgumentNullException(nameof(name));
-        KeyPair = keyPair ?? throw new ArgumentNullException(nameof(keyPair));
+        Name = name;
+        KeyPair = keyPair;
     }
 
     public Player() { }
