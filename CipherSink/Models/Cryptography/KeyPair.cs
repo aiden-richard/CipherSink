@@ -1,4 +1,6 @@
-﻿namespace CipherSink.Models.Cryptography;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CipherSink.Models.Cryptography;
 
 /// <summary>
 /// Represents a cryptographic key pair consisting of a public and a private key
@@ -9,6 +11,7 @@ internal class KeyPair
     /// Gets or sets the unique identifier for this key pair.
     /// </summary>
     /// <value>The unique identifier for the key pair.</value>
+    [Key]
     public int Id { get; set; }
 
     /// <summary>
