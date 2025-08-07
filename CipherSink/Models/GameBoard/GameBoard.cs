@@ -5,7 +5,7 @@
 /// It has a grid of cells and a list of ships.
 /// It provides methods to initialize the grid, place ships, and to check cells
 /// </summary>
-internal class GameBoard
+internal class Gameboard
 {
     /// <summary>
     /// The size of the game board, which is a square grid of cells.
@@ -25,7 +25,7 @@ internal class GameBoard
     /// <summary>
     /// Constructor to initialize the ships and the grid of cells.
     /// </summary>
-    public GameBoard()
+    public Gameboard()
     {
         Grid = new Cell[BoardSize, BoardSize];
         InitializeGrid();
