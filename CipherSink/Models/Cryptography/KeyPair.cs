@@ -39,7 +39,7 @@ internal class KeyPair
 
     /// <summary>
     /// Initializes a new instance of the <see cref="KeyPair"/> class with empty key values.
-    /// EF Core requires a parameterless constructor 
+    /// EF Core requires a parameterless constructor.
     /// </summary>
     public KeyPair() { }
 }
