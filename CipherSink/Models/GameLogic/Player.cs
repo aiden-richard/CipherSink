@@ -27,7 +27,12 @@ internal class Player
     /// Gets or sets the cryptographic key pair associated with this player.
     /// </summary>
     /// <value>The player's cryptographic key pair. This property is required and cannot be null.</value>
-    /// <exception cref="ArgumentNullException">Thrown when attempting to set a null value.</exception>
+    public required string Name { get; set; }
+
+    /// <summary>
+    /// Gets or sets the cryptographic key pair associated with this player.
+    /// </summary>
+    /// <value>The player's cryptographic key pair. This property is required and cannot be null.</value>
     /// <seealso cref="KeyPair"/>
     public required KeyPair KeyPair { get; set; }
 
