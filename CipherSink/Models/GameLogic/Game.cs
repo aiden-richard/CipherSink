@@ -1,4 +1,7 @@
-﻿namespace CipherSink.Models.GameLogic;
+﻿using CipherSink.Models.Networking;
+using System.Threading.Tasks;
+
+namespace CipherSink.Models.GameLogic;
 
 internal class Game
 {
@@ -14,22 +17,50 @@ internal class Game
 
     public required Action UpdateUI { get; set; }
 
+    private TcpPeer Peer { get; set; }
+
     public Game(Player localPlayer, bool isHost, Action updateUI)
     {
         LocalPlayer = localPlayer;
         IsHost = isHost;
         UpdateUI = updateUI;
+        Peer = new TcpPeer(localPlayer.Rsa);
     }
 
-    public void Start()
+    public async Task Start()
     {
         while (State != GameState.Finished)
         {
             switch (State)
             {
                 case GameState.VerifyUser:
-                    // Logic for verifying user
+                    Peer.IsHost = IsHost;
+                    if (IsHost)
+                    {
+                        await Peer.TryAcceptConnection(12345);
+                        await Peer.ExchangeKeys();
+                        await Peer.ValidateConnection();
+                    }
+                    else
+                    {
+                        await Peer.TryConnect("127.0.0.1", 12345);
+                        await Peer.ExchangeKeys();
+                        await Peer.ValidateConnection();
+                    }
+
+                    if (Peer.ConnectionVerified)
+                    {
+                        State = GameState.PlaceShips;
+                    }
+                    else
+                    {
+                        State = GameState.Aborted;
+                        UpdateUI.Invoke();
+                        return; // Exit if connection verification fails
+                    }
+                    
                     break;
+
                 case GameState.PlaceShips:
                     // Logic for placing ships
                     break;
