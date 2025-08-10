@@ -1,4 +1,4 @@
-﻿namespace CipherSink.Models.GameLogic;
+namespace CipherSink.Models.GameLogic;
 
 internal enum GameState
 {
@@ -7,7 +7,6 @@ internal enum GameState
     WaitingOnOpponentReady,
     LocalTurn,
     RemoteTurn,
-    AwaitShotResult,
     Finished,
     Aborted
 }
