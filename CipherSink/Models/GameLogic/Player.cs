@@ -1,13 +1,14 @@
 ﻿using CipherSink.Models.Cryptography;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
+using System.Xml.Linq;
 
 namespace CipherSink.Models.GameLogic;
 
 /// <summary>
 /// Represents a player in the CipherSink game, encapsulating their Id, Name, cryptographic credentials, and game state.
 /// </summary>
-internal class Player
+public class Player
 {
     /// <summary>
     /// Gets or sets the unique identifier for this player in the database.
@@ -21,9 +22,9 @@ internal class Player
     /// Gets or sets the cryptographic key pair associated with this player.
     /// </summary>
     /// <value>The player's cryptographic key pair. This property is required and cannot be null.</value>
-    public required string Name { get; set; }
+    public string Name { get; set; }
 
-    public RSA Rsa { get; set; } = RSA.Create();
+    public RSA Rsa { get; set; }
 
     public byte[] PublicKey => Rsa.ExportRSAPublicKey();
 
@@ -34,11 +35,15 @@ internal class Player
     /// <seealso cref="Gameboard"/>
     public Gameboard GameBoard { get; set; } = new Gameboard();
 
-    public Player(string name, RSA rsa)
+    public Player(string name)
     {
         Name = name;
-        Rsa = rsa;
+        Rsa = RSA.Create();
     }
 
-    public Player() { }
+    public Player() 
+    {
+        Name = "testUser";
+        Rsa = RSA.Create();
+    }
 }
