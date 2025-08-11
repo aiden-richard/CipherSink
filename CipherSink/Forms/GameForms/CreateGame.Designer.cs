@@ -1,4 +1,4 @@
-﻿namespace CipherSink.Forms.Game
+﻿namespace CipherSink.Forms.GameForms
 {
     partial class CreateGame
     {
@@ -80,6 +80,7 @@
             BtnCreateGame.TabIndex = 5;
             BtnCreateGame.Text = "Create Game";
             BtnCreateGame.UseVisualStyleBackColor = true;
+            BtnCreateGame.Click += BtnCreateGame_Click;
             // 
             // comboBoxGameType
             // 
