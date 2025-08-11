@@ -5,13 +5,14 @@ using System.Security.Cryptography;
 
 namespace CipherSink.Models.Networking;
 
-internal class TcpPeer : IDisposable
+public class TcpPeer : IDisposable
 {
     private RSA Rsa;
     private byte[] PublicKey;
     private byte[]? PeerPublicKey;
 
     private Socket? Connection;
+    public const int Port = 57575;
     public bool IsHost;
     public bool ConnectionVerified = false;
 
@@ -21,12 +22,12 @@ internal class TcpPeer : IDisposable
         PublicKey = Rsa.ExportRSAPublicKey();
     }
 
-    public async Task<bool> TryConnect(string host, int port)
+    public async Task<bool> TryConnect(string host)
     {
         try
         {
             IsHost = false;
-            IPEndPoint EndPoint = new(IPAddress.Parse(host), port);
+            IPEndPoint EndPoint = new(IPAddress.Parse(host), Port);
             Connection = new Socket(EndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
             await Connection.ConnectAsync(EndPoint);
@@ -39,12 +40,12 @@ internal class TcpPeer : IDisposable
         }
     }
 
-    public async Task<bool> TryAcceptConnection(int port)
+    public async Task<bool> TryAcceptConnection()
     {
         try
         {
             IsHost = true;
-            IPEndPoint EndPoint = new(IPAddress.Any, port);
+            IPEndPoint EndPoint = new(IPAddress.Any, Port);
             Socket listener = new(EndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
             listener.Bind(EndPoint);

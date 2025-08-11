@@ -1,6 +1,6 @@
 namespace CipherSink.Models.GameLogic;
 
-internal enum GameState
+public enum GameState
 {
     VerifyUser,
     PlaceShips,

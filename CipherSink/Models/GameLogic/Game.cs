@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace CipherSink.Models.GameLogic;
 
-internal class Game
+public class Game
 {
     public int Id { get; set; }
 
@@ -11,24 +11,30 @@ internal class Game
 
     public Player? RemotePlayer { get; set; }
 
-    public GameState State { get; set; }
+    public GameState State { get; set; } = GameState.VerifyUser;
 
-    public required bool IsHost { get; set; }
+    public bool IsHost { get; set; }
 
-    public required Action UpdateUI { get; set; }
+    public string? HostIp { get; set; } = null;
+
+    public Action UpdateUI { get; set; }
 
     private TcpPeer Peer { get; set; }
 
-    public Game(Player localPlayer, bool isHost, Action updateUI)
+    public Game(TcpPeer peer, Player localPlayer, bool isHost)
     {
+        Peer = peer;
         LocalPlayer = localPlayer;
         IsHost = isHost;
-        UpdateUI = updateUI;
-        Peer = new TcpPeer(localPlayer.Rsa);
     }
 
     public async Task Start()
     {
+        if (UpdateUI == null)
+        {
+            throw new Exception("UpdateUI action must be set before starting the game.");
+        }
+
         while (State != GameState.Finished)
         {
             switch (State)
@@ -37,26 +43,25 @@ internal class Game
                     Peer.IsHost = IsHost;
                     if (IsHost)
                     {
-                        await Peer.TryAcceptConnection(12345);
+                        await Peer.TryAcceptConnection();
                         await Peer.ExchangeKeys();
                         await Peer.ValidateConnection();
                     }
                     else
                     {
-                        await Peer.TryConnect("127.0.0.1", 12345);
+                        await Peer.TryConnect(HostIp);
                         await Peer.ExchangeKeys();
                         await Peer.ValidateConnection();
                     }
 
                     if (Peer.ConnectionVerified)
                     {
+                        MessageBox.Show("Connection verified", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         State = GameState.PlaceShips;
                     }
                     else
                     {
                         State = GameState.Aborted;
-                        UpdateUI.Invoke();
-                        return; // Exit if connection verification fails
                     }
                     
                     break;
@@ -77,7 +82,7 @@ internal class Game
                     // Logic for finishing the game
                     break;
                 case GameState.Aborted:
-                    // Logic for aborting the game
+                    MessageBox.Show("Game aborted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
 
