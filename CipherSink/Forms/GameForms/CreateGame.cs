@@ -45,7 +45,7 @@ public partial class CreateGame : Form
             Player selectedPlayer = (Player)comboBoxSelectUser.SelectedItem;
             TcpPeer peer = new TcpPeer(selectedPlayer.Rsa);
 
-            Game game = new(peer, selectedPlayer, false);
+            Game game = new(peer, selectedPlayer, true);
 
             var placeShipsForm = new PlaceShips(game);
             placeShipsForm.ShowDialog();
