@@ -1,3 +1,5 @@
+using CipherSink.Forms.GameForms;
+
 namespace CipherSink;
 
 public partial class Main : Form
@@ -10,15 +12,14 @@ public partial class Main : Form
     private void CreateGameBtn_Click(object sender, EventArgs e)
     {
         // For now will just open the gameboard form, later on should open a message box to create a game
-        var gameboardForm = new Gameboard();
-        gameboardForm.ShowDialog();
+        var createGameForm = new CreateGame();
+        createGameForm.ShowDialog();
     }
 
     private void JoinGameBtn_Click(object sender, EventArgs e)
     {
-        // Will do the same as above, but the message box will be for joining a game
-        var gameboardForm = new Gameboard();
-        gameboardForm.ShowDialog();
+        var joinGameForm = new JoinGame();
+        joinGameForm.ShowDialog();
     }
 
     private void PlayerAccountBtn_Click(object sender, EventArgs e)
@@ -43,5 +44,4 @@ public partial class Main : Form
     {
         Application.Exit();
     }
-
 }
