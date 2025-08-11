@@ -56,9 +56,9 @@
             UserStatsGbx.Controls.Add(LossesTbx);
             UserStatsGbx.Controls.Add(WinsTbx);
             UserStatsGbx.ForeColor = Color.FromArgb(128, 255, 255);
-            UserStatsGbx.Location = new Point(12, 12);
+            UserStatsGbx.Location = new Point(12, 283);
             UserStatsGbx.Name = "UserStatsGbx";
-            UserStatsGbx.Size = new Size(199, 217);
+            UserStatsGbx.Size = new Size(256, 208);
             UserStatsGbx.TabIndex = 7;
             UserStatsGbx.TabStop = false;
             UserStatsGbx.Text = "Current user's stats:";
@@ -66,7 +66,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(67, 138);
+            label8.Location = new Point(91, 139);
             label8.Name = "label8";
             label8.Size = new Size(65, 15);
             label8.TabIndex = 9;
@@ -75,7 +75,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(114, 80);
+            label7.Location = new Point(167, 80);
             label7.Name = "label7";
             label7.Size = new Size(42, 15);
             label7.TabIndex = 8;
@@ -93,7 +93,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(114, 28);
+            label5.Location = new Point(167, 28);
             label5.Name = "label5";
             label5.Size = new Size(44, 15);
             label5.TabIndex = 6;
@@ -110,7 +110,7 @@
             // 
             // TotalSunkTbx
             // 
-            TotalSunkTbx.Location = new Point(50, 156);
+            TotalSunkTbx.Location = new Point(74, 157);
             TotalSunkTbx.Name = "TotalSunkTbx";
             TotalSunkTbx.ReadOnly = true;
             TotalSunkTbx.Size = new Size(100, 23);
@@ -119,7 +119,7 @@
             // 
             // MissesTbx
             // 
-            MissesTbx.Location = new Point(114, 98);
+            MissesTbx.Location = new Point(167, 98);
             MissesTbx.Name = "MissesTbx";
             MissesTbx.ReadOnly = true;
             MissesTbx.Size = new Size(52, 23);
@@ -137,7 +137,7 @@
             // 
             // LossesTbx
             // 
-            LossesTbx.Location = new Point(114, 46);
+            LossesTbx.Location = new Point(167, 46);
             LossesTbx.Name = "LossesTbx";
             LossesTbx.ReadOnly = true;
             LossesTbx.Size = new Size(52, 23);
@@ -158,7 +158,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkBlue;
-            ClientSize = new Size(227, 248);
+            ClientSize = new Size(280, 503);
             Controls.Add(UserStatsGbx);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
