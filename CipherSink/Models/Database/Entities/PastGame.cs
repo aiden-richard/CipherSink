@@ -9,7 +9,7 @@ public class PastGame
 
     [ForeignKey("LocalUser")]
     public int LocalUserId { get; set; }
-    public LocalUser LocalUser { get; set; }
+    public LocalPlayer LocalUser { get; set; }
 
     [ForeignKey("RemotePlayer")]
     public int RemotePlayerId { get; set; }

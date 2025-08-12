@@ -10,12 +10,10 @@ public class CipherSinkContext : DbContext
         Database.EnsureCreated();
     }
 
-    public DbSet<LocalUser> LocalUsers { get; set; }
+    public DbSet<LocalPlayer> LocalUsers { get; set; }
     public DbSet<RemotePlayer> RemotePlayers { get; set; }
     public DbSet<PastGame> PastGames { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
         => options.UseSqlite("Data Source=CipherSink.db");
-
-
 }
