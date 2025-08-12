@@ -24,7 +24,7 @@ public partial class Main : Form
 
     private void PlayerAccountBtn_Click(object sender, EventArgs e)
     {
-        var accountForm = new AccountStats();
+        var accountForm = new AccountAndStats();
         accountForm.ShowDialog();
     }
 
