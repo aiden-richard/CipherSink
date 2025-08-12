@@ -1,6 +1,6 @@
 ﻿namespace CipherSink
 {
-    partial class RecentPlayers
+    partial class RecentGames
     {
         /// <summary>
         /// Required designer variable.

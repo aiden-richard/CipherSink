@@ -1,23 +1,26 @@
 ﻿using CipherSink.Models;
+using CipherSink.Models.Database;
+using CipherSink.Models.Database.Entities;
+using System.Security.Cryptography;
 
 namespace CipherSink;
 
-public partial class RecentPlayers : Form
+public partial class RecentGames : Form
 {
-    public RecentPlayers()
+    public RecentGames()
     {
         InitializeComponent();
     }
 
     // Adds to the RemotePlayers table in the database
-
     private void CreateDbBtn_Click(object sender, EventArgs e)
     {
+        RSA rsa = RSA.Create();
         using var db = new CipherSinkContext();
         var player = new RemotePlayer
         {
             Username = RUsernameTestTbx.Text,
-            PublicKey = RPublicKeyTestTbx.Text,
+            PublicKeyBytes = rsa.ExportRSAPublicKey(),
             IsFriend = bool.TryParse(IsFriendTestTbx.Text, out var isFriend) ? isFriend : false
         };
         db.RemotePlayers.Add(player);
@@ -44,7 +47,6 @@ public partial class RecentPlayers : Form
         if (player != null)
         {
             player.Username = RUsernameTestTbx.Text;
-            player.PublicKey = RPublicKeyTestTbx.Text;
             player.IsFriend = bool.TryParse(IsFriendTestTbx.Text, out var isFriend) ? isFriend : false;
             db2.SaveChanges();
         }
@@ -99,7 +101,7 @@ public partial class RecentPlayers : Form
             {
                 player.Id.ToString(),
                 player.Username,
-                player.PublicKey,
+                Convert.ToBase64String(player.PublicKeyBytes),
                 player.IsFriend.ToString()
             });
             RecentPlayersLV.Items.Add(item);

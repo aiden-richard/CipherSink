@@ -36,7 +36,7 @@ public partial class Main : Form
 
     private void RecentGamesBtn_Click(object sender, EventArgs e)
     {
-        var friendsForm = new RecentPlayers();
+        var friendsForm = new RecentGames();
         friendsForm.ShowDialog();
     }
 
