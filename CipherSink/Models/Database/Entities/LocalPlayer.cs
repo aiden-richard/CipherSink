@@ -6,9 +6,16 @@ namespace CipherSink.Models.Database.Entities;
 
 public class LocalPlayer : BasePlayer
 {
+    public LocalPlayer()
+    {
+        RsaObject = RSA.Create(2048);
+        PublicKeyBytes = RsaObject.ExportRSAPublicKey();
+        EncryptedPrivateKeyBytes = RsaObject.ExportRSAPrivateKey();
+    }
+
     // Store private key securely (e.g., encrypted, or use DPAPI)
     [Required]
-    public required byte[] EncryptedPrivateKeyBytes { get; set; }
+    public byte[] EncryptedPrivateKeyBytes { get; set; }
 
     public int Wins { get; private set; } = 0;
 
@@ -26,9 +33,9 @@ public class LocalPlayer : BasePlayer
 
     public int Hits { get; private set; } = 0;
 
-    public int AddMisses(int numHits)
+    public int AddMisses(int numMisses)
     {
-        return Hits += numHits;
+        return Hits += numMisses;
     }
 
     public int Misses { get; private set; } = 0;

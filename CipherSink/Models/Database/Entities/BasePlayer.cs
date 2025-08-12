@@ -14,5 +14,5 @@ public abstract class BasePlayer
     /// The User's public key stored as a byte array.
     /// </summary>
     [Required]
-    public required byte[] PublicKeyBytes { get; set; }
+    public byte[] PublicKeyBytes { get; set; }
 }
