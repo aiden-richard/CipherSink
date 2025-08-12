@@ -70,6 +70,7 @@
             CreateDbBtn.TabIndex = 4;
             CreateDbBtn.Text = "Create";
             CreateDbBtn.UseVisualStyleBackColor = true;
+            CreateDbBtn.Click += CreateDbBtn_Click;
             // 
             // UpdateDbBtn
             // 
@@ -79,6 +80,7 @@
             UpdateDbBtn.TabIndex = 5;
             UpdateDbBtn.Text = "Update";
             UpdateDbBtn.UseVisualStyleBackColor = true;
+            UpdateDbBtn.Click += UpdateDbBtn_Click;
             // 
             // DeleteDbBtn
             // 
@@ -88,6 +90,7 @@
             DeleteDbBtn.TabIndex = 6;
             DeleteDbBtn.Text = "Remove";
             DeleteDbBtn.UseVisualStyleBackColor = true;
+            DeleteDbBtn.Click += DeleteDbBtn_Click;
             // 
             // LoadDbBtn
             // 
@@ -97,6 +100,7 @@
             LoadDbBtn.TabIndex = 7;
             LoadDbBtn.Text = "Refresh";
             LoadDbBtn.UseVisualStyleBackColor = true;
+            LoadDbBtn.Click += LoadDbBtn_Click;
             // 
             // RUsernameTestTbx
             // 
