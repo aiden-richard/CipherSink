@@ -5,15 +5,14 @@ namespace CipherSink.Models.Database.Entities;
 
 public class PastGame
 {
+    [Key]
     public int Id { get; set; }
 
     [ForeignKey("LocalUser")]
     public int LocalUserId { get; set; }
-    public LocalPlayer LocalUser { get; set; }
 
     [ForeignKey("RemotePlayer")]
     public int RemotePlayerId { get; set; }
-    public RemotePlayer RemotePlayer { get; set; }
 
     // Not needed for testing nor at the immediate moment, but useful for later on
     /*[Required]
@@ -24,5 +23,6 @@ public class PastGame
     */
 
     public int GameLengthSeconds { get; set; }
+
     public int TurnsTaken { get; set; }
 }
