@@ -28,7 +28,19 @@ public partial class RecentPlayers : Form
     private void UpdateDbBtn_Click(object sender, EventArgs e)
     {
         using var db = new CipherSinkContext();
-        var player = db.RemotePlayers.FirstOrDefault();
+        if (RecentPlayersLV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Please select a player to update.");
+            return;
+        }
+        var selectedItem = RecentPlayersLV.SelectedItems[0];
+        if (!int.TryParse(selectedItem.SubItems[0].Text, out int playerId))
+        {
+            MessageBox.Show("Invalid player ID.");
+            return;
+        }
+        using var db = new CipherSinkContext();
+        var player = db.RemotePlayers.Find(playerId);
         if (player != null)
         {
             player.Username = RUsernameTestTbx.Text;
