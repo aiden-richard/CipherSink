@@ -1,4 +1,6 @@
-﻿using CipherSink.Models;
+﻿using CipherSink.Models.Database;
+using System.Security.Cryptography;
+using CipherSink.Models.Database.Entities;
 
 
 namespace CipherSink;
@@ -14,19 +16,15 @@ public partial class AccountStats : Form
 
     private void CreateDbBtn_Click(object sender, EventArgs e)
     {
+        RSA rsa = RSA.Create();
         using var db = new CipherSinkContext();
-        var user = new LocalUser
+        var user = new LocalPlayer
         {
             Username = UsernameTestTbx.Text,
-            EncryptedPrivateKey = PrivateKeyTbx.Text,
-            PublicKey = PublicKeyTbx.Text,
-            Wins = int.TryParse(WinsTestTbx.Text, out var w) ? w : 0,
-            Losses = int.TryParse(LossesTestTbx.Text, out var l) ? l : 0,
-            Hits = int.TryParse(HitsTestTbx.Text, out var h) ? h : 0,
-            Misses = int.TryParse(MissesTestTbx.Text, out var m) ? m : 0,
-            SunkShips = int.TryParse(SunkShipsTestTbx.Text, out var s) ? s : 0
+            EncryptedPrivateKeyBytes = rsa.ExportRSAPrivateKey(),
+            PublicKeyBytes = rsa.ExportRSAPublicKey()
         };
-        db.LocalUsers.Add(user);
+        db.LocalPlayers.Add(user);
         db.SaveChanges();
         LoadLocalUserStats();
     }
@@ -34,17 +32,15 @@ public partial class AccountStats : Form
     private void UpdateDbBtn_Click(object sender, EventArgs e)
     {
         using var db = new CipherSinkContext();
-        var user = db.LocalUsers.FirstOrDefault();
+        var user = db.LocalPlayers.FirstOrDefault();
         if (user != null)
         {
             user.Username = UsernameTestTbx.Text;
-            user.EncryptedPrivateKey = PrivateKeyTbx.Text;
-            user.PublicKey = PublicKeyTbx.Text;
-            user.Wins = int.TryParse(WinsTestTbx.Text, out var w) ? w : 0;
-            user.Losses = int.TryParse(LossesTestTbx.Text, out var l) ? l : 0;
-            user.Hits = int.TryParse(HitsTestTbx.Text, out var h) ? h : 0;
-            user.Misses = int.TryParse(MissesTestTbx.Text, out var m) ? m : 0;
-            user.SunkShips = int.TryParse(SunkShipsTestTbx.Text, out var s) ? s : 0;
+            user.IncrementWins();
+            user.IncrementLosses();
+            user.AddHits(int.TryParse(HitsTestTbx.Text, out var hits) ? hits : 0);
+            user.AddMisses(int.TryParse(MissesTestTbx.Text, out var misses) ? misses : 0);
+            user.AddSunkShips(int.TryParse(SunkShipsTestTbx.Text, out var sunkShips) ? sunkShips : 0);
             db.SaveChanges();
         }
         LoadLocalUserStats();
@@ -53,10 +49,10 @@ public partial class AccountStats : Form
     private void DeleteDbBtn_Click(object sender, EventArgs e)
     {
         using var db = new CipherSinkContext();
-        var user = db.LocalUsers.FirstOrDefault();
+        var user = db.LocalPlayers.FirstOrDefault();
         if (user != null)
         {
-            db.LocalUsers.Remove(user);
+            db.LocalPlayers.Remove(user);
             db.SaveChanges();
         }
         LoadLocalUserStats();
@@ -70,7 +66,7 @@ public partial class AccountStats : Form
     private void LoadLocalUserStats()
     {
         using var db = new CipherSinkContext();
-        var user = db.LocalUsers.FirstOrDefault(); // For demo, just load the first user
+        var user = db.LocalPlayers.FirstOrDefault(); // For demo, just load the first user
         if (user != null)
         {
             WinsTbx.Text = user.Wins.ToString();
