@@ -10,7 +10,7 @@ public class CipherSinkContext : DbContext
         Database.EnsureCreated();
     }
 
-    public DbSet<LocalPlayer> LocalUsers { get; set; }
+    public DbSet<LocalPlayer> LocalPlayers { get; set; }
     public DbSet<RemotePlayer> RemotePlayers { get; set; }
     public DbSet<PastGame> PastGames { get; set; }
 
