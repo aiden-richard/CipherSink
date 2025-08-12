@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CipherSink.Migrations
 {
     [DbContext(typeof(CipherSinkContext))]
-    [Migration("20250812022007_InitialCreate")]
+    [Migration("20250812231241_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -19,15 +19,15 @@ namespace CipherSink.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.8");
 
-            modelBuilder.Entity("CipherSink.Models.LocalUser", b =>
+            modelBuilder.Entity("CipherSink.Models.Database.Entities.LocalPlayer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("EncryptedPrivateKey")
+                    b.Property<byte[]>("EncryptedPrivateKeyBytes")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("BLOB");
 
                     b.Property<int>("Hits")
                         .HasColumnType("INTEGER");
@@ -38,9 +38,9 @@ namespace CipherSink.Migrations
                     b.Property<int>("Misses")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("PublicKey")
+                    b.Property<byte[]>("PublicKeyBytes")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("BLOB");
 
                     b.Property<int>("SunkShips")
                         .HasColumnType("INTEGER");
@@ -54,10 +54,10 @@ namespace CipherSink.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LocalUsers");
+                    b.ToTable("LocalPlayers");
                 });
 
-            modelBuilder.Entity("CipherSink.Models.PastGame", b =>
+            modelBuilder.Entity("CipherSink.Models.Database.Entities.PastGame", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,14 +77,10 @@ namespace CipherSink.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocalUserId");
-
-                    b.HasIndex("RemotePlayerId");
-
                     b.ToTable("PastGames");
                 });
 
-            modelBuilder.Entity("CipherSink.Models.RemotePlayer", b =>
+            modelBuilder.Entity("CipherSink.Models.Database.Entities.RemotePlayer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,9 +89,9 @@ namespace CipherSink.Migrations
                     b.Property<bool>("IsFriend")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("PublicKey")
+                    b.Property<byte[]>("PublicKeyBytes")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -104,25 +100,6 @@ namespace CipherSink.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RemotePlayers");
-                });
-
-            modelBuilder.Entity("CipherSink.Models.PastGame", b =>
-                {
-                    b.HasOne("CipherSink.Models.LocalUser", "LocalUser")
-                        .WithMany()
-                        .HasForeignKey("LocalUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CipherSink.Models.RemotePlayer", "RemotePlayer")
-                        .WithMany()
-                        .HasForeignKey("RemotePlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LocalUser");
-
-                    b.Navigation("RemotePlayer");
                 });
 #pragma warning restore 612, 618
         }
