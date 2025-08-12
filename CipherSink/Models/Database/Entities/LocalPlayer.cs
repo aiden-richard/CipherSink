@@ -10,35 +10,35 @@ public class LocalPlayer : BasePlayer
     [Required]
     public required byte[] EncryptedPrivateKeyBytes { get; set; }
 
-    public int Wins { get; private set; }
+    public int Wins { get; private set; } = 0;
 
     public int IncrementWins()
     {
         return Wins++;
     }
 
-    public int Losses { get; set; }
+    public int Losses { get; private set; } = 0;
 
     public int IncrementLosses()
     {
         return Losses++;
     }
 
-    public int Hits { get; private set; }
+    public int Hits { get; private set; } = 0;
 
     public int AddMisses(int numHits)
     {
         return Hits += numHits;
     }
 
-    public int Misses { get; private set; }
+    public int Misses { get; private set; } = 0;
 
     public int AddHits(int numMisses)
     {
         return Misses += numMisses;
     }
 
-    public int SunkShips { get; set; }
+    public int SunkShips { get; private set; } = 0;
     
     public int AddSunkShips(int numSunkShips)
     {
