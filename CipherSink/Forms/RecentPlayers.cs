@@ -27,7 +27,7 @@ public partial class RecentPlayers : Form
 
     private void UpdateDbBtn_Click(object sender, EventArgs e)
     {
-        using var db = new CipherSinkContext();
+        using var db1 = new CipherSinkContext();
         if (RecentPlayersLV.SelectedItems.Count == 0)
         {
             MessageBox.Show("Please select a player to update.");
@@ -39,21 +39,21 @@ public partial class RecentPlayers : Form
             MessageBox.Show("Invalid player ID.");
             return;
         }
-        using var db = new CipherSinkContext();
-        var player = db.RemotePlayers.Find(playerId);
+        using var db2 = new CipherSinkContext();
+        var player = db2.RemotePlayers.Find(playerId);
         if (player != null)
         {
             player.Username = RUsernameTestTbx.Text;
             player.PublicKey = RPublicKeyTestTbx.Text;
             player.IsFriend = bool.TryParse(IsFriendTestTbx.Text, out var isFriend) ? isFriend : false;
-            db.SaveChanges();
+            db2.SaveChanges();
         }
         LoadRemotePlayers();
     }
 
     private void DeleteDbBtn_Click(object sender, EventArgs e)
     {
-        using var db = new CipherSinkContext();
+        using var db3 = new CipherSinkContext();
         if (RecentPlayersLV.SelectedItems.Count == 0)
         {
             MessageBox.Show("Please select a player to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -65,12 +65,12 @@ public partial class RecentPlayers : Form
             MessageBox.Show("Invalid player ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
-        using var db = new CipherSinkContext();
-        var player = db.RemotePlayers.FirstOrDefault(p => p.Id == playerId);
+        using var db4 = new CipherSinkContext();
+        var player = db4.RemotePlayers.FirstOrDefault(p => p.Id == playerId);
         if (player != null)
         {
-            db.RemotePlayers.Remove(player);
-            db.SaveChanges();
+            db4.RemotePlayers.Remove(player);
+            db4.SaveChanges();
         }
         LoadRemotePlayers();
     }
