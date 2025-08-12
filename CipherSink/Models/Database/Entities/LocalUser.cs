@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 
-namespace CipherSink.Models;
+namespace CipherSink.Models.Database.Entities;
 
 public class LocalUser
 {

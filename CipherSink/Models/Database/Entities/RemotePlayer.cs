@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CipherSink.Models;
+namespace CipherSink.Models.Database.Entities;
 
 public class RemotePlayer
 {

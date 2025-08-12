@@ -1,12 +1,13 @@
+using CipherSink.Models.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CipherSink.Models;
+namespace CipherSink.Models.Database;
 
 public class CipherSinkContext : DbContext
 {
     public CipherSinkContext()
     {
-        this.Database.EnsureCreated();
+        Database.EnsureCreated();
     }
 
     public DbSet<LocalUser> LocalUsers { get; set; }
