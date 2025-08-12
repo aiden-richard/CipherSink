@@ -67,8 +67,8 @@ public class Game
                     break;
 
                 case GameState.PlaceShips:
-                    // Logic for placing ships
-                    break;
+                    return;
+                    
                 case GameState.WaitingOnOpponentReady:
                     // Logic for waiting on opponent
                     break;
