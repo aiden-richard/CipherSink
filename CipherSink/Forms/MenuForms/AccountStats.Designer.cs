@@ -39,12 +39,26 @@
             HitsTbx = new TextBox();
             LossesTbx = new TextBox();
             WinsTbx = new TextBox();
+            CreateDbBtn = new Button();
+            UpdateDbBtn = new Button();
+            UsernameTestTbx = new TextBox();
+            PrivateKeyTbx = new TextBox();
+            PublicKeyTbx = new TextBox();
+            WinsTestTbx = new TextBox();
+            LossesTestTbx = new TextBox();
+            HitsTestTbx = new TextBox();
+            MissesTestTbx = new TextBox();
+            label1 = new Label();
+            SunkShipsTestTbx = new TextBox();
+            DeleteDbBtn = new Button();
+            LoadDbBtn = new Button();
             UserStatsGbx.SuspendLayout();
             SuspendLayout();
             // 
             // UserStatsGbx
             // 
             UserStatsGbx.BackColor = Color.Transparent;
+            UserStatsGbx.Controls.Add(LoadDbBtn);
             UserStatsGbx.Controls.Add(label8);
             UserStatsGbx.Controls.Add(label7);
             UserStatsGbx.Controls.Add(label6);
@@ -66,7 +80,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(91, 139);
+            label8.Location = new Point(93, 134);
             label8.Name = "label8";
             label8.Size = new Size(65, 15);
             label8.TabIndex = 9;
@@ -110,7 +124,7 @@
             // 
             // TotalSunkTbx
             // 
-            TotalSunkTbx.Location = new Point(74, 157);
+            TotalSunkTbx.Location = new Point(76, 152);
             TotalSunkTbx.Name = "TotalSunkTbx";
             TotalSunkTbx.ReadOnly = true;
             TotalSunkTbx.Size = new Size(100, 23);
@@ -153,12 +167,133 @@
             WinsTbx.TabIndex = 0;
             WinsTbx.TabStop = false;
             // 
+            // CreateDbBtn
+            // 
+            CreateDbBtn.Location = new Point(12, 254);
+            CreateDbBtn.Name = "CreateDbBtn";
+            CreateDbBtn.Size = new Size(75, 23);
+            CreateDbBtn.TabIndex = 8;
+            CreateDbBtn.Text = "Create";
+            CreateDbBtn.UseVisualStyleBackColor = true;
+            CreateDbBtn.Click += CreateDbBtn_Click;
+            // 
+            // UpdateDbBtn
+            // 
+            UpdateDbBtn.Location = new Point(105, 254);
+            UpdateDbBtn.Name = "UpdateDbBtn";
+            UpdateDbBtn.Size = new Size(75, 23);
+            UpdateDbBtn.TabIndex = 9;
+            UpdateDbBtn.Text = "Update";
+            UpdateDbBtn.UseVisualStyleBackColor = true;
+            UpdateDbBtn.Click += UpdateDbBtn_Click;
+            // 
+            // UsernameTestTbx
+            // 
+            UsernameTestTbx.Location = new Point(12, 44);
+            UsernameTestTbx.Name = "UsernameTestTbx";
+            UsernameTestTbx.Size = new Size(256, 23);
+            UsernameTestTbx.TabIndex = 10;
+            // 
+            // PrivateKeyTbx
+            // 
+            PrivateKeyTbx.Location = new Point(12, 87);
+            PrivateKeyTbx.Name = "PrivateKeyTbx";
+            PrivateKeyTbx.Size = new Size(100, 23);
+            PrivateKeyTbx.TabIndex = 11;
+            // 
+            // PublicKeyTbx
+            // 
+            PublicKeyTbx.Location = new Point(168, 87);
+            PublicKeyTbx.Name = "PublicKeyTbx";
+            PublicKeyTbx.Size = new Size(100, 23);
+            PublicKeyTbx.TabIndex = 12;
+            // 
+            // WinsTestTbx
+            // 
+            WinsTestTbx.Location = new Point(12, 128);
+            WinsTestTbx.Name = "WinsTestTbx";
+            WinsTestTbx.Size = new Size(100, 23);
+            WinsTestTbx.TabIndex = 13;
+            // 
+            // LossesTestTbx
+            // 
+            LossesTestTbx.Location = new Point(168, 128);
+            LossesTestTbx.Name = "LossesTestTbx";
+            LossesTestTbx.Size = new Size(100, 23);
+            LossesTestTbx.TabIndex = 14;
+            // 
+            // HitsTestTbx
+            // 
+            HitsTestTbx.Location = new Point(12, 170);
+            HitsTestTbx.Name = "HitsTestTbx";
+            HitsTestTbx.Size = new Size(100, 23);
+            HitsTestTbx.TabIndex = 15;
+            // 
+            // MissesTestTbx
+            // 
+            MissesTestTbx.Location = new Point(168, 170);
+            MissesTestTbx.Name = "MissesTestTbx";
+            MissesTestTbx.Size = new Size(100, 23);
+            MissesTestTbx.TabIndex = 17;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.DarkBlue;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(128, 255, 255);
+            label1.Location = new Point(22, 8);
+            label1.Name = "label1";
+            label1.Size = new Size(236, 21);
+            label1.TabIndex = 18;
+            label1.Text = "Placeholder Textboxes for testing";
+            // 
+            // SunkShipsTestTbx
+            // 
+            SunkShipsTestTbx.Location = new Point(88, 210);
+            SunkShipsTestTbx.Name = "SunkShipsTestTbx";
+            SunkShipsTestTbx.Size = new Size(100, 23);
+            SunkShipsTestTbx.TabIndex = 19;
+            // 
+            // DeleteDbBtn
+            // 
+            DeleteDbBtn.Location = new Point(193, 254);
+            DeleteDbBtn.Name = "DeleteDbBtn";
+            DeleteDbBtn.Size = new Size(75, 23);
+            DeleteDbBtn.TabIndex = 20;
+            DeleteDbBtn.Text = "Delete";
+            DeleteDbBtn.UseVisualStyleBackColor = true;
+            DeleteDbBtn.Click += DeleteDbBtn_Click;
+            // 
+            // LoadDbBtn
+            // 
+            LoadDbBtn.ForeColor = Color.Black;
+            LoadDbBtn.Location = new Point(191, 179);
+            LoadDbBtn.Name = "LoadDbBtn";
+            LoadDbBtn.Size = new Size(59, 23);
+            LoadDbBtn.TabIndex = 10;
+            LoadDbBtn.Text = "Refresh";
+            LoadDbBtn.UseVisualStyleBackColor = true;
+            LoadDbBtn.Click += LoadDbBtn_Click;
+            // 
             // AccountStats
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkBlue;
             ClientSize = new Size(280, 503);
+            Controls.Add(DeleteDbBtn);
+            Controls.Add(SunkShipsTestTbx);
+            Controls.Add(label1);
+            Controls.Add(MissesTestTbx);
+            Controls.Add(HitsTestTbx);
+            Controls.Add(LossesTestTbx);
+            Controls.Add(WinsTestTbx);
+            Controls.Add(PublicKeyTbx);
+            Controls.Add(PrivateKeyTbx);
+            Controls.Add(UsernameTestTbx);
+            Controls.Add(UpdateDbBtn);
+            Controls.Add(CreateDbBtn);
             Controls.Add(UserStatsGbx);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -167,6 +302,7 @@
             UserStatsGbx.ResumeLayout(false);
             UserStatsGbx.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -181,5 +317,18 @@
         private TextBox HitsTbx;
         private TextBox LossesTbx;
         private TextBox WinsTbx;
+        private Button CreateDbBtn;
+        private Button UpdateDbBtn;
+        private TextBox UsernameTestTbx;
+        private TextBox PrivateKeyTbx;
+        private TextBox PublicKeyTbx;
+        private TextBox WinsTestTbx;
+        private TextBox LossesTestTbx;
+        private TextBox HitsTestTbx;
+        private TextBox MissesTestTbx;
+        private Label label1;
+        private TextBox SunkShipsTestTbx;
+        private Button DeleteDbBtn;
+        private Button LoadDbBtn;
     }
 }
