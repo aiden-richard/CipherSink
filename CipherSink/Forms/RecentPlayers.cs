@@ -54,7 +54,19 @@ public partial class RecentPlayers : Form
     private void DeleteDbBtn_Click(object sender, EventArgs e)
     {
         using var db = new CipherSinkContext();
-        var player = db.RemotePlayers.FirstOrDefault();
+        if (RecentPlayersLV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Please select a player to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+        var selectedItem = RecentPlayersLV.SelectedItems[0];
+        if (!int.TryParse(selectedItem.SubItems[0].Text, out int playerId))
+        {
+            MessageBox.Show("Invalid player ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+        using var db = new CipherSinkContext();
+        var player = db.RemotePlayers.FirstOrDefault(p => p.Id == playerId);
         if (player != null)
         {
             db.RemotePlayers.Remove(player);
