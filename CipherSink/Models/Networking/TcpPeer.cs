@@ -154,7 +154,10 @@ public class TcpPeer : IDisposable
         {
             
             throw;
-        }
+        byte[] lengthBytes = await ReadExact(4);
+        int messageLength = BitConverter.ToInt32(lengthBytes, 0);
+
+        return await ReadExact(messageLength);
     }
 
     /// <summary>
