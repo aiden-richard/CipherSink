@@ -1,6 +1,6 @@
 ﻿namespace CipherSink
 {
-    partial class AccountAndStats
+    partial class AccountStats
     {
         /// <summary>
         /// Required designer variable.

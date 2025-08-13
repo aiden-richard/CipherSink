@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace CipherSink;
 
-public partial class AccountAndStats : Form
+public partial class AccountStats : Form
 {
     private CipherSinkContext dbContext;
 
@@ -16,7 +16,7 @@ public partial class AccountAndStats : Form
         set => comboBoxSelectPlayer.SelectedItem = value;
     }
 
-    public AccountAndStats()
+    public AccountStats()
     {
         InitializeComponent();
     }
