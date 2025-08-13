@@ -1,0 +1,78 @@
+﻿using CipherSink.Models.Database;
+using CipherSink.Models.Database.Entities;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
+
+namespace CipherSink.Forms.MenuForms.AccountsAndStats;
+
+public partial class CreatePlayer : Form
+{
+    private CipherSinkContext dbContext;
+
+    public CreatePlayer()
+    {
+        InitializeComponent();
+        this.AcceptButton = BtnCreatePlayer;
+    }
+
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+
+        this.dbContext = new CipherSinkContext();
+
+        // uncomment the line below to start fresh with a new database.
+        // this.dbContext.Database.EnsureDeleted();
+        this.dbContext.Database.EnsureCreated();
+    }
+
+    private void BtnCreatePlayer_Click(object sender, EventArgs e)
+    {
+        if (ValidInputs())
+        {
+            LocalPlayer user = new(TxtBxUsername.Text, TxtBxPassword.Text);
+
+            dbContext.LocalPlayers.Add(user);
+            dbContext.SaveChanges();
+
+            MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close(); // Close the form after creating the user
+        }
+    }
+
+    private bool ValidInputs()
+    {
+        if (!Regex.IsMatch(TxtBxUsername.Text, @"^[A-Za-z0-9]+$"))
+        {
+            MessageBox.Show("Username must be alphanumeric", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false; // No user selected
+        }
+        else if (TxtBxUsername.Text.Length < 1 || TxtBxUsername.Text.Length > 32)
+        {
+            MessageBox.Show("Username must be between 1 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+        else if (!Regex.IsMatch(TxtBxPassword.Text, @"^[A-Za-z0-9]+$"))
+        {
+            MessageBox.Show("Password must be alphanumeric", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false; // No user selected
+        }
+        else if (TxtBxPassword.Text.Length < 4 || TxtBxPassword.Text.Length > 32)
+        {
+            MessageBox.Show("Password must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+        else
+        {
+            return true; // All inputs are valid
+        }
+    }
+
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        base.OnClosing(e);
+
+        this.dbContext?.Dispose();
+        this.dbContext = null;
+    }
+}

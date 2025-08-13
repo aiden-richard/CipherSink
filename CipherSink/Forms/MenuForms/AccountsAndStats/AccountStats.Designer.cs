@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            UserStatsGbx = new GroupBox();
+            PlayerStatsGbx = new GroupBox();
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
@@ -39,34 +39,39 @@
             HitsTbx = new TextBox();
             LossesTbx = new TextBox();
             WinsTbx = new TextBox();
-            UserStatsGbx.SuspendLayout();
+            BtnCreatePlayer = new Button();
+            BtnEditPlayer = new Button();
+            BtnDeletePlayer = new Button();
+            comboBoxSelectPlayer = new ComboBox();
+            LabelSelectPlayer = new Label();
+            PlayerStatsGbx.SuspendLayout();
             SuspendLayout();
             // 
-            // UserStatsGbx
+            // PlayerStatsGbx
             // 
-            UserStatsGbx.BackColor = Color.Transparent;
-            UserStatsGbx.Controls.Add(label8);
-            UserStatsGbx.Controls.Add(label7);
-            UserStatsGbx.Controls.Add(label6);
-            UserStatsGbx.Controls.Add(label5);
-            UserStatsGbx.Controls.Add(label4);
-            UserStatsGbx.Controls.Add(TotalSunkTbx);
-            UserStatsGbx.Controls.Add(MissesTbx);
-            UserStatsGbx.Controls.Add(HitsTbx);
-            UserStatsGbx.Controls.Add(LossesTbx);
-            UserStatsGbx.Controls.Add(WinsTbx);
-            UserStatsGbx.ForeColor = Color.FromArgb(128, 255, 255);
-            UserStatsGbx.Location = new Point(12, 12);
-            UserStatsGbx.Name = "UserStatsGbx";
-            UserStatsGbx.Size = new Size(199, 217);
-            UserStatsGbx.TabIndex = 7;
-            UserStatsGbx.TabStop = false;
-            UserStatsGbx.Text = "Current user's stats:";
+            PlayerStatsGbx.BackColor = Color.Transparent;
+            PlayerStatsGbx.Controls.Add(label8);
+            PlayerStatsGbx.Controls.Add(label7);
+            PlayerStatsGbx.Controls.Add(label6);
+            PlayerStatsGbx.Controls.Add(label5);
+            PlayerStatsGbx.Controls.Add(label4);
+            PlayerStatsGbx.Controls.Add(TotalSunkTbx);
+            PlayerStatsGbx.Controls.Add(MissesTbx);
+            PlayerStatsGbx.Controls.Add(HitsTbx);
+            PlayerStatsGbx.Controls.Add(LossesTbx);
+            PlayerStatsGbx.Controls.Add(WinsTbx);
+            PlayerStatsGbx.ForeColor = Color.FromArgb(128, 255, 255);
+            PlayerStatsGbx.Location = new Point(12, 40);
+            PlayerStatsGbx.Name = "PlayerStatsGbx";
+            PlayerStatsGbx.Size = new Size(256, 191);
+            PlayerStatsGbx.TabIndex = 7;
+            PlayerStatsGbx.TabStop = false;
+            PlayerStatsGbx.Text = "Player stats:";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(67, 138);
+            label8.Location = new Point(93, 134);
             label8.Name = "label8";
             label8.Size = new Size(65, 15);
             label8.TabIndex = 9;
@@ -75,7 +80,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(114, 80);
+            label7.Location = new Point(167, 80);
             label7.Name = "label7";
             label7.Size = new Size(42, 15);
             label7.TabIndex = 8;
@@ -93,7 +98,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(114, 28);
+            label5.Location = new Point(167, 28);
             label5.Name = "label5";
             label5.Size = new Size(44, 15);
             label5.TabIndex = 6;
@@ -110,7 +115,7 @@
             // 
             // TotalSunkTbx
             // 
-            TotalSunkTbx.Location = new Point(50, 156);
+            TotalSunkTbx.Location = new Point(76, 152);
             TotalSunkTbx.Name = "TotalSunkTbx";
             TotalSunkTbx.ReadOnly = true;
             TotalSunkTbx.Size = new Size(100, 23);
@@ -119,7 +124,7 @@
             // 
             // MissesTbx
             // 
-            MissesTbx.Location = new Point(114, 98);
+            MissesTbx.Location = new Point(167, 98);
             MissesTbx.Name = "MissesTbx";
             MissesTbx.ReadOnly = true;
             MissesTbx.Size = new Size(52, 23);
@@ -137,7 +142,7 @@
             // 
             // LossesTbx
             // 
-            LossesTbx.Location = new Point(114, 46);
+            LossesTbx.Location = new Point(167, 46);
             LossesTbx.Name = "LossesTbx";
             LossesTbx.ReadOnly = true;
             LossesTbx.Size = new Size(52, 23);
@@ -153,24 +158,81 @@
             WinsTbx.TabIndex = 0;
             WinsTbx.TabStop = false;
             // 
-            // AccountStats
+            // BtnCreatePlayer
+            // 
+            BtnCreatePlayer.Location = new Point(12, 240);
+            BtnCreatePlayer.Name = "BtnCreatePlayer";
+            BtnCreatePlayer.Size = new Size(89, 46);
+            BtnCreatePlayer.TabIndex = 8;
+            BtnCreatePlayer.Text = "Create Player";
+            BtnCreatePlayer.UseVisualStyleBackColor = true;
+            BtnCreatePlayer.Click += BtnCreatePlayer_Click;
+            // 
+            // BtnEditPlayer
+            // 
+            BtnEditPlayer.Location = new Point(107, 240);
+            BtnEditPlayer.Name = "BtnEditPlayer";
+            BtnEditPlayer.Size = new Size(72, 47);
+            BtnEditPlayer.TabIndex = 9;
+            BtnEditPlayer.Text = "Edit Player";
+            BtnEditPlayer.UseVisualStyleBackColor = true;
+            BtnEditPlayer.Click += BtnEditPlayer_Click;
+            // 
+            // BtnDeletePlayer
+            // 
+            BtnDeletePlayer.Location = new Point(185, 240);
+            BtnDeletePlayer.Name = "BtnDeletePlayer";
+            BtnDeletePlayer.Size = new Size(83, 47);
+            BtnDeletePlayer.TabIndex = 20;
+            BtnDeletePlayer.Text = "Delete Player";
+            BtnDeletePlayer.UseVisualStyleBackColor = true;
+            BtnDeletePlayer.Click += DeleteDbBtn_Click;
+            // 
+            // comboBoxSelectPlayer
+            // 
+            comboBoxSelectPlayer.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSelectPlayer.FormattingEnabled = true;
+            comboBoxSelectPlayer.Location = new Point(102, 11);
+            comboBoxSelectPlayer.Name = "comboBoxSelectPlayer";
+            comboBoxSelectPlayer.Size = new Size(166, 23);
+            comboBoxSelectPlayer.TabIndex = 21;
+            comboBoxSelectPlayer.TabStop = false;
+            comboBoxSelectPlayer.SelectedIndexChanged += comboBoxSelectPlayer_SelectedIndexChanged;
+            // 
+            // LabelSelectPlayer
+            // 
+            LabelSelectPlayer.AutoSize = true;
+            LabelSelectPlayer.ForeColor = Color.White;
+            LabelSelectPlayer.Location = new Point(20, 14);
+            LabelSelectPlayer.Name = "LabelSelectPlayer";
+            LabelSelectPlayer.Size = new Size(76, 15);
+            LabelSelectPlayer.TabIndex = 22;
+            LabelSelectPlayer.Text = "Select Player:";
+            // 
+            // AccountAndStats
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkBlue;
-            ClientSize = new Size(227, 248);
-            Controls.Add(UserStatsGbx);
+            ClientSize = new Size(280, 299);
+            Controls.Add(LabelSelectPlayer);
+            Controls.Add(comboBoxSelectPlayer);
+            Controls.Add(BtnDeletePlayer);
+            Controls.Add(BtnEditPlayer);
+            Controls.Add(BtnCreatePlayer);
+            Controls.Add(PlayerStatsGbx);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
-            Name = "AccountStats";
+            Name = "AccountAndStats";
             Text = "Account Stats";
-            UserStatsGbx.ResumeLayout(false);
-            UserStatsGbx.PerformLayout();
+            PlayerStatsGbx.ResumeLayout(false);
+            PlayerStatsGbx.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-        private GroupBox UserStatsGbx;
+        private GroupBox PlayerStatsGbx;
         private Label label8;
         private Label label7;
         private Label label6;
@@ -181,5 +243,10 @@
         private TextBox HitsTbx;
         private TextBox LossesTbx;
         private TextBox WinsTbx;
+        private Button BtnCreatePlayer;
+        private Button BtnEditPlayer;
+        private Button BtnDeletePlayer;
+        private ComboBox comboBoxSelectPlayer;
+        private Label LabelSelectPlayer;
     }
 }
