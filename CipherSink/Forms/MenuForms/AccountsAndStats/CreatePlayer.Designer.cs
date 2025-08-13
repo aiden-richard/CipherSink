@@ -30,7 +30,7 @@
         {
             TxtBxUsername = new TextBox();
             LabelUsername = new Label();
-            BtnCreateUser = new Button();
+            BtnCreatePlayer = new Button();
             SuspendLayout();
             // 
             // TxtBxUsername
@@ -50,28 +50,28 @@
             LabelUsername.TabIndex = 1;
             LabelUsername.Text = "Username:";
             // 
-            // BtnCreateUser
+            // BtnCreatePlayer
             // 
-            BtnCreateUser.Location = new Point(98, 74);
-            BtnCreateUser.Name = "BtnCreateUser";
-            BtnCreateUser.Size = new Size(101, 37);
-            BtnCreateUser.TabIndex = 2;
-            BtnCreateUser.Text = "Create User";
-            BtnCreateUser.UseVisualStyleBackColor = true;
-            BtnCreateUser.Click += this.BtnCreateUser_Click;
+            BtnCreatePlayer.Location = new Point(98, 74);
+            BtnCreatePlayer.Name = "BtnCreatePlayer";
+            BtnCreatePlayer.Size = new Size(101, 37);
+            BtnCreatePlayer.TabIndex = 2;
+            BtnCreatePlayer.Text = "Create User";
+            BtnCreatePlayer.UseVisualStyleBackColor = true;
+            BtnCreatePlayer.Click += BtnCreatePlayer_Click;
             // 
-            // CreateUser
+            // CreatePlayer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkBlue;
             ClientSize = new Size(295, 123);
-            Controls.Add(BtnCreateUser);
+            Controls.Add(BtnCreatePlayer);
             Controls.Add(LabelUsername);
             Controls.Add(TxtBxUsername);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
-            Name = "CreateUser";
+            Name = "CreatePlayer";
             Text = "Create";
             ResumeLayout(false);
             PerformLayout();
@@ -81,6 +81,6 @@
 
         private TextBox TxtBxUsername;
         private Label LabelUsername;
-        private Button BtnCreateUser;
+        private Button BtnCreatePlayer;
     }
 }

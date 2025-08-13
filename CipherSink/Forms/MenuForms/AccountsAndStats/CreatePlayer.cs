@@ -15,6 +15,7 @@ public partial class CreatePlayer : Form
 
     public CreatePlayer()
     {
+        this.AcceptButton = BtnCreatePlayer;
         InitializeComponent();
     }
 
@@ -29,7 +30,7 @@ public partial class CreatePlayer : Form
         this.dbContext.Database.EnsureCreated();
     }
 
-    private void BtnCreateUser_Click(object sender, EventArgs e)
+    private void BtnCreatePlayer_Click(object sender, EventArgs e)
     {
         if (ValidInputs())
         {

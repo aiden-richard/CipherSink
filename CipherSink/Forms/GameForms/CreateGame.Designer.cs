@@ -66,11 +66,13 @@
             // 
             // comboBoxSelectUser
             // 
+            comboBoxSelectUser.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxSelectUser.FormattingEnabled = true;
             comboBoxSelectUser.Location = new Point(188, 12);
             comboBoxSelectUser.Name = "comboBoxSelectUser";
             comboBoxSelectUser.Size = new Size(160, 23);
             comboBoxSelectUser.TabIndex = 4;
+            comboBoxSelectUser.TabStop = false;
             // 
             // BtnCreateGame
             // 

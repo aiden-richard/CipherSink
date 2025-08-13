@@ -2,7 +2,6 @@
 using CipherSink.Models.Database;
 using CipherSink.Models.Database.Entities;
 using System.ComponentModel;
-using System.Security.Cryptography;
 
 
 namespace CipherSink;
@@ -10,6 +9,12 @@ namespace CipherSink;
 public partial class AccountAndStats : Form
 {
     private CipherSinkContext dbContext;
+
+    private LocalPlayer SelectedPlayer
+    {
+        get => (LocalPlayer)comboBoxSelectPlayer.SelectedItem;
+        set => comboBoxSelectPlayer.SelectedItem = value;
+    }
 
     public AccountAndStats()
     {
@@ -26,33 +31,39 @@ public partial class AccountAndStats : Form
         // this.dbContext.Database.EnsureDeleted();
         this.dbContext.Database.EnsureCreated();
 
-        LoadLocalPlayerStats();
+        LoadComboBoxData();
+        LoadStats();
     }
 
-    private void LoadLocalPlayerStats()
+    private void LoadComboBoxData()
     {
+        // Clear the change tracker to ensure we get fresh data from the database
+        dbContext.ChangeTracker.Clear();
+
         // populate the Players ComboBox
         var players = dbContext.LocalPlayers.ToList();
         if (players.Count > 0)
         {
-            comboBoxSelectedPlayer.DataSource = players;
-            comboBoxSelectedPlayer.DisplayMember = "Username";
-            comboBoxSelectedPlayer.ValueMember = "Id";
+            comboBoxSelectPlayer.DataSource = players;
+            comboBoxSelectPlayer.DisplayMember = "Username";
+            comboBoxSelectPlayer.ValueMember = "Id";
         }
         else
         {
-            comboBoxSelectedPlayer.DataSource = null; // No players available
+            comboBoxSelectPlayer.DataSource = null; // No players available
         }
+    }
 
+    private void LoadStats()
+    {
         // populate the stats TextBoxes
-        var player = (LocalPlayer)comboBoxSelectedPlayer.SelectedItem;
-        if (player != null)
+        if (SelectedPlayer != null)
         {
-            WinsTbx.Text = player.Wins.ToString();
-            LossesTbx.Text = player.Losses.ToString();
-            HitsTbx.Text = player.Hits.ToString();
-            MissesTbx.Text = player.Misses.ToString();
-            TotalSunkTbx.Text = player.SunkShips.ToString();
+            WinsTbx.Text = SelectedPlayer.Wins.ToString();
+            LossesTbx.Text = SelectedPlayer.Losses.ToString();
+            HitsTbx.Text = SelectedPlayer.Hits.ToString();
+            MissesTbx.Text = SelectedPlayer.Misses.ToString();
+            TotalSunkTbx.Text = SelectedPlayer.SunkShips.ToString();
         }
         else
         {
@@ -60,27 +71,45 @@ public partial class AccountAndStats : Form
         }
     }
 
-    // Adds to the LocalUser table in the database
-    private void CreateDbBtn_Click(object sender, EventArgs e)
+    // Adds to the LocalPlayer table in the database
+    private void BtnCreatePlayer_Click(object sender, EventArgs e)
     {
-        var createUserForm = new CreatePlayer();
-        createUserForm.ShowDialog();
-        LoadLocalPlayerStats(); // Refresh the player list after creating a new user
+        var createPlayerForm = new CreatePlayer();
+        createPlayerForm.ShowDialog();
+        LoadComboBoxData(); // Refresh the player list after creating a new user
+        LoadStats(); // Refresh the player list after creating a new user
     }
 
-    private void UpdateDbBtn_Click(object sender, EventArgs e)
+    private void BtnEditPlayer_Click(object sender, EventArgs e)
     {
-        return;
+        var editPlayerForm = new EditPlayer();
+        editPlayerForm.ShowDialog();
+        LoadComboBoxData(); // Refresh the player list after editing a user
+        LoadStats();
     }
 
     private void DeleteDbBtn_Click(object sender, EventArgs e)
     {
-        return;
+        var result =  MessageBox.Show($"Are you sure you want to delete {SelectedPlayer.Username}?\nThis action cannot be undone.", $"Delete User: {SelectedPlayer.Username}", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (result == DialogResult.Yes)
+        {
+            dbContext.LocalPlayers.Remove(SelectedPlayer); // Remove the selected player from the database
+            dbContext.SaveChanges(); // Save changes to the database
+        }
+
+        LoadComboBoxData(); // Refresh the player list after deletion
+        LoadStats(); // Refresh the stats after deletion
     }
 
-    private void LoadDbBtn_Click(object sender, EventArgs e)
+    private void comboBoxSelectPlayer_SelectedIndexChanged(object sender, EventArgs e)
     {
-        LoadLocalPlayerStats();
+        if (SelectedPlayer == null)
+        {
+            MessageBox.Show("No player selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return; // No player selected
+        }
+
+        LoadStats();
     }
 
     protected override void OnClosing(CancelEventArgs e)

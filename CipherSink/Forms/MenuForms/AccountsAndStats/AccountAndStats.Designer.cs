@@ -42,7 +42,7 @@
             BtnCreatePlayer = new Button();
             BtnEditPlayer = new Button();
             BtnDeletePlayer = new Button();
-            comboBoxSelectedPlayer = new ComboBox();
+            comboBoxSelectPlayer = new ComboBox();
             LabelSelectPlayer = new Label();
             PlayerStatsGbx.SuspendLayout();
             SuspendLayout();
@@ -166,7 +166,7 @@
             BtnCreatePlayer.TabIndex = 8;
             BtnCreatePlayer.Text = "Create Player";
             BtnCreatePlayer.UseVisualStyleBackColor = true;
-            BtnCreatePlayer.Click += CreateDbBtn_Click;
+            BtnCreatePlayer.Click += BtnCreatePlayer_Click;
             // 
             // BtnEditPlayer
             // 
@@ -176,7 +176,7 @@
             BtnEditPlayer.TabIndex = 9;
             BtnEditPlayer.Text = "Edit Player";
             BtnEditPlayer.UseVisualStyleBackColor = true;
-            BtnEditPlayer.Click += UpdateDbBtn_Click;
+            BtnEditPlayer.Click += BtnEditPlayer_Click;
             // 
             // BtnDeletePlayer
             // 
@@ -188,13 +188,16 @@
             BtnDeletePlayer.UseVisualStyleBackColor = true;
             BtnDeletePlayer.Click += DeleteDbBtn_Click;
             // 
-            // comboBoxSelectedPlayer
+            // comboBoxSelectPlayer
             // 
-            comboBoxSelectedPlayer.FormattingEnabled = true;
-            comboBoxSelectedPlayer.Location = new Point(102, 11);
-            comboBoxSelectedPlayer.Name = "comboBoxSelectedPlayer";
-            comboBoxSelectedPlayer.Size = new Size(166, 23);
-            comboBoxSelectedPlayer.TabIndex = 21;
+            comboBoxSelectPlayer.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSelectPlayer.FormattingEnabled = true;
+            comboBoxSelectPlayer.Location = new Point(102, 11);
+            comboBoxSelectPlayer.Name = "comboBoxSelectPlayer";
+            comboBoxSelectPlayer.Size = new Size(166, 23);
+            comboBoxSelectPlayer.TabIndex = 21;
+            comboBoxSelectPlayer.TabStop = false;
+            comboBoxSelectPlayer.SelectedIndexChanged += comboBoxSelectPlayer_SelectedIndexChanged;
             // 
             // LabelSelectPlayer
             // 
@@ -213,7 +216,7 @@
             BackColor = Color.DarkBlue;
             ClientSize = new Size(280, 299);
             Controls.Add(LabelSelectPlayer);
-            Controls.Add(comboBoxSelectedPlayer);
+            Controls.Add(comboBoxSelectPlayer);
             Controls.Add(BtnDeletePlayer);
             Controls.Add(BtnEditPlayer);
             Controls.Add(BtnCreatePlayer);
@@ -243,7 +246,7 @@
         private Button BtnCreatePlayer;
         private Button BtnEditPlayer;
         private Button BtnDeletePlayer;
-        private ComboBox comboBoxSelectedPlayer;
+        private ComboBox comboBoxSelectPlayer;
         private Label LabelSelectPlayer;
     }
 }
