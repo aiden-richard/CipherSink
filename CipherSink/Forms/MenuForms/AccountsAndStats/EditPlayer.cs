@@ -53,8 +53,8 @@ public partial class EditPlayer : Form
         TxtBxUsername.Text = SelectedPlayer.Username;
         TxtBxPublicKey.Text = pemKey;
 
-        LabelWins.Text = $"Wins: {SelectedPlayer.Wins.ToString()}";
-        LabelLosses.Text = $"Losses: {SelectedPlayer.Losses.ToString()}";
+        LabelWins.Text = $"Wins: {SelectedPlayer.TotalWins.ToString()}";
+        LabelLosses.Text = $"Losses: {SelectedPlayer.TotalLosses.ToString()}";
     }
 
     private void comboBoxSelectPlayer_SelectedIndexChanged(object sender, EventArgs e)
@@ -109,12 +109,12 @@ public partial class EditPlayer : Form
     private void BtnIncrementWins_Click(object sender, EventArgs e)
     {
         SelectedPlayer?.IncrementWins();
-        LabelWins.Text = $"Wins: {SelectedPlayer.Wins.ToString()}";
+        LabelWins.Text = $"Wins: {SelectedPlayer.TotalWins.ToString()}";
     }
 
     private void BtnIncrementLosses_Click(object sender, EventArgs e)
     {
         SelectedPlayer?.IncrementLosses();
-        LabelLosses.Text = $"Losses: {SelectedPlayer.Losses.ToString()}";
+        LabelLosses.Text = $"Losses: {SelectedPlayer.TotalLosses.ToString()}";
     }
 }

@@ -34,10 +34,8 @@ public partial class CreatePlayer : Form
     {
         if (ValidInputs())
         {
-            var user = new LocalPlayer
-            {
-                Username = TxtBxUsername.Text
-            };
+            LocalPlayer user = new(TxtBxUsername.Text, TxtBxPassword.Text);
+
             dbContext.LocalPlayers.Add(user);
             dbContext.SaveChanges();
 
@@ -54,6 +52,16 @@ public partial class CreatePlayer : Form
             return false; // No user selected
         }
         else if (TxtBxUsername.Text.Length < 1 || TxtBxUsername.Text.Length > 32)
+        {
+            MessageBox.Show("Username must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+        else if (!Regex.IsMatch(TxtBxPassword.Text, @"^[A-Za-z0-9]+$"))
+        {
+            MessageBox.Show("Username must be alphanumeric", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false; // No user selected
+        }
+        else if (TxtBxPassword.Text.Length < 1 || TxtBxPassword.Text.Length > 32)
         {
             MessageBox.Show("Username must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;

@@ -59,11 +59,11 @@ public partial class AccountStats : Form
         // populate the stats TextBoxes
         if (SelectedPlayer != null)
         {
-            WinsTbx.Text = SelectedPlayer.Wins.ToString();
-            LossesTbx.Text = SelectedPlayer.Losses.ToString();
-            HitsTbx.Text = SelectedPlayer.Hits.ToString();
-            MissesTbx.Text = SelectedPlayer.Misses.ToString();
-            TotalSunkTbx.Text = SelectedPlayer.SunkShips.ToString();
+            WinsTbx.Text = SelectedPlayer.TotalWins.ToString();
+            LossesTbx.Text = SelectedPlayer.TotalLosses.ToString();
+            HitsTbx.Text = SelectedPlayer.TotalHits.ToString();
+            MissesTbx.Text = SelectedPlayer.TotalMisses.ToString();
+            TotalSunkTbx.Text = SelectedPlayer.TotalSunkShips.ToString();
         }
         else
         {

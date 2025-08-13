@@ -1,4 +1,6 @@
 ﻿using CipherSink.Models.Cryptography;
+using CipherSink.Models.Database;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
@@ -7,6 +9,8 @@ namespace CipherSink.Models.Networking;
 
 public class TcpPeer : IDisposable
 {
+    private CipherSinkContext dbContext;
+
     private RSA Rsa;
     private byte[] PublicKey;
     private byte[]? PeerPublicKey;
@@ -14,12 +18,17 @@ public class TcpPeer : IDisposable
     private Socket? Connection;
     public const int Port = 57575;
     public bool IsHost;
+    public bool IsPrivateMatch;
     public bool ConnectionVerified = false;
 
-    public TcpPeer(RSA rsa)
+    public TcpPeer(RSA rsa, bool isPrivateMatch)
     {
+        IsPrivateMatch = isPrivateMatch;
         Rsa = rsa;
         PublicKey = Rsa.ExportRSAPublicKey();
+
+        this.dbContext = new CipherSinkContext();
+        this.dbContext.Database.EnsureCreated();
     }
 
     public async Task<bool> TryConnect(string host)
@@ -144,6 +153,20 @@ public class TcpPeer : IDisposable
             throw new InvalidOperationException("Peer public key not received");
         }
 
+        if (IsPrivateMatch)
+        {
+            var friendPlayers = await dbContext.RemotePlayers
+            .Where(remotePlayer => remotePlayer.IsFriend == true)
+            .Select(remotePlayer => remotePlayer.PublicKeyBytes)
+            .ToListAsync();
+
+            if (!friendPlayers.Contains(PeerPublicKey))
+            {
+                return false;
+            }
+        }
+
+
         bool isValid;
 
         if (IsHost)
@@ -195,5 +218,6 @@ public class TcpPeer : IDisposable
         Connection?.Dispose();
         Rsa.Dispose();
         GC.SuppressFinalize(this);
+        dbContext.Dispose();
     }
 }

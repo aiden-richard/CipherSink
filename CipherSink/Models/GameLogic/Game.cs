@@ -1,5 +1,5 @@
-﻿using CipherSink.Models.Networking;
-using System.Threading.Tasks;
+﻿using CipherSink.Models.Database.Entities;
+using CipherSink.Models.Networking;
 
 namespace CipherSink.Models.GameLogic;
 
@@ -7,9 +7,9 @@ public class Game
 {
     public int Id { get; set; }
 
-    public Player LocalPlayer { get; set; }
+    public LocalPlayer LocalPlayer { get; set; }
 
-    public Player? RemotePlayer { get; set; }
+    public RemotePlayer RemotePlayer { get; set; }
 
     public GameState State { get; set; } = GameState.VerifyUser;
 
@@ -21,10 +21,11 @@ public class Game
 
     private TcpPeer Peer { get; set; }
 
-    public Game(TcpPeer peer, Player localPlayer, bool isHost)
+    public Game(TcpPeer peer, LocalPlayer localPlayer, bool isHost)
     {
         Peer = peer;
         LocalPlayer = localPlayer;
+        LocalPlayer.GameBoard = new Gameboard();
         IsHost = isHost;
     }
 

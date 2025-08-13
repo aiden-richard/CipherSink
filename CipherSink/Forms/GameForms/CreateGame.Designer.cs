@@ -30,18 +30,21 @@
         {
             LabelGamePassword = new Label();
             TxtBxGamePin = new TextBox();
-            LabelSelectUser = new Label();
-            comboBoxSelectUser = new ComboBox();
+            LabelSelectPlayer = new Label();
+            comboBoxSelectPlayer = new ComboBox();
             BtnCreateGame = new Button();
             comboBoxGameType = new ComboBox();
             LabelGameType = new Label();
+            TxtBxPlayerPassword = new TextBox();
+            LabelPlayerPassword = new Label();
+            LabelPrivateMatches = new Label();
             SuspendLayout();
             // 
             // LabelGamePassword
             // 
             LabelGamePassword.AutoSize = true;
             LabelGamePassword.ForeColor = Color.White;
-            LabelGamePassword.Location = new Point(20, 55);
+            LabelGamePassword.Location = new Point(20, 85);
             LabelGamePassword.Name = "LabelGamePassword";
             LabelGamePassword.Size = new Size(162, 15);
             LabelGamePassword.TabIndex = 0;
@@ -49,34 +52,34 @@
             // 
             // TxtBxGamePin
             // 
-            TxtBxGamePin.Location = new Point(188, 52);
+            TxtBxGamePin.Location = new Point(188, 82);
             TxtBxGamePin.Name = "TxtBxGamePin";
             TxtBxGamePin.Size = new Size(160, 23);
             TxtBxGamePin.TabIndex = 1;
             // 
-            // LabelSelectUser
+            // LabelSelectPlayer
             // 
-            LabelSelectUser.AutoSize = true;
-            LabelSelectUser.ForeColor = Color.White;
-            LabelSelectUser.Location = new Point(53, 20);
-            LabelSelectUser.Name = "LabelSelectUser";
-            LabelSelectUser.Size = new Size(129, 15);
-            LabelSelectUser.TabIndex = 3;
-            LabelSelectUser.Text = "Select a User to Play as:";
+            LabelSelectPlayer.AutoSize = true;
+            LabelSelectPlayer.ForeColor = Color.White;
+            LabelSelectPlayer.Location = new Point(44, 15);
+            LabelSelectPlayer.Name = "LabelSelectPlayer";
+            LabelSelectPlayer.Size = new Size(138, 15);
+            LabelSelectPlayer.TabIndex = 3;
+            LabelSelectPlayer.Text = "Select a Player to Play as:";
             // 
-            // comboBoxSelectUser
+            // comboBoxSelectPlayer
             // 
-            comboBoxSelectUser.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxSelectUser.FormattingEnabled = true;
-            comboBoxSelectUser.Location = new Point(188, 12);
-            comboBoxSelectUser.Name = "comboBoxSelectUser";
-            comboBoxSelectUser.Size = new Size(160, 23);
-            comboBoxSelectUser.TabIndex = 4;
-            comboBoxSelectUser.TabStop = false;
+            comboBoxSelectPlayer.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSelectPlayer.FormattingEnabled = true;
+            comboBoxSelectPlayer.Location = new Point(188, 12);
+            comboBoxSelectPlayer.Name = "comboBoxSelectPlayer";
+            comboBoxSelectPlayer.Size = new Size(160, 23);
+            comboBoxSelectPlayer.TabIndex = 4;
+            comboBoxSelectPlayer.TabStop = false;
             // 
             // BtnCreateGame
             // 
-            BtnCreateGame.Location = new Point(132, 137);
+            BtnCreateGame.Location = new Point(137, 175);
             BtnCreateGame.Name = "BtnCreateGame";
             BtnCreateGame.Size = new Size(114, 37);
             BtnCreateGame.TabIndex = 5;
@@ -87,7 +90,7 @@
             // comboBoxGameType
             // 
             comboBoxGameType.FormattingEnabled = true;
-            comboBoxGameType.Location = new Point(188, 91);
+            comboBoxGameType.Location = new Point(188, 117);
             comboBoxGameType.Name = "comboBoxGameType";
             comboBoxGameType.Size = new Size(160, 23);
             comboBoxGameType.TabIndex = 7;
@@ -96,23 +99,53 @@
             // 
             LabelGameType.AutoSize = true;
             LabelGameType.ForeColor = Color.White;
-            LabelGameType.Location = new Point(113, 94);
+            LabelGameType.Location = new Point(113, 120);
             LabelGameType.Name = "LabelGameType";
             LabelGameType.Size = new Size(69, 15);
             LabelGameType.TabIndex = 6;
             LabelGameType.Text = "Game Type:";
+            // 
+            // TxtBxPlayerPassword
+            // 
+            TxtBxPlayerPassword.Location = new Point(188, 47);
+            TxtBxPlayerPassword.Name = "TxtBxPlayerPassword";
+            TxtBxPlayerPassword.Size = new Size(160, 23);
+            TxtBxPlayerPassword.TabIndex = 9;
+            // 
+            // LabelPlayerPassword
+            // 
+            LabelPlayerPassword.AutoSize = true;
+            LabelPlayerPassword.ForeColor = Color.White;
+            LabelPlayerPassword.Location = new Point(87, 50);
+            LabelPlayerPassword.Name = "LabelPlayerPassword";
+            LabelPlayerPassword.Size = new Size(95, 15);
+            LabelPlayerPassword.TabIndex = 8;
+            LabelPlayerPassword.Text = "Player Password:";
+            // 
+            // LabelPrivateMatches
+            // 
+            LabelPrivateMatches.AutoSize = true;
+            LabelPrivateMatches.ForeColor = Color.White;
+            LabelPrivateMatches.Location = new Point(44, 143);
+            LabelPrivateMatches.Name = "LabelPrivateMatches";
+            LabelPrivateMatches.Size = new Size(304, 15);
+            LabelPrivateMatches.TabIndex = 10;
+            LabelPrivateMatches.Text = "*Private matches will only allow connetions from friends";
             // 
             // CreateGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkBlue;
-            ClientSize = new Size(388, 186);
+            ClientSize = new Size(388, 224);
+            Controls.Add(LabelPrivateMatches);
+            Controls.Add(TxtBxPlayerPassword);
+            Controls.Add(LabelPlayerPassword);
             Controls.Add(comboBoxGameType);
             Controls.Add(LabelGameType);
             Controls.Add(BtnCreateGame);
-            Controls.Add(comboBoxSelectUser);
-            Controls.Add(LabelSelectUser);
+            Controls.Add(comboBoxSelectPlayer);
+            Controls.Add(LabelSelectPlayer);
             Controls.Add(TxtBxGamePin);
             Controls.Add(LabelGamePassword);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -127,10 +160,13 @@
 
         private Label LabelGamePassword;
         private TextBox TxtBxGamePin;
-        private Label LabelSelectUser;
-        private ComboBox comboBoxSelectUser;
+        private Label LabelSelectPlayer;
+        private ComboBox comboBoxSelectPlayer;
         private Button BtnCreateGame;
         private ComboBox comboBoxGameType;
         private Label LabelGameType;
+        private TextBox TxtBxPlayerPassword;
+        private Label LabelPlayerPassword;
+        private Label LabelPrivateMatches;
     }
 }
