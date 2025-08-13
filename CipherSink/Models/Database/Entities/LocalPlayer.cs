@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic.ApplicationServices;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
@@ -7,6 +6,12 @@ namespace CipherSink.Models.Database.Entities;
 
 public class LocalPlayer : BasePlayer
 {
+    /// <summary>
+    /// Constructs a LocalPlayer with a username and password.
+    /// Will generate a new RSA key pair and encrypt the private key with the provided password.
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="password"></param>
     public LocalPlayer(string username, string password)
     {
         Username = username;
@@ -20,7 +25,17 @@ public class LocalPlayer : BasePlayer
         );
     }
 
-    public LocalPlayer()
+    /// <summary>
+    /// Constructs a LocalPlayer with an existing RSA public key.
+    /// EF Core will use this constructor when loading from the database.
+    /// </summary>
+    public LocalPlayer() { }
+
+    /// <summary>
+    /// Initializes the RSA object with the public key if available.
+    /// Should be called after EF Core loads the entity.
+    /// </summary>
+    public void InitializeRsa()
     {
         RsaObject = RSA.Create();
 
@@ -28,6 +43,23 @@ public class LocalPlayer : BasePlayer
         {
             RsaObject.ImportRSAPublicKey(PublicKeyBytes, out _);
         }
+    }
+
+    // Override RsaObject property to lazy load
+    private RSA? _rsaObject;
+
+    [NotMapped]
+    public new RSA RsaObject
+    {
+        get
+        {
+            if (_rsaObject == null)
+            {
+                InitializeRsa();
+            }
+            return _rsaObject!;
+        }
+        set => _rsaObject = value;
     }
 
     public bool LoadPrivatekey(string password)
