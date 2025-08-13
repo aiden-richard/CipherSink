@@ -10,16 +10,16 @@ public abstract class BasePlayer
     public int Id { get; set; }
 
     [Required]
-    public string Username { get; set; } = string.Empty;
-
-    [NotMapped]
-    public RSA RsaObject { get; set; }
+    public string Username { get; set; }
 
     /// <summary>
     /// The User's public key stored as a byte array.
     /// </summary>
     [Required]
     public byte[] PublicKeyBytes { get; set; }
+
+    [NotMapped]
+    public RSA RsaObject { get; set; }
 
     [NotMapped]
     public Gameboard? GameBoard { get; set; }
