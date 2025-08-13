@@ -29,8 +29,6 @@ public partial class JoinGame : Form
 
         this.dbContext = new CipherSinkContext();
 
-        // uncomment the line below to start fresh with a new database.
-        // this.dbContext.Database.EnsureDeleted();
         this.dbContext.Database.EnsureCreated();
 
         LoadComboBoxData();
@@ -62,14 +60,13 @@ public partial class JoinGame : Form
     {
         if (ValidInputs())
         {
-            TcpPeer peer = new TcpPeer(SelectedPlayer.RsaObject, false);
+            TcpPeer peer = new TcpPeer(SelectedPlayer.RsaObject, false, TxtBxHostIp.Text);
 
-            Game game = new Game(peer, SelectedPlayer, false);
-
-            game.HostIp = TxtBxHostIp.Text;
+            Game game = new Game(peer, SelectedPlayer);
 
             var placeShipsForm = new PlaceShips(game);
             placeShipsForm.ShowDialog();
+            this.Close(); // Close the JoinGame form after starting the game
         }
     }
 
@@ -79,6 +76,11 @@ public partial class JoinGame : Form
         {
             MessageBox.Show("Player password must be alphanumeric.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false; // Player password must be alphanumeric
+        }
+        else if (TxtBxPlayerPassword.Text.Length < 4 || TxtBxPlayerPassword.Text.Length > 32)
+        {
+            MessageBox.Show("Password must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
         else if (!SelectedPlayer.LoadPrivatekey(TxtBxPlayerPassword.Text))
         {

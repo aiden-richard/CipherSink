@@ -2,16 +2,8 @@
 using CipherSink.Models.Database.Entities;
 using CipherSink.Models.GameLogic;
 using CipherSink.Models.Networking;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CipherSink.Forms.GameForms;
 
@@ -45,8 +37,6 @@ public partial class CreateGame : Form
 
         this.dbContext = new CipherSinkContext();
 
-        // uncomment the line below to start fresh with a new database.
-        // this.dbContext.Database.EnsureDeleted();
         this.dbContext.Database.EnsureCreated();
 
         LoadComboBoxData();
@@ -79,12 +69,14 @@ public partial class CreateGame : Form
         if (ValidInputs())
         {   
             bool isPrivatGame = comboBoxGameType.SelectedItem.ToString() == GameType.Private.ToString();
-            TcpPeer peer = new TcpPeer(SelectedPlayer.RsaObject, isPrivatGame   );
 
-            Game game = new(peer, SelectedPlayer, true);
+            TcpPeer peer = new TcpPeer(SelectedPlayer.RsaObject, isPrivatGame, null);
+
+            Game game = new(peer, SelectedPlayer);
 
             var placeShipsForm = new PlaceShips(game);
             placeShipsForm.ShowDialog();
+            this.Close();
         }
     }
 
@@ -94,6 +86,11 @@ public partial class CreateGame : Form
         {
             MessageBox.Show("Player password must be alphanumeric.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false; // Player password must be alphanumeric
+        }
+        else if (TxtBxPlayerPassword.Text.Length < 4 || TxtBxPlayerPassword.Text.Length > 32)
+        {
+            MessageBox.Show("Password must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
         else if (!SelectedPlayer.LoadPrivatekey(TxtBxPlayerPassword.Text))
         {
