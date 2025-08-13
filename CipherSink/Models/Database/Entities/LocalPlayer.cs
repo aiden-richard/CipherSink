@@ -91,7 +91,7 @@ public class LocalPlayer : BasePlayer
 
     public int IncrementWins()
     {
-        return TotalWins++;
+        return ++TotalWins;
     }
 
     public int TotalLosses { get; private set; } = 0;
