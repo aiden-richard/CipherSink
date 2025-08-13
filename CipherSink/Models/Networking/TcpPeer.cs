@@ -135,26 +135,12 @@ public class TcpPeer : IDisposable
     /// then read the actual message bytes based on that length.
     /// </summary>
     /// <returns>The byte array received</returns>
-    /// <exception cref="SocketException">Thrown when the connection is reset or network error occurs</exception>
-    /// <exception cref="ArgumentException">Thrown when message length is invalid</exception>
     private async Task<byte[]> ReceiveMessage()
     {
-        try
-        {
-            byte[] lengthBytes = await ReadExact(4);
-            int messageLength = BitConverter.ToInt32(lengthBytes, 0);
+        byte[] lengthBytes = await ReadExact(4);
+        int messageLength = BitConverter.ToInt32(lengthBytes, 0);
 
-            return await ReadExact(messageLength);
-        }
-        catch (SocketException)
-        {
-            throw;
-        }
-        catch (ArgumentException)
-        {
-            
-            throw;
-        }
+        return await ReadExact(messageLength);
     }
 
     /// <summary>
