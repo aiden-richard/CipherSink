@@ -89,6 +89,7 @@ public partial class JoinGame : Form
         }
         else if (!IPAddress.TryParse(TxtBxHostIp.Text, out _))
         {
+            MessageBox.Show("Host IP address format is invalid.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false; // Invalid IP address format
         }
         else if (TxtBxGamePin.Text != String.Empty && !Regex.IsMatch(TxtBxGamePin.Text, @"^[A-Za-z0-9]+$"))
