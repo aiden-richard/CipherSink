@@ -16,7 +16,6 @@ public partial class EditPlayer : Form
 
     public EditPlayer()
     {
-        this.AcceptButton = BtnUpdatePlayer;
         InitializeComponent();
     }
 
@@ -60,12 +59,6 @@ public partial class EditPlayer : Form
 
     private void comboBoxSelectPlayer_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (SelectedPlayer == null)
-        {
-            MessageBox.Show("No player selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return; // No player selected
-        }
-
         LoadPlayerData();
     }
 

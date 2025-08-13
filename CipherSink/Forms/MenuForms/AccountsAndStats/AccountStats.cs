@@ -82,6 +82,12 @@ public partial class AccountStats : Form
 
     private void BtnEditPlayer_Click(object sender, EventArgs e)
     {
+        if (SelectedPlayer == null)
+        {
+            MessageBox.Show("No players to edit.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
         var editPlayerForm = new EditPlayer();
         editPlayerForm.ShowDialog();
         LoadComboBoxData(); // Refresh the player list after editing a user
@@ -90,6 +96,12 @@ public partial class AccountStats : Form
 
     private void DeleteDbBtn_Click(object sender, EventArgs e)
     {
+        if (SelectedPlayer == null)
+        {
+            MessageBox.Show("No player selected for deletion.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
         var result =  MessageBox.Show($"Are you sure you want to delete {SelectedPlayer.Username}?\nThis action cannot be undone.", $"Delete User: {SelectedPlayer.Username}", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
         if (result == DialogResult.Yes)
         {
@@ -103,12 +115,6 @@ public partial class AccountStats : Form
 
     private void comboBoxSelectPlayer_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (SelectedPlayer == null)
-        {
-            MessageBox.Show("No player selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return; // No player selected
-        }
-
         LoadStats();
     }
 
