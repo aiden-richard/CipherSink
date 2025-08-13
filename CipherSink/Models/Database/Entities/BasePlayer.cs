@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
 
 namespace CipherSink.Models.Database.Entities;
 
@@ -10,9 +12,15 @@ public abstract class BasePlayer
     [Required]
     public string Username { get; set; } = string.Empty;
 
+    [NotMapped]
+    public RSA RsaObject { get; set; }
+
     /// <summary>
     /// The User's public key stored as a byte array.
     /// </summary>
     [Required]
     public byte[] PublicKeyBytes { get; set; }
+
+    [NotMapped]
+    public Gameboard? GameBoard { get; set; }
 }

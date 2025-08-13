@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CipherSink.Migrations
 {
     [DbContext(typeof(CipherSinkContext))]
-    [Migration("20250812231241_InitialCreate")]
+    [Migration("20250813024456_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,28 +29,28 @@ namespace CipherSink.Migrations
                         .IsRequired()
                         .HasColumnType("BLOB");
 
-                    b.Property<int>("Hits")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Losses")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Misses")
-                        .HasColumnType("INTEGER");
-
                     b.Property<byte[]>("PublicKeyBytes")
                         .IsRequired()
                         .HasColumnType("BLOB");
 
-                    b.Property<int>("SunkShips")
+                    b.Property<int>("TotalHits")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TotalLosses")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TotalMisses")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TotalSunkShips")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TotalWins")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("Wins")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

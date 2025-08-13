@@ -17,11 +17,11 @@ namespace CipherSink.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     EncryptedPrivateKeyBytes = table.Column<byte[]>(type: "BLOB", nullable: false),
-                    Wins = table.Column<int>(type: "INTEGER", nullable: false),
-                    Losses = table.Column<int>(type: "INTEGER", nullable: false),
-                    Hits = table.Column<int>(type: "INTEGER", nullable: false),
-                    Misses = table.Column<int>(type: "INTEGER", nullable: false),
-                    SunkShips = table.Column<int>(type: "INTEGER", nullable: false),
+                    TotalWins = table.Column<int>(type: "INTEGER", nullable: false),
+                    TotalLosses = table.Column<int>(type: "INTEGER", nullable: false),
+                    TotalHits = table.Column<int>(type: "INTEGER", nullable: false),
+                    TotalMisses = table.Column<int>(type: "INTEGER", nullable: false),
+                    TotalSunkShips = table.Column<int>(type: "INTEGER", nullable: false),
                     Username = table.Column<string>(type: "TEXT", nullable: false),
                     PublicKeyBytes = table.Column<byte[]>(type: "BLOB", nullable: false)
                 },
