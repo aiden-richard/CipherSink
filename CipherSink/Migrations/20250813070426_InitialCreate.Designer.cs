@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CipherSink.Migrations
 {
     [DbContext(typeof(CipherSinkContext))]
-    [Migration("20250813024456_InitialCreate")]
+    [Migration("20250813070426_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
