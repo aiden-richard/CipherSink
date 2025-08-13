@@ -1,10 +1,6 @@
-﻿using CipherSink.Forms.GameForms;
-using CipherSink.Models.Database;
+﻿using CipherSink.Models.Database;
 using CipherSink.Models.Database.Entities;
-using CipherSink.Models.GameLogic;
-using CipherSink.Models.Networking;
 using System.ComponentModel;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
 namespace CipherSink.Forms.MenuForms.AccountsAndStats;
@@ -15,8 +11,8 @@ public partial class CreatePlayer : Form
 
     public CreatePlayer()
     {
-        this.AcceptButton = BtnCreatePlayer;
         InitializeComponent();
+        this.AcceptButton = BtnCreatePlayer;
     }
 
     protected override void OnLoad(EventArgs e)
@@ -53,7 +49,7 @@ public partial class CreatePlayer : Form
         }
         else if (TxtBxUsername.Text.Length < 1 || TxtBxUsername.Text.Length > 32)
         {
-            MessageBox.Show("Username must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Username must be between 1 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
         else if (!Regex.IsMatch(TxtBxPassword.Text, @"^[A-Za-z0-9]+$"))
@@ -61,9 +57,9 @@ public partial class CreatePlayer : Form
             MessageBox.Show("Username must be alphanumeric", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false; // No user selected
         }
-        else if (TxtBxPassword.Text.Length < 1 || TxtBxPassword.Text.Length > 32)
+        else if (TxtBxPassword.Text.Length < 4 || TxtBxPassword.Text.Length > 32)
         {
-            MessageBox.Show("Username must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Password must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
         else

@@ -77,7 +77,7 @@
             TxtBxPassword.Location = new Point(108, 64);
             TxtBxPassword.Name = "TxtBxPassword";
             TxtBxPassword.Size = new Size(147, 23);
-            TxtBxPassword.TabIndex = 3;
+            TxtBxPassword.TabIndex = 1;
             // 
             // CreatePlayer
             // 
@@ -102,8 +102,8 @@
 
         private TextBox TxtBxUsername;
         private Label LabelUsername;
-        private Button BtnCreatePlayer;
         private Label LabelPassword;
         private TextBox TxtBxPassword;
+        private Button BtnCreatePlayer;
     }
 }

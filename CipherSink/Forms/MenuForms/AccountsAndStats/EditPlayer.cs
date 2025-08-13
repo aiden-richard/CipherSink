@@ -25,8 +25,6 @@ public partial class EditPlayer : Form
 
         this.dbContext = new CipherSinkContext();
 
-        // uncomment the line below to start fresh with a new database.
-        // this.dbContext.Database.EnsureDeleted();
         this.dbContext.Database.EnsureCreated();
 
         var players = dbContext.LocalPlayers.ToList();
@@ -49,8 +47,6 @@ public partial class EditPlayer : Form
         TxtBxUsername.Text = SelectedPlayer.Username;
 
         string pemKey = SelectedPlayer.RsaObject.ExportRSAPublicKeyPem();
-
-        TxtBxUsername.Text = SelectedPlayer.Username;
         TxtBxPublicKey.Text = pemKey;
 
         LabelWins.Text = $"Wins: {SelectedPlayer.TotalWins.ToString()}";
@@ -89,7 +85,7 @@ public partial class EditPlayer : Form
         }
         else if (TxtBxUsername.Text.Length < 1 || TxtBxUsername.Text.Length > 32)
         {
-            MessageBox.Show("Username must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Username must be between 1 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
         else

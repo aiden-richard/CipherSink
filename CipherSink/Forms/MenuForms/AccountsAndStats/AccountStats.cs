@@ -27,8 +27,6 @@ public partial class AccountStats : Form
 
         this.dbContext = new CipherSinkContext();
 
-        // uncomment the line below to start fresh with a new database.
-        // this.dbContext.Database.EnsureDeleted();
         this.dbContext.Database.EnsureCreated();
 
         LoadComboBoxData();
@@ -77,7 +75,7 @@ public partial class AccountStats : Form
         var createPlayerForm = new CreatePlayer();
         createPlayerForm.ShowDialog();
         LoadComboBoxData(); // Refresh the player list after creating a new user
-        LoadStats(); // Refresh the player list after creating a new user
+        LoadStats(); // Refresh the player stats
     }
 
     private void BtnEditPlayer_Click(object sender, EventArgs e)
