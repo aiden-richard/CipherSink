@@ -7,26 +7,23 @@ public class Game
 {
     public int Id { get; set; }
 
+    private TcpPeer Peer { get; set; }
+
     public LocalPlayer LocalPlayer { get; set; }
 
     public RemotePlayer RemotePlayer { get; set; }
 
     public GameState State { get; set; } = GameState.VerifyUser;
 
-    public bool IsHost { get; set; }
-
-    public string? HostIp { get; set; } = null;
-
     public Action UpdateUI { get; set; }
 
-    private TcpPeer Peer { get; set; }
-
-    public Game(TcpPeer peer, LocalPlayer localPlayer, bool isHost)
+    public Game(TcpPeer peer, LocalPlayer localPlayer)
     {
         Peer = peer;
         LocalPlayer = localPlayer;
         LocalPlayer.GameBoard = new Gameboard();
-        IsHost = isHost;
+        RemotePlayer = new RemotePlayer();
+        RemotePlayer.GameBoard = new Gameboard();
     }
 
     public async Task Start()
@@ -38,11 +35,12 @@ public class Game
 
         while (State != GameState.Finished)
         {
+            UpdateUI.Invoke();
+
             switch (State)
             {
                 case GameState.VerifyUser:
-                    Peer.IsHost = IsHost;
-                    if (IsHost)
+                    if (Peer.IsHost)
                     {
                         await Peer.TryAcceptConnection();
                         await Peer.ExchangeKeys();
@@ -50,14 +48,16 @@ public class Game
                     }
                     else
                     {
-                        await Peer.TryConnect(HostIp);
+                        await Peer.TryConnect();
                         await Peer.ExchangeKeys();
                         await Peer.ValidateConnection();
                     }
 
                     if (Peer.ConnectionVerified)
                     {
+                        RemotePlayer.PublicKeyBytes = Peer.PeerPublicKeyBytes;
                         MessageBox.Show("Connection verified", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                         State = GameState.PlaceShips;
                     }
                     else
@@ -86,8 +86,6 @@ public class Game
                     MessageBox.Show("Game aborted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
-
-            UpdateUI.Invoke();
         }
     }
 }
