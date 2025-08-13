@@ -54,7 +54,7 @@ public partial class CreatePlayer : Form
         }
         else if (!Regex.IsMatch(TxtBxPassword.Text, @"^[A-Za-z0-9]+$"))
         {
-            MessageBox.Show("Username must be alphanumeric", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Password must be alphanumeric", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false; // No user selected
         }
         else if (TxtBxPassword.Text.Length < 4 || TxtBxPassword.Text.Length > 32)
