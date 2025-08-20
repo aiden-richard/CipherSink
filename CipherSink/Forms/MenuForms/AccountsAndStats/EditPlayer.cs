@@ -1,7 +1,7 @@
 ﻿using CipherSink.Models.Database;
 using CipherSink.Models.Database.Entities;
+using CipherSink.Models.Validation;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
 
 namespace CipherSink.Forms.MenuForms.AccountsAndStats;
 public partial class EditPlayer : Form
@@ -62,36 +62,38 @@ public partial class EditPlayer : Form
     {
         if (ValidInputs())
         {
-            if (SelectedPlayer == null)
+            if (SelectedPlayer.Username != TxtBxUsername.Text)
             {
-                MessageBox.Show("No player selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; // No player selected
+                SelectedPlayer.Username = TxtBxUsername.Text;
+
+                dbContext.SaveChanges();
+
+                MessageBox.Show("Player info updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close(); // Close the form after creating the user
             }
-
-            SelectedPlayer.Username = TxtBxUsername.Text;
-            dbContext.SaveChanges();
-
-            MessageBox.Show("Player info updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close(); // Close the form after creating the user
+            else
+            {
+                MessageBox.Show("No Changes were made.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
         }
     }
 
     private bool ValidInputs()
     {
-        if (!Regex.IsMatch(TxtBxUsername.Text, @"^[A-Za-z0-9]+$"))
+        if (SelectedPlayer == null)
         {
-            MessageBox.Show("Username must be alphanumeric", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false; // No user selected
+            MessageBox.Show("No player selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false; // No player selected
         }
-        else if (TxtBxUsername.Text.Length < 1 || TxtBxUsername.Text.Length > 32)
+
+        if (!Validator.IsValidUsername(TxtBxUsername.Text))
         {
-            MessageBox.Show("Username must be between 1 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Invalid username. It must be alphanumeric and between 1 and 32 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
-        else
-        {
-            return true; // All inputs are valid
-        }
+
+        return true;
     }
 
     protected override void OnClosing(CancelEventArgs e)
