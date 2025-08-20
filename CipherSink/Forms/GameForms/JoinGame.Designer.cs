@@ -90,6 +90,7 @@
             // 
             TxtBxPlayerPassword.Location = new Point(213, 47);
             TxtBxPlayerPassword.Name = "TxtBxPlayerPassword";
+            TxtBxPlayerPassword.PasswordChar = '*';
             TxtBxPlayerPassword.Size = new Size(160, 23);
             TxtBxPlayerPassword.TabIndex = 11;
             // 
