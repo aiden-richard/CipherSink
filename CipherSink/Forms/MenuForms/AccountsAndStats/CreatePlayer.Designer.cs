@@ -76,6 +76,7 @@
             // 
             TxtBxPassword.Location = new Point(108, 64);
             TxtBxPassword.Name = "TxtBxPassword";
+            TxtBxPassword.PasswordChar = '*';
             TxtBxPassword.Size = new Size(147, 23);
             TxtBxPassword.TabIndex = 1;
             // 
