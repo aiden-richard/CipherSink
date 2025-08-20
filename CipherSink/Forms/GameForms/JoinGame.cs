@@ -2,6 +2,7 @@
 using CipherSink.Models.Database.Entities;
 using CipherSink.Models.GameLogic;
 using CipherSink.Models.Networking;
+using CipherSink.Models.Validation;
 using System.ComponentModel;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -72,40 +73,31 @@ public partial class JoinGame : Form
 
     private bool ValidInputs()
     {
-        if (!Regex.IsMatch(TxtBxPlayerPassword.Text, @"^[A-Za-z0-9]+$"))
+        if (!Validator.IsValidPassword(TxtBxPlayerPassword.Text))
         {
-            MessageBox.Show("Player password must be alphanumeric.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false; // Player password must be alphanumeric
-        }
-        else if (TxtBxPlayerPassword.Text.Length < 4 || TxtBxPlayerPassword.Text.Length > 32)
-        {
-            MessageBox.Show("Password must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Password must be alphanumeric and between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
-        else if (!SelectedPlayer.LoadPrivatekey(TxtBxPlayerPassword.Text))
+
+        if (!SelectedPlayer.LoadPrivatekey(TxtBxPlayerPassword.Text))
         {
             MessageBox.Show("Incorrect Password", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false; // Failed to load player's private key with the provided password
+            return false;
         }
-        else if (!IPAddress.TryParse(TxtBxHostIp.Text, out _))
+
+        if (TxtBxGamePin.Text != String.Empty && !Validator.IsValidGamePin(TxtBxGamePin.Text))
         {
-            MessageBox.Show("Host IP address format is invalid.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false; // Invalid IP address format
+            MessageBox.Show("Game PIN must be alphanumeric and between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
-        else if (TxtBxGamePin.Text != String.Empty && !Regex.IsMatch(TxtBxGamePin.Text, @"^[A-Za-z0-9]+$"))
+
+        if (!Validator.IsValidHostIp(TxtBxHostIp.Text))
         {
-            MessageBox.Show("Game PIN must be alphanumeric.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false; // Game PIN must be alphanumeric
+            MessageBox.Show("Host IP address is invalid. Please enter a valid IPv4 address.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
-        else if (TxtBxGamePin.Text != String.Empty && (TxtBxGamePin.Text.Length < 4 || TxtBxGamePin.Text.Length > 32))
-        {
-            MessageBox.Show("Game PIN must be between 4 and 32 characters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false; // Game PIN must be between 4 and 32 characters
-        }
-        else
-        {
-            return true; // All inputs are valid
-        }
+
+        return true;
     }
 
     protected override void OnClosing(CancelEventArgs e)

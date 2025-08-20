@@ -1,3 +1,4 @@
+using Validator = CipherSink.Models.Validation.Validator;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
@@ -39,7 +40,7 @@ public class LocalPlayer : BasePlayer
     {
         RsaObject = RSA.Create();
 
-        if (PublicKeyBytes != null)
+        if (Validator.IsValidRSAPublicKey(PublicKeyBytes))
         {
             RsaObject.ImportRSAPublicKey(PublicKeyBytes, out _);
         }
@@ -64,7 +65,17 @@ public class LocalPlayer : BasePlayer
 
     public bool LoadPrivatekey(string password)
     {
-        if (EncryptedPrivateKeyBytes != null && password != null)
+        if (!Validator.IsValidPassword(password))
+        {
+            return false; // Invalid password format
+        }
+
+        if (!Validator.IsValidRSAPublicKey(PublicKeyBytes))
+        {
+            return false; // Invalid public key format
+        }
+
+        if (EncryptedPrivateKeyBytes != null)
         {
             try
             {
