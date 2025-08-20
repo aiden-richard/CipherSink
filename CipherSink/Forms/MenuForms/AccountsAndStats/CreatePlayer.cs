@@ -44,7 +44,7 @@ public partial class CreatePlayer : Form
     {
         if (!Validator.IsValidUsername(TxtBxUsername.Text))
         {
-            MessageBox.Show("Invalid username. It must be alphanumeric and between 4 and 32 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Invalid username. It must be alphanumeric and between 1 and 32 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 

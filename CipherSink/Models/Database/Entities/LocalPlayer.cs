@@ -40,7 +40,7 @@ public class LocalPlayer : BasePlayer
     {
         RsaObject = RSA.Create();
 
-        if (!Validator.IsValidRSAPublicKey(PublicKeyBytes))
+        if (Validator.IsValidRSAPublicKey(PublicKeyBytes))
         {
             RsaObject.ImportRSAPublicKey(PublicKeyBytes, out _);
         }

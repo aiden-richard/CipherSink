@@ -35,7 +35,7 @@ public static class Validator
     /// A password is considered valid if it is alphanumeric and between 4 and 32 characters long.
     /// </summary>
     /// <param name="password">The password to check</param>
-    /// <returns>True if the provided password is valid; otherwise fasle.</returns>
+    /// <returns>True if the provided password is valid; otherwise false.</returns>
     public static bool IsValidPassword(string password) 
     {
         if (!Regex.IsMatch(password, @"^[A-Za-z0-9]+$"))
@@ -51,6 +51,12 @@ public static class Validator
         return true; // Password is valid
     }
 
+    /// <summary>
+    /// Validates if the provided game PIN is in a valid format.
+    /// A game PIN is considered valid if it is alphanumeric and between 4 and 32 characters long.
+    /// </summary>
+    /// <param name="gamePin">The game PIN to check</param>
+    /// <returns>True if the provided game PIN is valid; otherwise false.</returns>
     public static bool IsValidGamePin(string gamePin)
     {
         if (!Regex.IsMatch(gamePin, @"^[A-Za-z0-9]+$"))
@@ -78,7 +84,6 @@ public static class Validator
             using (RSA rsa = RSA.Create())
             {
                 rsa.ImportRSAPublicKey(new ReadOnlySpan<byte>(keyBytes), out _);
-                rsa.Clear(); // Clear the RSA object to release resources
                 return true;
             }
         }
@@ -100,7 +105,6 @@ public static class Validator
             using (RSA rsa = RSA.Create())
             {
                 rsa.ImportRSAPrivateKey(new ReadOnlySpan<byte>(keyBytes), out _);
-                rsa.Clear(); // Clear the RSA object to release resources
                 return true;
             }
         }
@@ -110,6 +114,11 @@ public static class Validator
         }
     }
 
+    /// <summary>
+    /// Validates if the provided host IP string is a valid IP address.
+    /// </summary>
+    /// <param name="hostIp">The host IP string to check</param>
+    /// <returns>True if the provided string is a valid IP address; otherwise false.</returns>
     public static bool IsValidHostIp(string hostIp)
     {
         return IPAddress.TryParse(hostIp, out _);
