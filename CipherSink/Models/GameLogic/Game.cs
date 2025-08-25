@@ -23,7 +23,19 @@ public class Game
         LocalPlayer = localPlayer;
         LocalPlayer.GameBoard = new Gameboard();
         RemotePlayer = new RemotePlayer();
-        RemotePlayer.GameBoard = new Gameboard();
+    }
+
+    // TCS used to await user confirmation of ship placements
+    // initialized to null, set in the PlaceShips state
+    private TaskCompletionSource<bool>? _placementReadyTcs;
+
+    /// <summary>
+    /// This method is called by the UI to indicate that the user has finished placing ships
+    /// It sets the TaskCompletionSource to allow the game loop to continue.
+    /// </summary>
+    public void AcceptShipPlacements()
+    {
+        _placementReadyTcs?.TrySetResult(true);
     }
 
     public async Task Start()
@@ -68,7 +80,28 @@ public class Game
                     break;
 
                 case GameState.PlaceShips:
-                    return;
+                    // Show placement UI via UpdateUI; then await the user's acceptance.
+                    if (_placementReadyTcs is null || _placementReadyTcs.Task.IsCompleted)
+                    {
+                        _placementReadyTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
+                    }
+
+                    try
+                    {
+                        await _placementReadyTcs.Task; // Wait until AcceptShipPlacements() is called by the UI
+                        LocalPlayer.Gameboard.LockShips();
+                        State = GameState.WaitingOnOpponentReady; // Proceed to waiting for opponent readiness
+                    }
+                    catch (TaskCanceledException)
+                    {
+                        State = GameState.Aborted;
+                    }
+                    catch (Exception)
+                    {
+                        State = GameState.Aborted;
+                    }
+
+                    break;
                     
                 case GameState.WaitingOnOpponentReady:
                     // Logic for waiting on opponent
