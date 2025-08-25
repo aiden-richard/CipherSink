@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CipherSink", "CipherSink\CipherSink.csproj", "{A5D3B957-5394-4BB3-A56A-A757503B9F90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CipherSinkTests", "CipherSinkTests\CipherSinkTests.csproj", "{9BA2277A-BD10-4EAF-95D7-45E27C8A64AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A5D3B957-5394-4BB3-A56A-A757503B9F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D3B957-5394-4BB3-A56A-A757503B9F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5D3B957-5394-4BB3-A56A-A757503B9F90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BA2277A-BD10-4EAF-95D7-45E27C8A64AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA2277A-BD10-4EAF-95D7-45E27C8A64AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA2277A-BD10-4EAF-95D7-45E27C8A64AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BA2277A-BD10-4EAF-95D7-45E27C8A64AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

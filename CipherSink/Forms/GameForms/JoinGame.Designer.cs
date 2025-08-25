@@ -54,7 +54,7 @@
             TxtBxHostIp.Location = new Point(213, 81);
             TxtBxHostIp.Name = "TxtBxHostIp";
             TxtBxHostIp.Size = new Size(160, 23);
-            TxtBxHostIp.TabIndex = 1;
+            TxtBxHostIp.TabIndex = 3;
             // 
             // LabelHostIp
             // 
@@ -73,7 +73,7 @@
             comboBoxSelectPlayer.Location = new Point(213, 12);
             comboBoxSelectPlayer.Name = "comboBoxSelectPlayer";
             comboBoxSelectPlayer.Size = new Size(160, 23);
-            comboBoxSelectPlayer.TabIndex = 6;
+            comboBoxSelectPlayer.TabIndex = 1;
             comboBoxSelectPlayer.TabStop = false;
             // 
             // LabelSelectPlayer
@@ -92,7 +92,7 @@
             TxtBxPlayerPassword.Name = "TxtBxPlayerPassword";
             TxtBxPlayerPassword.PasswordChar = '*';
             TxtBxPlayerPassword.Size = new Size(160, 23);
-            TxtBxPlayerPassword.TabIndex = 11;
+            TxtBxPlayerPassword.TabIndex = 2;
             // 
             // LabelPlayerPassword
             // 
@@ -109,7 +109,7 @@
             TxtBxGamePin.Location = new Point(213, 117);
             TxtBxGamePin.Name = "TxtBxGamePin";
             TxtBxGamePin.Size = new Size(160, 23);
-            TxtBxGamePin.TabIndex = 13;
+            TxtBxGamePin.TabIndex = 4;
             // 
             // LabelGamePassword
             // 

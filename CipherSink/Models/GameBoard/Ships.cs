@@ -3,7 +3,7 @@
 /// <summary>
 /// This class represents a ship on the game board.
 /// </summary>
-internal abstract class Ship
+public abstract class Ship
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Ship"/> class with the specified name, size, and occupation type.

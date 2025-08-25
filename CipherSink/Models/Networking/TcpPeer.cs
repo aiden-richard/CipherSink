@@ -1,4 +1,5 @@
 ﻿using CipherSink.Models.Cryptography;
+using CipherSink.Models.Cryptography.MerkleTree;
 using CipherSink.Models.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
@@ -297,6 +298,35 @@ public class TcpPeer : IDisposable
 
         byte[] signature = Rsa.SignData(challenge, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
         await SendMessage(signature);
+    }
+
+    public async Task<bool> SendMerkleRoot(byte[] rootHash)
+    {
+        await SendMessage(rootHash);
+
+        return true;
+    }
+
+    public async Task<MerkleValidator> ReceiveMerkleRoot()
+    {
+        byte[] rootHash = await ReceiveMessage();
+        MerkleValidator merkleValidator = new MerkleValidator(rootHash);
+
+        return merkleValidator;
+    }
+
+    public async Task<bool> SendMerkleProof(List<MerkleProofElement> proof)
+    {
+        await SendMessage(BitConverter.GetBytes(proof.Count));
+
+        foreach (var element in proof)
+        {
+            byte[] isLeftByte = new byte[] { element.IsLeft ? (byte)1 : (byte)0 };
+            await SendMessage(isLeftByte);
+            await SendMessage(element.Hash);
+        }
+
+        return true;
     }
 
     public void Dispose()

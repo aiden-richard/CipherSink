@@ -3,7 +3,7 @@
 /// <summary>
 /// CheckCellResult enumeration represents the result of checking a cell in the game board.
 /// </summary>
-internal enum CheckCellResult
+public enum CheckCellResult
 {
     Hit,
     Miss,
@@ -13,7 +13,7 @@ internal enum CheckCellResult
 /// <summary>
 /// Enumeration representing the occupation type of a cell in the grid.
 /// </summary>
-internal enum OccupationType
+public enum OccupationType
 {
     Carrier,
 
