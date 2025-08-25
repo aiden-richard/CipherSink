@@ -1,4 +1,5 @@
-﻿using CipherSink.Models.Database.Entities;
+﻿using CipherSink.Models.Cryptography;
+using CipherSink.Models.Database.Entities;
 using CipherSink.Models.Networking;
 
 namespace CipherSink.Models.GameLogic;
@@ -15,13 +16,12 @@ public class Game
 
     public GameState State { get; set; } = GameState.VerifyUser;
 
-    public Action UpdateUI { get; set; }
+    public Action? UpdateUI { get; set; }
 
     public Game(TcpPeer peer, LocalPlayer localPlayer)
     {
         Peer = peer;
         LocalPlayer = localPlayer;
-        LocalPlayer.GameBoard = new Gameboard();
         RemotePlayer = new RemotePlayer();
     }
 
@@ -68,15 +68,13 @@ public class Game
                     if (Peer.ConnectionVerified)
                     {
                         RemotePlayer.PublicKeyBytes = Peer.PeerPublicKeyBytes;
-                        MessageBox.Show("Connection verified", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                         State = GameState.PlaceShips;
                     }
                     else
                     {
                         State = GameState.Aborted;
                     }
-                    
+
                     break;
 
                 case GameState.PlaceShips:
@@ -102,10 +100,20 @@ public class Game
                     }
 
                     break;
-                    
+
                 case GameState.WaitingOnOpponentReady:
-                    // Logic for waiting on opponent
+                    if (Peer.IsHost)
+                    {
+                        await Peer.SendMerkleRoot(LocalPlayer.Gameboard.MerkleTree.RootHash);
+                        RemotePlayer.MerkleValidator = await Peer.ReceiveMerkleRoot();
+                    }
+                    else
+                    {
+                        RemotePlayer.MerkleValidator = await Peer.ReceiveMerkleRoot();
+                        await Peer.SendMerkleRoot(LocalPlayer.Gameboard.MerkleTree.RootHash);
+                    }
                     break;
+
                 case GameState.LocalTurn:
                     // Logic for local player's turn
                     break;
@@ -117,7 +125,7 @@ public class Game
                     break;
                 case GameState.Aborted:
                     MessageBox.Show("Game aborted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    return;
             }
         }
     }
