@@ -3,7 +3,7 @@
 /// <summary>
 /// This class represents a pair of coordinates (X, Y).
 /// </summary>
-internal class Coordinates
+public class Coordinates
 {
     /// <summary>
     /// The X coordinate.

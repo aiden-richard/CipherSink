@@ -1,11 +1,13 @@
-﻿namespace CipherSink.Models.GameBoard;
+﻿using CipherSink.Models.Cryptography.MerkleTree;
+
+namespace CipherSink.Models.GameBoard;
 
 /// <summary>
 /// This class represents the game board for the Battleship game
 /// It has a grid of cells and a list of ships.
 /// It provides methods to initialize the grid, place ships, and to check cells
 /// </summary>
-internal class Gameboard
+public class Gameboard
 {
     /// <summary>
     /// The size of the game board, which is a square grid of cells.
@@ -16,6 +18,13 @@ internal class Gameboard
     /// Gets the two-dimensional array representing the grid of cells.
     /// </summary>
     public Cell[,] Grid { get; init; }
+
+    /// <summary>
+    /// Gets the Merkle tree associated with the current instance.
+    /// The Tree gets created after all ships are locked.
+    /// This is null if the gameboard belongs to the RemotePlayer class
+    /// </summary>
+    public MerkleTree? MerkleTree { get; set; }
 
     /// <summary>
     /// Read-only list of ships
@@ -72,6 +81,11 @@ internal class Gameboard
             throw new ArgumentNullException(nameof(ship), "Ship cannot be null.");
         }
 
+        foreach (var cell in ship.Positions)
+        {
+            Grid[cell.X, cell.Y].OccupationType = OccupationType.Empty; // Clear previous positions
+        }
+
         // end coordinates based on orientation
         int endX = vertical ? x : x + ship.Size - 1;
         int endY = vertical ? y + ship.Size - 1 : y;
@@ -126,7 +140,7 @@ internal class Gameboard
     /// If a ship cannot be placed after 1000 attempts, it throws an exception.
     /// </summary>
     /// <exception cref="InvalidOperationException"></exception>
-    public void PlaceShipsRandomly()
+    public void RandomizeShipPositions()
     {
         var rand = new Random();
         foreach (var ship in Ships)
@@ -147,6 +161,7 @@ internal class Gameboard
             }
         }
     }
+
     /// <summary>
     /// This method locks all ships on the game board.
     /// It does this by calling the LockPositions method on each ship.
@@ -169,6 +184,7 @@ internal class Gameboard
             }
         }
 
+        MerkleTree = new MerkleTree(Grid);
         return true; // All ships successfully locked
     }
 
@@ -206,5 +222,105 @@ internal class Gameboard
         }
 
         return CheckCellResult.Miss; // Should not reach here, but just in case
+    }
+
+    public void FillTableLayoutPanel(TableLayoutPanel TLP)
+    {
+        for (int row = 0; row < TLP.RowCount; row++)
+        {
+            for (int col = 0; col < TLP.ColumnCount; col++)
+            {
+                // Get panel at the current position
+                var cellPanel = TLP.GetControlFromPosition(col, row);
+
+                if (cellPanel == null)
+                {
+                    cellPanel = new Panel();
+                    TLP.Controls.Add(cellPanel, col, row);
+                }
+
+                if (Grid[col, row].IsOccupied)
+                {
+                    cellPanel.BackColor = Color.Gray;
+                }
+                else
+                {
+                    cellPanel.BackColor = Color.Transparent; // Empty cell
+                }
+            }
+        }
+    }
+        
+    /// <summary>
+    /// Serializes the current state of the grid into a byte array.
+    /// Each cell is represented by 1 bit: 1 if occupied, 0 if not.
+    /// The resulting array is 13 bytes long (100 bits for the grid, 4 unused bits).
+    /// </summary>
+    /// <returns>
+    /// A byte array representing the occupation state of each cell in the grid.
+    /// </returns>
+    public byte[] SerializeGrid()
+    {
+        // Use 1 bit per cell: 1 if occupied, 0 if not.
+        // 10x10 grid = 100 bits = 13 bytes (104 bits, last 4 bits unused).
+        // Pack bits into a byte array.
+
+        byte[] result = new byte[13];
+        int bitIndex = 0;
+
+        // Loop through the grid and set bits in the byte array
+        for (int y = 0; y < BoardSize; y++)
+        {
+            for (int x = 0; x < BoardSize; x++)
+            {
+                if (Grid[x, y].IsOccupied)
+                {
+                    int byteIndex = bitIndex / 8; // Determine which byte to write to
+                    int bitInByte = bitIndex % 8; // Determine which bit in the byte to set
+
+                    // create a byte with only the specific bit set
+                    // example cellBitFlag for the first cell (0,0) would be 00000001
+                    byte cellBitFlag = (byte)(1 << bitInByte);
+
+                    // the cellBitFlag is then ORed with the byte at the byteIndex in the result array
+                    // this sets the specific bit in the byte to 1 for each occupied cell
+                    result[byteIndex] |= cellBitFlag;
+                }
+                bitIndex++;
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Deserializes a byte array into the grid, setting each cell's occupation type.
+    /// The byte array must be exactly 13 bytes long.
+    /// Occupied cells are set to <see cref="OccupationType.Hit"/>, empty cells to <see cref="OccupationType.Empty"/>.
+    /// </summary>
+    /// <param name="data">A byte array representing the occupation state of each cell in the grid.</param>
+    /// <exception cref="ArgumentException">Thrown if the data array is not exactly 13 bytes long.</exception>
+    public void DeserializeGrid(byte[] data)
+    {
+        if (data.Length != 13)
+        {
+            throw new ArgumentException("Data must be exactly 13 bytes long.");
+        }
+
+        int bitIndex = 0;
+        // Loop through the grid and set the occupation type based on the bits in the byte array
+        for (int y = 0; y < BoardSize; y++)
+        {
+            for (int x = 0; x < BoardSize; x++)
+            {
+                int byteIndex = bitIndex / 8; // Determine which byte to read from
+                int bitInByte = bitIndex % 8; // Determine which bit in the byte to check
+
+                // Check if the specific bit is set
+                bool isOccupied = (data[byteIndex] & (1 << bitInByte)) != 0;
+                Grid[x, y].OccupationType = isOccupied ? OccupationType.Hit : OccupationType.Empty;
+                bitIndex++;
+            }
+        }
     }
 }
