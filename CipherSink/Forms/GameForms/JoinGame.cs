@@ -22,6 +22,7 @@ public partial class JoinGame : Form
     public JoinGame()
     {
         InitializeComponent();
+        this.AcceptButton = BtnJoinGame;
     }
 
     protected override void OnLoad(EventArgs e)
@@ -66,6 +67,7 @@ public partial class JoinGame : Form
             Game game = new Game(peer, SelectedPlayer);
 
             var placeShipsForm = new PlaceShips(game);
+            this.Hide(); // Hide the JoinGame form while placing ships
             placeShipsForm.ShowDialog();
             this.Close(); // Close the JoinGame form after starting the game
         }

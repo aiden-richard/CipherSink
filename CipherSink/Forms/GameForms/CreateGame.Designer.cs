@@ -55,7 +55,7 @@
             TxtBxGamePin.Location = new Point(188, 82);
             TxtBxGamePin.Name = "TxtBxGamePin";
             TxtBxGamePin.Size = new Size(160, 23);
-            TxtBxGamePin.TabIndex = 1;
+            TxtBxGamePin.TabIndex = 3;
             // 
             // LabelSelectPlayer
             // 
@@ -74,7 +74,7 @@
             comboBoxSelectPlayer.Location = new Point(188, 12);
             comboBoxSelectPlayer.Name = "comboBoxSelectPlayer";
             comboBoxSelectPlayer.Size = new Size(160, 23);
-            comboBoxSelectPlayer.TabIndex = 4;
+            comboBoxSelectPlayer.TabIndex = 1;
             comboBoxSelectPlayer.TabStop = false;
             // 
             // BtnCreateGame
@@ -93,7 +93,7 @@
             comboBoxGameType.Location = new Point(188, 117);
             comboBoxGameType.Name = "comboBoxGameType";
             comboBoxGameType.Size = new Size(160, 23);
-            comboBoxGameType.TabIndex = 7;
+            comboBoxGameType.TabIndex = 4;
             // 
             // LabelGameType
             // 
@@ -111,7 +111,7 @@
             TxtBxPlayerPassword.Name = "TxtBxPlayerPassword";
             TxtBxPlayerPassword.PasswordChar = '*';
             TxtBxPlayerPassword.Size = new Size(160, 23);
-            TxtBxPlayerPassword.TabIndex = 9;
+            TxtBxPlayerPassword.TabIndex = 2;
             // 
             // LabelPlayerPassword
             // 
