@@ -40,10 +40,11 @@ public partial class PlaceShips : Form
 
             case GameState.WaitingOnOpponentReady:
                 var mainGameForm = new MainGame(Game);
+                this.Hide();
+                mainGameForm.Show();
                 break;
 
             case GameState.Aborted:
-                MessageBox.Show("Game aborted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
                 break;
         }
@@ -57,6 +58,7 @@ public partial class PlaceShips : Form
 
     private void BtnReady_Click(object sender, EventArgs e)
     {
+        BtnReady.Enabled = false;
         Game.AcceptShipPlacements();
     }
 }

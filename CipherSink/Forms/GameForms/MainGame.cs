@@ -11,6 +11,8 @@ public partial class MainGame : Form
         InitializeComponent();
         Game = game;
         Game.UpdateUI = UpdateUI;
+
+        UpdateUI();
     }
 
     public void UpdateUI()
@@ -30,13 +32,21 @@ public partial class MainGame : Form
                 // show grids for both players
                 LayoutPanelOpponent.Visible = true;
                 LayoutPanelLocal.Visible = true;
+
+                this.Close();
                 break;
 
             case GameState.RemoteTurn:
+                LabelWaitingForOpponentReady.Visible = false;
+
+                // show grids for both players
+                LayoutPanelOpponent.Visible = true;
+                LayoutPanelLocal.Visible = true;
+
+                this.Close();
                 break;
 
             case GameState.Aborted:
-                MessageBox.Show("Game aborted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
                 break;
         }

@@ -76,8 +76,8 @@ public partial class CreateGame : Form
             Game game = new(peer, SelectedPlayer);
 
             var placeShipsForm = new PlaceShips(game);
-            this.Hide(); // Hide the create game form while placing ships
-            placeShipsForm.ShowDialog();
+            this.Hide();
+            placeShipsForm.ShowDialog();                   
             this.Close();
         }
     }

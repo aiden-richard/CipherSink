@@ -109,7 +109,7 @@ public class TcpPeer : IDisposable
     /// <param name="message">Byte array to send to the peer</param>
     /// <returns>true if message sent; false otherwise</returns>
     /// <exception cref="InvalidOperationException">Will throw exception if there is no connection established</exception>
-    private async Task<bool> SendMessage(byte[] message)
+    public async Task<bool> SendMessage(byte[] message)
     {
         if (Connection == null)
         {
@@ -136,7 +136,7 @@ public class TcpPeer : IDisposable
     /// then read the actual message bytes based on that length.
     /// </summary>
     /// <returns>The byte array received</returns>
-    private async Task<byte[]> ReceiveMessage()
+    public async Task<byte[]> ReceiveMessage()
     {
         byte[] lengthBytes = await ReadExact(4);
         int messageLength = BitConverter.ToInt32(lengthBytes, 0);
@@ -298,21 +298,6 @@ public class TcpPeer : IDisposable
 
         byte[] signature = Rsa.SignData(challenge, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
         await SendMessage(signature);
-    }
-
-    public async Task<bool> SendMerkleRoot(byte[] rootHash)
-    {
-        await SendMessage(rootHash);
-
-        return true;
-    }
-
-    public async Task<MerkleValidator> ReceiveMerkleRoot()
-    {
-        byte[] rootHash = await ReceiveMessage();
-        MerkleValidator merkleValidator = new MerkleValidator(rootHash);
-
-        return merkleValidator;
     }
 
     public async Task<bool> SendMerkleProof(List<MerkleProofElement> proof)

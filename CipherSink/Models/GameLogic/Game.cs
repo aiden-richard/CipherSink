@@ -1,4 +1,5 @@
 ﻿using CipherSink.Models.Cryptography;
+using CipherSink.Models.Cryptography.MerkleTree;
 using CipherSink.Models.Database.Entities;
 using CipherSink.Models.Networking;
 
@@ -102,23 +103,21 @@ public class Game
                     break;
 
                 case GameState.WaitingOnOpponentReady:
-                    if (Peer.IsHost)
-                    {
-                        await Peer.SendMerkleRoot(LocalPlayer.Gameboard.MerkleTree.RootHash);
-                        RemotePlayer.MerkleValidator = await Peer.ReceiveMerkleRoot();
-                    }
-                    else
-                    {
-                        RemotePlayer.MerkleValidator = await Peer.ReceiveMerkleRoot();
-                        await Peer.SendMerkleRoot(LocalPlayer.Gameboard.MerkleTree.RootHash);
-                    }
+                    await Peer.SendMessage(LocalPlayer.Gameboard.MerkleTree.RootHash);
+                    byte[] rootHash = await Peer.ReceiveMessage();
+                    RemotePlayer.MerkleValidator = new MerkleValidator(rootHash);
+
+                    State = Peer.IsHost ? GameState.LocalTurn : GameState.RemoteTurn;
+
                     break;
 
                 case GameState.LocalTurn:
                     // Logic for local player's turn
+                    MessageBox.Show("Local Turn - Not Implemented", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case GameState.RemoteTurn:
                     // Logic for remote player's turn
+                    MessageBox.Show("Remote Turn - Not Implemented", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case GameState.Finished:
                     // Logic for finishing the game
