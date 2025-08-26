@@ -31,142 +31,99 @@
             LabelUsername = new Label();
             TxtBxUsername = new TextBox();
             LabelPublicKey = new Label();
-            comboBoxSelectPlayer = new ComboBox();
             TxtBxPublicKey = new TextBox();
-            LabelSelectPlayer = new Label();
             BtnUpdatePlayer = new Button();
-            BtnIncrementWins = new Button();
-            BtnIncrementLosses = new Button();
-            LabelWins = new Label();
-            LabelLosses = new Label();
+            BtnImportKey = new Button();
+            BtnExportKeys = new Button();
             SuspendLayout();
             // 
             // LabelUsername
             // 
             LabelUsername.AutoSize = true;
             LabelUsername.ForeColor = Color.White;
-            LabelUsername.Location = new Point(35, 76);
+            LabelUsername.Location = new Point(50, 40);
+            LabelUsername.Margin = new Padding(4, 0, 4, 0);
             LabelUsername.Name = "LabelUsername";
-            LabelUsername.Size = new Size(63, 15);
+            LabelUsername.Size = new Size(95, 25);
             LabelUsername.TabIndex = 0;
             LabelUsername.Text = "Username:";
             // 
             // TxtBxUsername
             // 
-            TxtBxUsername.Location = new Point(104, 73);
+            TxtBxUsername.Location = new Point(149, 35);
+            TxtBxUsername.Margin = new Padding(4, 5, 4, 5);
             TxtBxUsername.Name = "TxtBxUsername";
-            TxtBxUsername.Size = new Size(253, 23);
+            TxtBxUsername.Size = new Size(360, 31);
             TxtBxUsername.TabIndex = 1;
             // 
             // LabelPublicKey
             // 
             LabelPublicKey.AutoSize = true;
             LabelPublicKey.ForeColor = Color.White;
-            LabelPublicKey.Location = new Point(33, 119);
+            LabelPublicKey.Location = new Point(47, 104);
+            LabelPublicKey.Margin = new Padding(4, 0, 4, 0);
             LabelPublicKey.Name = "LabelPublicKey";
-            LabelPublicKey.Size = new Size(65, 15);
+            LabelPublicKey.Size = new Size(96, 25);
             LabelPublicKey.TabIndex = 2;
             LabelPublicKey.Text = "Public Key:";
             // 
-            // comboBoxSelectPlayer
-            // 
-            comboBoxSelectPlayer.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxSelectPlayer.FormattingEnabled = true;
-            comboBoxSelectPlayer.Location = new Point(104, 25);
-            comboBoxSelectPlayer.Name = "comboBoxSelectPlayer";
-            comboBoxSelectPlayer.Size = new Size(253, 23);
-            comboBoxSelectPlayer.TabIndex = 3;
-            comboBoxSelectPlayer.TabStop = false;
-            comboBoxSelectPlayer.SelectedIndexChanged += comboBoxSelectPlayer_SelectedIndexChanged;
-            // 
             // TxtBxPublicKey
             // 
-            TxtBxPublicKey.Location = new Point(104, 116);
+            TxtBxPublicKey.Location = new Point(149, 99);
+            TxtBxPublicKey.Margin = new Padding(4, 5, 4, 5);
             TxtBxPublicKey.Multiline = true;
             TxtBxPublicKey.Name = "TxtBxPublicKey";
             TxtBxPublicKey.ReadOnly = true;
-            TxtBxPublicKey.Size = new Size(471, 114);
+            TxtBxPublicKey.Size = new Size(671, 187);
             TxtBxPublicKey.TabIndex = 4;
             TxtBxPublicKey.TabStop = false;
             // 
-            // LabelSelectPlayer
-            // 
-            LabelSelectPlayer.AutoSize = true;
-            LabelSelectPlayer.ForeColor = Color.White;
-            LabelSelectPlayer.Location = new Point(22, 28);
-            LabelSelectPlayer.Name = "LabelSelectPlayer";
-            LabelSelectPlayer.Size = new Size(76, 15);
-            LabelSelectPlayer.TabIndex = 5;
-            LabelSelectPlayer.Text = "Select Player:";
-            // 
             // BtnUpdatePlayer
             // 
-            BtnUpdatePlayer.Location = new Point(460, 332);
+            BtnUpdatePlayer.Location = new Point(656, 380);
+            BtnUpdatePlayer.Margin = new Padding(4, 5, 4, 5);
             BtnUpdatePlayer.Name = "BtnUpdatePlayer";
-            BtnUpdatePlayer.Size = new Size(115, 47);
+            BtnUpdatePlayer.Size = new Size(164, 78);
             BtnUpdatePlayer.TabIndex = 6;
             BtnUpdatePlayer.Text = "Update Player Info";
             BtnUpdatePlayer.UseVisualStyleBackColor = true;
             BtnUpdatePlayer.Click += BtnUpdatePlayer_Click;
             // 
-            // BtnIncrementWins
+            // BtnImportKey
             // 
-            BtnIncrementWins.Location = new Point(104, 273);
-            BtnIncrementWins.Name = "BtnIncrementWins";
-            BtnIncrementWins.Size = new Size(107, 34);
-            BtnIncrementWins.TabIndex = 7;
-            BtnIncrementWins.Text = "Increment Wins";
-            BtnIncrementWins.UseVisualStyleBackColor = true;
-            BtnIncrementWins.Click += BtnIncrementWins_Click;
+            BtnImportKey.Location = new Point(149, 294);
+            BtnImportKey.Name = "BtnImportKey";
+            BtnImportKey.Size = new Size(166, 60);
+            BtnImportKey.TabIndex = 11;
+            BtnImportKey.Text = "Import New Keys";
+            BtnImportKey.UseVisualStyleBackColor = true;
+            BtnImportKey.Click += BtnImportKey_Click;
             // 
-            // BtnIncrementLosses
+            // BtnExportKeys
             // 
-            BtnIncrementLosses.Location = new Point(215, 273);
-            BtnIncrementLosses.Name = "BtnIncrementLosses";
-            BtnIncrementLosses.Size = new Size(107, 34);
-            BtnIncrementLosses.TabIndex = 8;
-            BtnIncrementLosses.Text = "Increment Losses";
-            BtnIncrementLosses.UseVisualStyleBackColor = true;
-            BtnIncrementLosses.Click += BtnIncrementLosses_Click;
-            // 
-            // LabelWins
-            // 
-            LabelWins.AutoSize = true;
-            LabelWins.ForeColor = Color.White;
-            LabelWins.Location = new Point(104, 243);
-            LabelWins.Name = "LabelWins";
-            LabelWins.Size = new Size(36, 15);
-            LabelWins.TabIndex = 9;
-            LabelWins.Text = "Wins:";
-            // 
-            // LabelLosses
-            // 
-            LabelLosses.AutoSize = true;
-            LabelLosses.ForeColor = Color.White;
-            LabelLosses.Location = new Point(173, 243);
-            LabelLosses.Name = "LabelLosses";
-            LabelLosses.Size = new Size(44, 15);
-            LabelLosses.TabIndex = 10;
-            LabelLosses.Text = "Losses:";
+            BtnExportKeys.Location = new Point(321, 294);
+            BtnExportKeys.Name = "BtnExportKeys";
+            BtnExportKeys.Size = new Size(166, 60);
+            BtnExportKeys.TabIndex = 12;
+            BtnExportKeys.Text = "Export Keys";
+            BtnExportKeys.UseVisualStyleBackColor = true;
+            BtnExportKeys.Click += BtnExportKeys_Click;
             // 
             // EditPlayer
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkBlue;
-            ClientSize = new Size(587, 391);
-            Controls.Add(LabelLosses);
-            Controls.Add(LabelWins);
-            Controls.Add(BtnIncrementLosses);
-            Controls.Add(BtnIncrementWins);
+            ClientSize = new Size(839, 471);
+            Controls.Add(BtnExportKeys);
+            Controls.Add(BtnImportKey);
             Controls.Add(BtnUpdatePlayer);
-            Controls.Add(LabelSelectPlayer);
             Controls.Add(TxtBxPublicKey);
-            Controls.Add(comboBoxSelectPlayer);
             Controls.Add(LabelPublicKey);
             Controls.Add(TxtBxUsername);
             Controls.Add(LabelUsername);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(4, 5, 4, 5);
             MaximizeBox = false;
             Name = "EditPlayer";
             Text = "Edit Player";
@@ -181,13 +138,9 @@
         private Label LabelPublicKey;
         private TextBox textBox1;
         private Label Label;
-        private ComboBox comboBoxSelectPlayer;
         private TextBox TxtBxPublicKey;
-        private Label LabelSelectPlayer;
         private Button BtnUpdatePlayer;
-        private Button BtnIncrementWins;
-        private Button BtnIncrementLosses;
-        private Label LabelWins;
-        private Label LabelLosses;
+        private Button BtnImportKey;
+        private Button BtnExportKeys;
     }
 }
