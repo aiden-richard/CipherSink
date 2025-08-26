@@ -17,6 +17,11 @@ public static class Validator
     /// <returns>True if the provided username is valid; otherwise false.</returns>
     public static bool IsValidUsername(string username)
     {
+        if (username == null)
+        {
+            return false;
+        }
+
         if (!Regex.IsMatch(username, @"^[A-Za-z0-9]+$"))
         { 
             return false; // Invalid username format
@@ -38,6 +43,11 @@ public static class Validator
     /// <returns>True if the provided password is valid; otherwise false.</returns>
     public static bool IsValidPassword(string password) 
     {
+        if (password == null)
+        {
+            return false;
+        }
+
         if (!Regex.IsMatch(password, @"^[A-Za-z0-9]+$"))
         {
             return false; // Invalid password format
@@ -59,6 +69,11 @@ public static class Validator
     /// <returns>True if the provided game PIN is valid; otherwise false.</returns>
     public static bool IsValidGamePin(string gamePin)
     {
+        if (gamePin == null)
+        {
+            return false;
+        }
+
         if (!Regex.IsMatch(gamePin, @"^[A-Za-z0-9]+$"))
         {
             return false; // Game PIN must be alphanumeric
