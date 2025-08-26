@@ -288,8 +288,6 @@ public partial class EditPlayer : Form
             return false;
         }
 
-        // we will need to validate imported keys
-
         return true;
     }
 
