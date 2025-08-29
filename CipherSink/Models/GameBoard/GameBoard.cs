@@ -15,6 +15,11 @@ public class Gameboard
     public const int BoardSize = 10;
 
     /// <summary>
+    /// Int to keep track of how many hits have been made on this board.
+    /// </summary>
+    public int HitCounter = 0;
+
+    /// <summary>
     /// Gets the two-dimensional array representing the grid of cells.
     /// </summary>
     public Cell[,] Grid { get; init; }
@@ -220,6 +225,7 @@ public class Gameboard
             {
                 ship.RegisterHit(coordinates);
                 Grid[x, y].OccupationType = OccupationType.Hit;
+                HitCounter++;
                 return CheckCellResult.Hit;
             }
         }
@@ -227,7 +233,7 @@ public class Gameboard
         return CheckCellResult.Miss;
     }
 
-    public void FillTableLayoutPanel(TableLayoutPanel TLP)
+    public void FillTableLayoutPanel(TableLayoutPanel TLP, bool isRemoteBoard)
     {
         for (int row = 0; row < TLP.RowCount; row++)
         {
@@ -248,6 +254,10 @@ public class Gameboard
                     cellPanel.BackColor = Color.Red; // Hit
                 }
                 else if (Grid[col, row].IsOccupied)
+                {
+                    cellPanel.BackColor = Color.Gray;
+                }
+                else if (isRemoteBoard && Grid[col, row].OccupationType == OccupationType.Miss)
                 {
                     cellPanel.BackColor = Color.Gray;
                 }

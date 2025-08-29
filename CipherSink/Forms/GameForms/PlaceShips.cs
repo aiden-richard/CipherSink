@@ -14,7 +14,7 @@ public partial class PlaceShips : Form
         _ = Game.Start();
 
         BtnRandomizePositions.PerformClick(); // Randomize ship positions on start
-        Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelPlaceShips);
+        Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelPlaceShips, false);
     }
 
     private Task UpdateUIAsync()
@@ -50,7 +50,7 @@ public partial class PlaceShips : Form
     private void BtnRandomizePositions_Click(object sender, EventArgs e)
     {
         Game.LocalPlayer.Gameboard.RandomizeShipPositions();
-        Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelPlaceShips);
+        Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelPlaceShips, false);
     }
 
     private void BtnReady_Click(object sender, EventArgs e)

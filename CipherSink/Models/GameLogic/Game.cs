@@ -204,6 +204,8 @@ public class Game
             if (x >= 0 && x < Gameboard.BoardSize && y >= 0 && y < Gameboard.BoardSize)
             {
                 RemotePlayer.Gameboard.Grid[x, y].OccupationType = occupied ? OccupationType.Hit : OccupationType.Miss;
+                if (occupied)
+                    RemotePlayer.Gameboard.HitCounter++;
                 StatusMessage = occupied ? "Hit! Waiting for Opponent's Turn..." : "Miss! Waiting for Opponents Turn...";
             }
 
@@ -294,7 +296,7 @@ public class Game
             }
             else
             {
-                State = GameState.RemoteTurn;
+                State = GameState.LocalTurn;
             }
         }
         catch
@@ -305,6 +307,6 @@ public class Game
 
     public bool GameOver()
     {
-        return LocalPlayer.Gameboard.Ships.All(s => s.IsSunk) || RemotePlayer.Gameboard.Ships.All(s => s.IsSunk);
+        return LocalPlayer.Gameboard.Ships.All(s => s.IsSunk) || RemotePlayer.Gameboard.HitCounter >= 17;
     }
 }

@@ -40,8 +40,8 @@ public partial class MainGame : Form
 
     private Task UpdateUIAsync()
     {
-        Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelLocal);
-        Game.RemotePlayer.Gameboard.FillTableLayoutPanel(LayoutPanelOpponent);
+        Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelLocal, false);
+        Game.RemotePlayer.Gameboard.FillTableLayoutPanel(LayoutPanelOpponent, true);
 
         switch (Game.State)
         {
@@ -69,7 +69,7 @@ public partial class MainGame : Form
                 LayoutPanelLocal.Visible = false;
                 LabelStatusMessage.Text = String.Empty;
                 LabelWaitingForOpponentReady.Text = Game.StatusMessage; // use waiting for opponent ready label for bigger text
-                LabelWaitingForOpponentReady.Visible = false;
+                LabelWaitingForOpponentReady.Visible = true;
 
                 break;
 
