@@ -26,14 +26,12 @@ public class MerkleTree
         {
             for (int x = 0; x < Gameboard.BoardSize; x++)
             {
-                // Hash the string representation of the cell's coordinates and occupation type
                 var cell = grid[x, y];
-                string cellDataString = $"{cell.Coordinates.ToString()}:{cell.OccupationType}";
-
+                string cellDataString = $"{cell.Coordinates}:{(cell.IsOccupied ? "X" : "O")}";
                 Leaves.Add(new MerkleTreeNode(cellDataString));
             }
         }
-        
+
         Root = BuildMerkleRoot(Leaves);
     }
 
@@ -89,9 +87,6 @@ public class MerkleTree
             return new List<MerkleProofElement>(); // empty proof for null coordinates
         }
 
-        // Find the leaf node corresponding to the given coordinates
-        // Do this by skipping through the leaves list based on the coordinates
-        // Each row has BoardSize leaves, so the index is (Y * BoardSize + X)
         int index = coords.Y * Gameboard.BoardSize + coords.X;
         MerkleTreeNode? leaf = (index >= 0 && index < Leaves.Count) ? Leaves[index] : null;
 
@@ -100,17 +95,14 @@ public class MerkleTree
             return new List<MerkleProofElement>(); // empty proof for null, non-leaf, or leaf not in tree
         }
 
-        List<MerkleProofElement> proof = new(); // Initialize empty proof list
-        List<MerkleTreeNode> nodes = Leaves.ToList(); // copy of leaves to work with
-        MerkleTreeNode targetLeaf = leaf; // at each layer, track the node we are looking for
+        List<MerkleProofElement> proof = new();
+        List<MerkleTreeNode> nodes = Leaves.ToList();
+        MerkleTreeNode targetLeaf = leaf;
 
-        // Build the proof by traversing up the tree
-        // Loop until we reach the root
         while (nodes.Count > 1)
         {
-            List<MerkleTreeNode> nextLevel = new(); // Prepare for the next level of the tree
+            List<MerkleTreeNode> nextLevel = new();
 
-            // Process pairs of nodes to build the next level
             for (int i = 0; i < nodes.Count; i += 2)
             {
                 MerkleTreeNode left = nodes[i];
@@ -120,11 +112,8 @@ public class MerkleTree
                     ? new MerkleTreeNode(left, right)
                     : new MerkleTreeNode(left, left);
 
-                // Check that pair has two nodes
                 if (right != null)
                 {
-                    // add sibling hash to proof if one of the nodes is the target leaf
-                    // The hash of the sibling of the target leaf is added to the proof
                     if (left.Hash.SequenceEqual(targetLeaf.Hash))
                     {
                         proof.Add(new MerkleProofElement(right.Hash, false));
@@ -136,9 +125,9 @@ public class MerkleTree
                         targetLeaf = combinedNode;
                     }
                 }
-                else // no sibling
+                else
                 {
-                    if (left.Hash.SequenceEqual(targetLeaf.Hash)) // we add the target leaf's own hash to the proof
+                    if (left.Hash.SequenceEqual(targetLeaf.Hash))
                     {
                         proof.Add(new MerkleProofElement(left.Hash, false));
                         targetLeaf = combinedNode;
