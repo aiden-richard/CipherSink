@@ -86,7 +86,7 @@ public partial class AccountStats : Form
             return;
         }
 
-        var editPlayerForm = new EditPlayer();
+        var editPlayerForm = new EditPlayer(SelectedPlayer);
         editPlayerForm.ShowDialog();
         LoadComboBoxData(); // Refresh the player list after editing a user
         LoadStats();
