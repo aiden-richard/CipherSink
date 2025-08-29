@@ -207,7 +207,15 @@ public class Game
                 StatusMessage = occupied ? "Hit! Waiting for Opponent's Turn..." : "Miss! Waiting for Opponents Turn...";
             }
 
-            State = GameState.RemoteTurn;
+            if (GameOver())
+            {
+                StatusMessage = "You Win!";
+                State = GameState.Finished;
+            }
+            else
+            {
+                State = GameState.RemoteTurn;
+            }
         }
         catch
         {
@@ -231,6 +239,15 @@ public class Game
             var coords = new Coordinates(x, y);
 
             var attackResult = LocalPlayer.Gameboard.CheckCell(coords);
+            if (attackResult == CheckCellResult.Hit)
+            {
+                LocalPlayer.Gameboard.Grid[x, y].OccupationType = OccupationType.Hit;
+            }
+            else if (attackResult == CheckCellResult.Miss)
+            {
+                LocalPlayer.Gameboard.Grid[x, y].OccupationType = OccupationType.Miss;
+            }
+
             StatusMessage = attackResult == CheckCellResult.Hit ? "Opponent Hit! Your Turn..." : "Opponent Missed! Your Turn...";
 
             // Build cell data string exactly as original Merkle tree leaf construction
@@ -269,12 +286,25 @@ public class Game
 
             await Peer.SendMessage(ms.ToArray());
 
-            // After responding with proof, switch turn
-            State = GameState.LocalTurn;
+            // After responding with proof, check win or switch turn
+            if (GameOver())
+            {
+                StatusMessage = "You Lose!";
+                State = GameState.Finished;
+            }
+            else
+            {
+                State = GameState.RemoteTurn;
+            }
         }
         catch
         {
             State = GameState.Aborted;
         }
+    }
+
+    public bool GameOver()
+    {
+        return LocalPlayer.Gameboard.Ships.All(s => s.IsSunk) || RemotePlayer.Gameboard.Ships.All(s => s.IsSunk);
     }
 }

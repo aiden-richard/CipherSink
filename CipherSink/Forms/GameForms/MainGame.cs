@@ -47,6 +47,7 @@ public partial class MainGame : Form
         {
             case GameState.WaitingOnOpponentReady:
                 LabelWaitingForOpponentReady.Visible = true;
+                LabelStatusMessage.Text = String.Empty;
                 break;
 
             case GameState.LocalTurn:
@@ -61,6 +62,15 @@ public partial class MainGame : Form
                 LayoutPanelOpponent.Visible = true;
                 LayoutPanelLocal.Visible = true;
                 LabelStatusMessage.Text = Game.StatusMessage;
+                break;
+            
+            case GameState.Finished:
+                LayoutPanelOpponent.Visible = false;
+                LayoutPanelLocal.Visible = false;
+                LabelStatusMessage.Text = String.Empty;
+                LabelWaitingForOpponentReady.Text = Game.StatusMessage; // use waiting for opponent ready label for bigger text
+                LabelWaitingForOpponentReady.Visible = false;
+
                 break;
 
             case GameState.Aborted:
