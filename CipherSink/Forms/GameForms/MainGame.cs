@@ -1,4 +1,5 @@
-﻿using CipherSink.Models.GameLogic;
+﻿using CipherSink.Models.GameBoard;
+using CipherSink.Models.GameLogic;
 
 namespace CipherSink;
 
@@ -10,12 +11,34 @@ public partial class MainGame : Form
     {
         InitializeComponent();
         Game = game;
-        Game.UpdateUI = UpdateUI;
+        Game.UpdateUIAsync = UpdateUIAsync;
 
-        UpdateUI();
+        // Set up TableLayoutPanels
+        for (int row = 0; row < LayoutPanelOpponent.RowCount; row++)
+        {
+            for (int col = 0; col < LayoutPanelOpponent.ColumnCount; col++)
+            {
+                // Get panel at the current position
+                var cellPanel = LayoutPanelOpponent.GetControlFromPosition(col, row);
+
+                if (cellPanel == null)
+                {
+                    cellPanel = new Panel();
+                    LayoutPanelOpponent.Controls.Add(cellPanel, col, row);
+                }
+
+                // Capture loop variables for closure
+                int x = col;
+                int y = row;
+                cellPanel.Click += (_, _) => Game.AcceptAttackOnEnemyCell(new Coordinates(x, y));
+            }
+        }
+
+        // Initial UI sync
+        _ = UpdateUIAsync();
     }
 
-    public void UpdateUI()
+    private Task UpdateUIAsync()
     {
         Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelLocal);
         Game.RemotePlayer.Gameboard.FillTableLayoutPanel(LayoutPanelOpponent);
@@ -28,27 +51,22 @@ public partial class MainGame : Form
 
             case GameState.LocalTurn:
                 LabelWaitingForOpponentReady.Visible = false;
-
-                // show grids for both players
                 LayoutPanelOpponent.Visible = true;
                 LayoutPanelLocal.Visible = true;
-
-                this.Close();
+                LabelStatusMessage.Text = Game.StatusMessage;
                 break;
 
             case GameState.RemoteTurn:
                 LabelWaitingForOpponentReady.Visible = false;
-
-                // show grids for both players
                 LayoutPanelOpponent.Visible = true;
                 LayoutPanelLocal.Visible = true;
-
-                this.Close();
+                LabelStatusMessage.Text = Game.StatusMessage;
                 break;
 
             case GameState.Aborted:
-                this.Close();
+                Close();
                 break;
         }
+        return Task.CompletedTask;
     }
 }

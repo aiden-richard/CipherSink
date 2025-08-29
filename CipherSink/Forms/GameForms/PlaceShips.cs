@@ -10,29 +10,25 @@ public partial class PlaceShips : Form
     {
         InitializeComponent();
         Game = game;
-        Game.UpdateUI = UpdateUI;
-        Game.Start();
+        Game.UpdateUIAsync = UpdateUIAsync;
+        _ = Game.Start();
 
         BtnRandomizePositions.PerformClick(); // Randomize ship positions on start
         Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelPlaceShips);
     }
 
-    public void UpdateUI()
+    private Task UpdateUIAsync()
     {
         switch (Game.State)
         {
             case GameState.VerifyUser:
-                // Show waiting label and change background color
-                this.BackColor = Color.LightSkyBlue;
+                BackColor = Color.LightSkyBlue;
                 LabelWaitingForConnection.Visible = true;
                 break;
 
             case GameState.PlaceShips:
-                // Hide the waiting label and change background color
                 LabelWaitingForConnection.Visible = false;
                 BackColor = Color.DarkBlue;
-
-                // show controls for placing ships
                 LayoutPanelPlaceShips.Visible = true;
                 BtnRandomizePositions.Visible = true;
                 BtnReady.Visible = true;
@@ -40,14 +36,15 @@ public partial class PlaceShips : Form
 
             case GameState.WaitingOnOpponentReady:
                 var mainGameForm = new MainGame(Game);
-                this.Hide();
+                Hide();
                 mainGameForm.Show();
                 break;
 
             case GameState.Aborted:
-                this.Close();
+                Close();
                 break;
         }
+        return Task.CompletedTask;
     }
 
     private void BtnRandomizePositions_Click(object sender, EventArgs e)
