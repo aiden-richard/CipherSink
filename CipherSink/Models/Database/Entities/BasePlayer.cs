@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CipherSink.Models.GameBoard;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 
@@ -22,5 +23,5 @@ public abstract class BasePlayer
     public RSA RsaObject { get; set; }
 
     [NotMapped]
-    public Gameboard? GameBoard { get; set; }
+    public Gameboard Gameboard { get; set; } = new Gameboard();
 }

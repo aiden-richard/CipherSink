@@ -26,6 +26,7 @@ public partial class CreateGame : Form
     public CreateGame()
     {
         InitializeComponent();
+        this.AcceptButton = BtnCreateGame;
 
         // Populate GameType ComboBox with enum values
         comboBoxGameType.DataSource = Enum.GetValues(typeof(GameType));
@@ -75,7 +76,8 @@ public partial class CreateGame : Form
             Game game = new(peer, SelectedPlayer);
 
             var placeShipsForm = new PlaceShips(game);
-            placeShipsForm.ShowDialog();
+            this.Hide();
+            placeShipsForm.ShowDialog();                   
             this.Close();
         }
     }

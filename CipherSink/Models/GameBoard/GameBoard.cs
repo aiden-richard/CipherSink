@@ -1,11 +1,13 @@
-﻿namespace CipherSink.Models.GameBoard;
+﻿using CipherSink.Models.Cryptography.MerkleTree;
+
+namespace CipherSink.Models.GameBoard;
 
 /// <summary>
 /// This class represents the game board for the Battleship game
 /// It has a grid of cells and a list of ships.
 /// It provides methods to initialize the grid, place ships, and to check cells
 /// </summary>
-internal class Gameboard
+public class Gameboard
 {
     /// <summary>
     /// The size of the game board, which is a square grid of cells.
@@ -13,9 +15,21 @@ internal class Gameboard
     public const int BoardSize = 10;
 
     /// <summary>
+    /// Int to keep track of how many hits have been made on this board.
+    /// </summary>
+    public int HitCounter = 0;
+
+    /// <summary>
     /// Gets the two-dimensional array representing the grid of cells.
     /// </summary>
     public Cell[,] Grid { get; init; }
+
+    /// <summary>
+    /// Gets the Merkle tree associated with the current instance.
+    /// The Tree gets created after all ships are locked.
+    /// This is null if the gameboard belongs to the RemotePlayer class
+    /// </summary>
+    public MerkleTree? MerkleTree { get; set; }
 
     /// <summary>
     /// Read-only list of ships
@@ -72,6 +86,11 @@ internal class Gameboard
             throw new ArgumentNullException(nameof(ship), "Ship cannot be null.");
         }
 
+        foreach (var cell in ship.Positions)
+        {
+            Grid[cell.X, cell.Y].OccupationType = OccupationType.Empty; // Clear previous positions
+        }
+
         // end coordinates based on orientation
         int endX = vertical ? x : x + ship.Size - 1;
         int endY = vertical ? y + ship.Size - 1 : y;
@@ -126,7 +145,7 @@ internal class Gameboard
     /// If a ship cannot be placed after 1000 attempts, it throws an exception.
     /// </summary>
     /// <exception cref="InvalidOperationException"></exception>
-    public void PlaceShipsRandomly()
+    public void RandomizeShipPositions()
     {
         var rand = new Random();
         foreach (var ship in Ships)
@@ -147,6 +166,7 @@ internal class Gameboard
             }
         }
     }
+
     /// <summary>
     /// This method locks all ships on the game board.
     /// It does this by calling the LockPositions method on each ship.
@@ -169,19 +189,25 @@ internal class Gameboard
             }
         }
 
+        MerkleTree = new MerkleTree(Grid);
         return true; // All ships successfully locked
     }
 
     /// <summary>
-    /// This method checks a cell for ship at the given coordinates.
+    /// Checks a cell for a ship at the given coordinates.
     /// </summary>
-    /// <param name="x">The x coordinate to check</param>
-    /// <param name="y">The y coordinate to check</param>
-    /// <returns>A CheckCellResult</returns>
-    /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public CheckCellResult CheckCell(int x, int y)
+    /// <param name="coordinates">The coordinates to check.</param>
+    /// <returns>A CheckCellResult indicating Hit, Miss, or OutOfBounds.</returns>
+    public CheckCellResult CheckCell(Coordinates coordinates)
     {
-        // Check if coordinates are within bounds
+        if (coordinates is null)
+        {
+            throw new ArgumentNullException(nameof(coordinates));
+        }
+
+        int x = coordinates.X;
+        int y = coordinates.Y;
+
         if (x < 0 || x >= BoardSize || y < 0 || y >= BoardSize)
         {
             return CheckCellResult.OutOfBounds;
@@ -189,22 +215,57 @@ internal class Gameboard
 
         if (!Grid[x, y].IsOccupied)
         {
-            Grid[x, y].OccupationType = OccupationType.Miss; // Mark as Miss
+            Grid[x, y].OccupationType = OccupationType.Miss;
             return CheckCellResult.Miss;
         }
 
-        // Find the ship occupying this cell and register a hit
-        Coordinates coord = new Coordinates(x, y);
         foreach (var ship in Ships)
         {
-            if (ship.Positions.Any(pos => pos.Equals(coord)))
+            if (ship.Positions.Any(pos => pos.Equals(coordinates)))
             {
-                ship.RegisterHit(coord);
+                ship.RegisterHit(coordinates);
                 Grid[x, y].OccupationType = OccupationType.Hit;
-                return CheckCellResult.Hit; // Return Hit
+                HitCounter++;
+                return CheckCellResult.Hit;
             }
         }
 
-        return CheckCellResult.Miss; // Should not reach here, but just in case
+        return CheckCellResult.Miss;
+    }
+
+    public void FillTableLayoutPanel(TableLayoutPanel TLP, bool isRemoteBoard)
+    {
+        for (int row = 0; row < TLP.RowCount; row++)
+        {
+            for (int col = 0; col < TLP.ColumnCount; col++)
+            {
+                // Get panel at the current position
+                var cellPanel = TLP.GetControlFromPosition(col, row);
+
+                if (cellPanel == null)
+                {
+                    cellPanel = new Panel();
+                    TLP.Controls.Add(cellPanel, col, row);
+                }
+
+
+                if (Grid[col, row].OccupationType == OccupationType.Hit)
+                {
+                    cellPanel.BackColor = Color.Red; // Hit
+                }
+                else if (Grid[col, row].IsOccupied)
+                {
+                    cellPanel.BackColor = Color.Gray;
+                }
+                else if (isRemoteBoard && Grid[col, row].OccupationType == OccupationType.Miss)
+                {
+                    cellPanel.BackColor = Color.Gray;
+                }
+                else
+                {
+                    cellPanel.BackColor = Color.Transparent; // Empty cell
+                }
+            }
+        }
     }
 }

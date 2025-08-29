@@ -4,37 +4,58 @@ namespace CipherSink.Forms.GameForms;
 
 public partial class PlaceShips : Form
 {
-    private Game Game;
+    public Game Game;
 
     public PlaceShips(Game game)
     {
         InitializeComponent();
         Game = game;
-        Game.UpdateUI = UpdateUI;
-        Game.Start();
+        Game.UpdateUIAsync = UpdateUIAsync;
+        _ = Game.Start();
+
+        BtnRandomizePositions.PerformClick(); // Randomize ship positions on start
+        Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelPlaceShips, false);
     }
 
-    public void UpdateUI()
+    private Task UpdateUIAsync()
     {
         switch (Game.State)
         {
             case GameState.VerifyUser:
-                this.BackColor = Color.LightBlue;
+                BackColor = Color.LightSkyBlue;
+                LabelWaitingForConnection.Visible = true;
                 break;
 
             case GameState.PlaceShips:
+                LabelWaitingForConnection.Visible = false;
                 BackColor = Color.DarkBlue;
-                // Display place ships UI
+                LayoutPanelPlaceShips.Visible = true;
+                BtnRandomizePositions.Visible = true;
+                BtnReady.Visible = true;
                 break;
 
             case GameState.WaitingOnOpponentReady:
-                // once ships are placed, state will change to WaitingOnOpponentReady
-                // we will send User to main game board form here
+                var mainGameForm = new MainGame(Game);
+                Hide();
+                mainGameForm.Show();
                 break;
 
             case GameState.Aborted:
-                MessageBox.Show("Game aborted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
                 break;
         }
+        return Task.CompletedTask;
+    }
+
+    private void BtnRandomizePositions_Click(object sender, EventArgs e)
+    {
+        Game.LocalPlayer.Gameboard.RandomizeShipPositions();
+        Game.LocalPlayer.Gameboard.FillTableLayoutPanel(LayoutPanelPlaceShips, false);
+    }
+
+    private void BtnReady_Click(object sender, EventArgs e)
+    {
+        BtnReady.Enabled = false;
+        Game.AcceptShipPlacements();
     }
 }

@@ -6,7 +6,7 @@
 /// Coordinates are represented by the Coordinates class.
 /// OccupationType is represented by the OccupationType enum.
 /// </summary>
-internal class Cell
+public class Cell
 {
     /// <summary>
     /// Coordinates of the cell in the grid.
