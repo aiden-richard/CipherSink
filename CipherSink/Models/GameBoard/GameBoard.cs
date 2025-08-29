@@ -189,15 +189,20 @@ public class Gameboard
     }
 
     /// <summary>
-    /// This method checks a cell for ship at the given coordinates.
+    /// Checks a cell for a ship at the given coordinates.
     /// </summary>
-    /// <param name="x">The x coordinate to check</param>
-    /// <param name="y">The y coordinate to check</param>
-    /// <returns>A CheckCellResult</returns>
-    /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public CheckCellResult CheckCell(int x, int y)
+    /// <param name="coordinates">The coordinates to check.</param>
+    /// <returns>A CheckCellResult indicating Hit, Miss, or OutOfBounds.</returns>
+    public CheckCellResult CheckCell(Coordinates coordinates)
     {
-        // Check if coordinates are within bounds
+        if (coordinates is null)
+        {
+            throw new ArgumentNullException(nameof(coordinates));
+        }
+
+        int x = coordinates.X;
+        int y = coordinates.Y;
+
         if (x < 0 || x >= BoardSize || y < 0 || y >= BoardSize)
         {
             return CheckCellResult.OutOfBounds;
@@ -205,23 +210,21 @@ public class Gameboard
 
         if (!Grid[x, y].IsOccupied)
         {
-            Grid[x, y].OccupationType = OccupationType.Miss; // Mark as Miss
+            Grid[x, y].OccupationType = OccupationType.Miss;
             return CheckCellResult.Miss;
         }
 
-        // Find the ship occupying this cell and register a hit
-        Coordinates coord = new Coordinates(x, y);
         foreach (var ship in Ships)
         {
-            if (ship.Positions.Any(pos => pos.Equals(coord)))
+            if (ship.Positions.Any(pos => pos.Equals(coordinates)))
             {
-                ship.RegisterHit(coord);
+                ship.RegisterHit(coordinates);
                 Grid[x, y].OccupationType = OccupationType.Hit;
-                return CheckCellResult.Hit; // Return Hit
+                return CheckCellResult.Hit;
             }
         }
 
-        return CheckCellResult.Miss; // Should not reach here, but just in case
+        return CheckCellResult.Miss;
     }
 
     public void FillTableLayoutPanel(TableLayoutPanel TLP)
@@ -239,7 +242,12 @@ public class Gameboard
                     TLP.Controls.Add(cellPanel, col, row);
                 }
 
-                if (Grid[col, row].IsOccupied)
+
+                if (Grid[col, row].OccupationType == OccupationType.Hit)
+                {
+                    cellPanel.BackColor = Color.Red; // Hit
+                }
+                else if (Grid[col, row].IsOccupied)
                 {
                     cellPanel.BackColor = Color.Gray;
                 }
@@ -247,79 +255,6 @@ public class Gameboard
                 {
                     cellPanel.BackColor = Color.Transparent; // Empty cell
                 }
-            }
-        }
-    }
-        
-    /// <summary>
-    /// Serializes the current state of the grid into a byte array.
-    /// Each cell is represented by 1 bit: 1 if occupied, 0 if not.
-    /// The resulting array is 13 bytes long (100 bits for the grid, 4 unused bits).
-    /// </summary>
-    /// <returns>
-    /// A byte array representing the occupation state of each cell in the grid.
-    /// </returns>
-    public byte[] SerializeGrid()
-    {
-        // Use 1 bit per cell: 1 if occupied, 0 if not.
-        // 10x10 grid = 100 bits = 13 bytes (104 bits, last 4 bits unused).
-        // Pack bits into a byte array.
-
-        byte[] result = new byte[13];
-        int bitIndex = 0;
-
-        // Loop through the grid and set bits in the byte array
-        for (int y = 0; y < BoardSize; y++)
-        {
-            for (int x = 0; x < BoardSize; x++)
-            {
-                if (Grid[x, y].IsOccupied)
-                {
-                    int byteIndex = bitIndex / 8; // Determine which byte to write to
-                    int bitInByte = bitIndex % 8; // Determine which bit in the byte to set
-
-                    // create a byte with only the specific bit set
-                    // example cellBitFlag for the first cell (0,0) would be 00000001
-                    byte cellBitFlag = (byte)(1 << bitInByte);
-
-                    // the cellBitFlag is then ORed with the byte at the byteIndex in the result array
-                    // this sets the specific bit in the byte to 1 for each occupied cell
-                    result[byteIndex] |= cellBitFlag;
-                }
-                bitIndex++;
-            }
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    /// Deserializes a byte array into the grid, setting each cell's occupation type.
-    /// The byte array must be exactly 13 bytes long.
-    /// Occupied cells are set to <see cref="OccupationType.Hit"/>, empty cells to <see cref="OccupationType.Empty"/>.
-    /// </summary>
-    /// <param name="data">A byte array representing the occupation state of each cell in the grid.</param>
-    /// <exception cref="ArgumentException">Thrown if the data array is not exactly 13 bytes long.</exception>
-    public void DeserializeGrid(byte[] data)
-    {
-        if (data.Length != 13)
-        {
-            throw new ArgumentException("Data must be exactly 13 bytes long.");
-        }
-
-        int bitIndex = 0;
-        // Loop through the grid and set the occupation type based on the bits in the byte array
-        for (int y = 0; y < BoardSize; y++)
-        {
-            for (int x = 0; x < BoardSize; x++)
-            {
-                int byteIndex = bitIndex / 8; // Determine which byte to read from
-                int bitInByte = bitIndex % 8; // Determine which bit in the byte to check
-
-                // Check if the specific bit is set
-                bool isOccupied = (data[byteIndex] & (1 << bitInByte)) != 0;
-                Grid[x, y].OccupationType = isOccupied ? OccupationType.Hit : OccupationType.Empty;
-                bitIndex++;
             }
         }
     }
