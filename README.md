@@ -13,9 +13,8 @@ CipherSink uses cryptography to prevent cheating and enable honesty checks betwe
  - If a ship is hit on all of its cells, it is considered sunk
  - The first player to sink all of their opponent's ships wins
 
-# Examples:
-### How to start the game up. (with screenshots or video)
-
-### Screenshot of main page - (insert photo)
-
-### Screenshots or Video showing a game being played - (insert multiple photos/video)
+## Screenshots
+<img width="800" alt="Screenshot 2025-08-29 165813" src="https://github.com/user-attachments/assets/ef0c750f-9fc1-43d3-b37d-23b151923221" />
+<img width="400" alt="Screenshot 2025-08-29 170425" src="https://github.com/user-attachments/assets/47288e2d-d93f-4a59-a3a1-9631cd3ca462" />
+<img width="200" alt="Screenshot 2025-08-29 170442" src="https://github.com/user-attachments/assets/ea904397-15e0-4e30-9d60-e7f3f2676a5f" />
+<img width="300" alt="Screenshot 2025-08-29 170456" src="https://github.com/user-attachments/assets/3a2ebdfa-f073-4c35-9032-8b95d2fd48e7" />
